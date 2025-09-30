@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+	<!-- Base application theme -->
+	<style name="Base.Theme.InternetGuardPro" parent="Theme.Material3.DayNight">
+		<!-- Primary brand color -->
+		<item name="colorPrimary">@color/primary_color</item>
+		<item name="colorOnPrimary">@android:color/white</item>
+		<item name="colorPrimaryContainer">@color/primary_variant</item>
+		<item name="colorOnPrimaryContainer">@android:color/white</item>
+		
+		<!-- Secondary brand color -->
+		<item name="colorSecondary">@color/secondary_color</item>
+		<item name="colorOnSecondary">@android:color/white</item>
+		<item name="colorSecondaryContainer">@color/secondary_variant</item>
+		<item name="colorOnSecondaryContainer">@android:color/white</item>
+		
+		<!-- Tertiary brand color -->
+		<item name="colorTertiary">@color/accent_color</item>
+		<item name="colorOnTertiary">@android:color/white</item>
+		<item name="colorTertiaryContainer">@color/accent_variant</item>
+		<item name="colorOnTertiaryContainer">@android:color/white</item>
+		
+		<!-- Error colors -->
+		<item name="colorError">@color/error_color</item>
+		<item name="colorOnError">@android:color/white</item>
+		<item name="colorErrorContainer">@color/error_color</item>
+		<item name="colorOnErrorContainer">@android:color/white</item>
+		
+		<!-- Surface colors -->
+		<item name="colorSurface">@color/surface_color</item>
+		<item name="colorOnSurface">@color/on_surface_color</item>
+		<item name="colorSurfaceVariant">@color/surface_color</item>
+		<item name="colorOnSurfaceVariant">@color/on_surface_variant_color</item>
+		
+		<!-- Background colors -->
+		<item name="colorBackground">@color/background_color</item>
+		<item name="colorOnBackground">@color/on_background_color</item>
+		
+		<!-- Outline colors -->
+		<item name="colorOutline">@color/outline_color</item>
+		<item name="colorOutlineVariant">@color/outline_variant_color</item>
+		
+		<!-- Status bar -->
+		<item name="android:statusBarColor">@color/primary_color</item>
+		<item name="android:windowLightStatusBar">false</item>
+		
+		<!-- Navigation bar -->
+		<item name="android:navigationBarColor">@color/primary_color</item>
+		<item name="android:windowLightNavigationBar">false</item>
+	</style>
+
+	<!-- Light theme -->
+	<style name="Theme.InternetGuardPro" parent="Base.Theme.InternetGuardPro" />
+
+	<!-- Dark theme -->
+	<style name="Theme.InternetGuardPro.Dark" parent="Base.Theme.InternetGuardPro">
+		<!-- Override colors for dark theme -->
+		<item name="colorSurface">#121212</item>
+		<item name="colorOnSurface">@android:color/white</item>
+		<item name="colorSurfaceVariant">#121212</item>
+		<item name="colorOnSurfaceVariant">@color/light_gray</item>
+		<item name="colorBackground">#121212</item>
+		<item name="colorOnBackground">@android:color/white</item>
+		<item name="colorOutline">@color/light_gray</item>
+		<item name="colorOutlineVariant">@color/dark_gray</item>
+		
+		<!-- Status bar -->
+		<item name="android:statusBarColor">@android:color/black</item>
+		<item name="android:windowLightStatusBar">false</item>
+		
+		<!-- Navigation bar -->
+		<item name="android:navigationBarColor">@android:color/black</item>
+		<item name="android:windowLightNavigationBar">false</item>
+	</style>
+
+	<!-- Custom button styles -->
+	<style name="Widget.InternetGuardPro.Button.Primary" parent="Widget.Material3.Button">
+		<item name="backgroundTint">@color/primary_color</item>
+		<item name="android:textColor">@android:color/white</item>
+	</style>
+
+	<style name="Widget.InternetGuardPro.Button.Secondary" parent="Widget.Material3.Button.OutlinedButton">
+		<item name="strokeColor">@color/primary_color</item>
+		<item name="android:textColor">@color/primary_color</item>
+	</style>
+
+	<!-- Custom card styles -->
+	<style name="Widget.InternetGuardPro.Card" parent="Widget.Material3.CardView.Elevated">
+		<item name="cardCornerRadius">8dp</item>
+		<item name="cardElevation">4dp</item>
+		<item name="cardBackgroundColor">@color/surface_color</item>
+	</style>
+
+	<!-- Custom text styles -->
+	<style name="TextAppearance.InternetGuardPro.Headline" parent="TextAppearance.Material3.HeadlineSmall">
+		<item name="android:textColor">@color/on_surface_color</item>
+	</style>
+
+	<style name="TextAppearance.InternetGuardPro.Body" parent="TextAppearance.Material3.BodyMedium">
+		<item name="android:textColor">@color/on_surface_variant_color</item>
+	</style>
+</resources>

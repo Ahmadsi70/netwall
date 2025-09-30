@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:layout_margin="8dp"
+	app:cardCornerRadius="8dp"
+	app:cardElevation="4dp">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:padding="16dp">
+
+		<!-- Keyword info -->
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:orientation="vertical">
+
+			<TextView
+				android:id="@+id/keyword_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+				android:textColor="@android:color/black" />
+
+			<TextView
+				android:id="@+id/category_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="4dp"
+				android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+				android:textColor="@android:color/darker_gray" />
+
+			<TextView
+				android:id="@+id/language_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="2dp"
+				android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+				android:textColor="@android:color/darker_gray" />
+
+			<TextView
+				android:id="@+id/case_sensitive_text"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="2dp"
+				android:textAppearance="@style/TextAppearance.Material3.BodySmall" />
+
+		</LinearLayout>
+
+		<!-- Action buttons -->
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:gravity="center_vertical">
+
+			<ImageButton
+				android:id="@+id/assign_button"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:contentDescription="Assign to apps"
+				android:src="@android:drawable/ic_menu_set_as" />
+
+			<ImageButton
+				android:id="@+id/edit_button"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:contentDescription="Edit keyword"
+				android:src="@drawable/ic_edit" />
+
+			<ImageButton
+				android:id="@+id/delete_button"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="?attr/selectableItemBackgroundBorderless"
+				android:contentDescription="Delete keyword"
+				android:src="@drawable/ic_delete"
+				android:tint="@color/delete_color" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</androidx.cardview.widget.CardView>

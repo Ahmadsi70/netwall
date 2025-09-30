@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">インターネットガードプロ</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">ダッシュボード</string>
+    <string name="nav_apps">アプリ</string>
+    <string name="nav_keywords">キーワード</string>
+    <string name="nav_rules">ルール</string>
+    <string name="nav_analytics">分析</string>
+    <string name="nav_settings">設定</string>
+    <string name="nav_education">教育</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">ダッシュボード</string>
+    <string name="vpn_status">VPNステータス</string>
+    <string name="vpn_enabled">有効</string>
+    <string name="vpn_disabled">無効</string>
+    <string name="blocked_apps">ブロックされたアプリ</string>
+    <string name="blocked_keywords">ブロックされたキーワード</string>
+    <string name="time_saved">節約時間</string>
+    <string name="ai_suggestions">AI提案</string>
+    <string name="refresh">更新</string>
+    
+    <!-- App List -->
+    <string name="app_list_title">アプリリスト</string>
+    <string name="search_apps">アプリを検索</string>
+    <string name="filter_category">カテゴリでフィルター</string>
+    <string name="all_categories">すべてのカテゴリ</string>
+    <string name="social_media">ソーシャルメディア</string>
+    <string name="games">ゲーム</string>
+    <string name="entertainment">エンターテイメント</string>
+    <string name="productivity">生産性</string>
+    <string name="system">システム</string>
+    <string name="other">その他</string>
+    <string name="block_app">アプリをブロック</string>
+    <string name="unblock_app">アプリのブロックを解除</string>
+    <string name="app_details">アプリの詳細</string>
+    <string name="blocking_mode">ブロックモード</string>
+    <string name="always_block">常にブロック</string>
+    <string name="schedule_block">スケジュールブロック</string>
+    <string name="time_limit">時間制限</string>
+    <string name="focus_mode">フォーカスモード</string>
+    
+    <!-- Keyword List -->
+    <string name="keyword_list_title">キーワードリスト</string>
+    <string name="add_keyword">キーワードを追加</string>
+    <string name="search_keywords">キーワードを検索</string>
+    <string name="keyword">キーワード</string>
+    <string name="language">言語</string>
+    <string name="category">カテゴリ</string>
+    <string name="case_sensitive">大文字小文字を区別</string>
+    <string name="regex">正規表現</string>
+    <string name="active">アクティブ</string>
+    <string name="inactive">非アクティブ</string>
+    <string name="edit_keyword">キーワードを編集</string>
+    <string name="delete_keyword">キーワードを削除</string>
+    <string name="confirm_delete">削除を確認</string>
+    <string name="delete_keyword_message">このキーワードを削除してもよろしいですか？</string>
+    <string name="yes">はい</string>
+    <string name="no">いいえ</string>
+    <string name="save">保存</string>
+    <string name="cancel">キャンセル</string>
+    
+    <!-- Rules -->
+    <string name="rules_title">ルール</string>
+    <string name="add_rule">ルールを追加</string>
+    <string name="rule_name">ルール名</string>
+    <string name="rule_description">ルールの説明</string>
+    <string name="rule_conditions">ルールの条件</string>
+    <string name="rule_actions">ルールのアクション</string>
+    <string name="time_based">時間ベース</string>
+    <string name="location_based">場所ベース</string>
+    <string name="battery_based">バッテリーベース</string>
+    <string name="app_based">アプリベース</string>
+    <string name="keyword_based">キーワードベース</string>
+    
+    <!-- Analytics -->
+    <string name="analytics_title">分析</string>
+    <string name="usage_stats">使用統計</string>
+    <string name="blocking_stats">ブロック統計</string>
+    <string name="time_analysis">時間分析</string>
+    <string name="app_usage">アプリ使用</string>
+    <string name="keyword_blocks">キーワードブロック</string>
+    <string name="daily_report">日次レポート</string>
+    <string name="weekly_report">週次レポート</string>
+    <string name="monthly_report">月次レポート</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">設定</string>
+    <string name="general_settings">一般設定</string>
+    <string name="security_settings">セキュリティ設定</string>
+    <string name="privacy_settings">プライバシー設定</string>
+    <string name="notification_settings">通知設定</string>
+    <string name="language_settings">言語設定</string>
+    <string name="theme_settings">テーマ設定</string>
+    <string name="data_management">データ管理</string>
+    <string name="export_data">データをエクスポート</string>
+    <string name="import_data">データをインポート</string>
+    <string name="clear_data">データをクリア</string>
+    <string name="about">について</string>
+    <string name="privacy_policy">プライバシーポリシー</string>
+    <string name="terms_of_service">利用規約</string>
+    <string name="version">バージョン</string>
+    
+    <!-- Security -->
+    <string name="biometric_auth">生体認証</string>
+    <string name="enable_biometric">生体認証を有効にする</string>
+    <string name="disable_biometric">生体認証を無効にする</string>
+    <string name="database_encryption">データベース暗号化</string>
+    <string name="advanced_privacy">高度なプライバシー</string>
+    <string name="security_score">セキュリティスコア</string>
+    <string name="permissions">権限</string>
+    <string name="vpn_permission">VPN権限</string>
+    <string name="accessibility_permission">アクセシビリティ権限</string>
+    <string name="usage_stats_permission">使用統計権限</string>
+    <string name="location_permission">位置情報権限</string>
+    
+    <!-- Education -->
+    <string name="education_title">教育</string>
+    <string name="digital_wellness">デジタルウェルネス</string>
+    <string name="internet_safety">インターネットセキュリティ</string>
+    <string name="parental_controls">ペアレンタルコントロール</string>
+    <string name="privacy_tips">プライバシーのヒント</string>
+    <string name="security_tips">セキュリティのヒント</string>
+    <string name="read_more">もっと読む</string>
+    <string name="read_less">少なく読む</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">インターネットガードプロへようこそ</string>
+    <string name="welcome_description">インターネットアクセスを制御し、すべてのアプリで不適切なコンテンツをブロック</string>
+    <string name="permissions_title">必要な権限</string>
+    <string name="permissions_description">アプリが正常に動作するために特定の権限が必要です</string>
+    <string name="features_title">主要機能</string>
+    <string name="features_description">インターネット使用を制御するのに役立つ強力な機能を発見</string>
+    <string name="ready_title">開始準備完了</string>
+    <string name="ready_description">すべて準備完了です！今すぐアプリの使用を開始できます</string>
+    <string name="get_started">開始</string>
+    <string name="next">次へ</string>
+    <string name="skip">スキップ</string>
+    <string name="finish">完了</string>
+    
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="error">エラー</string>
+    <string name="success">成功</string>
+    <string name="warning">警告</string>
+    <string name="info">情報</string>
+    <string name="loading">読み込み中...</string>
+    <string name="retry">再試行</string>
+    <string name="close">閉じる</string>
+    <string name="back">戻る</string>
+    <string name="done">完了</string>
+    <string name="edit">編集</string>
+    <string name="delete">削除</string>
+    <string name="add">追加</string>
+    <string name="remove">削除</string>
+    <string name="enable">有効</string>
+    <string name="disable">無効</string>
+    <string name="on">オン</string>
+    <string name="off">オフ</string>
+    
+    <!-- Time -->
+    <string name="hours">時間</string>
+    <string name="minutes">分</string>
+    <string name="seconds">秒</string>
+    <string name="days">日</string>
+    <string name="weeks">週</string>
+    <string name="months">月</string>
+    <string name="years">年</string>
+    
+    <!-- Categories -->
+    <string name="content">コンテンツ</string>
+    <string name="gambling">ギャンブル</string>
+    <string name="violence">暴力</string>
+    <string name="adult">成人向け</string>
+    <string name="hate_speech">ヘイトスピーチ</string>
+    <string name="custom">カスタム</string>
+    
+    <!-- Languages -->
+    <string name="english">英語</string>
+    <string name="arabic">アラビア語</string>
+    <string name="persian">ペルシャ語</string>
+    <string name="chinese">中国語</string>
+    <string name="spanish">スペイン語</string>
+    <string name="french">フランス語</string>
+    <string name="german">ドイツ語</string>
+    <string name="russian">ロシア語</string>
+    <string name="japanese">日本語</string>
+    <string name="korean">韓国語</string>
+    <string name="hindi">ヒンディー語</string>
+    <string name="portuguese">ポルトガル語</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">ネットワークエラー</string>
+    <string name="error_permission_denied">権限が拒否されました</string>
+    <string name="error_invalid_input">無効な入力</string>
+    <string name="error_database">データベースエラー</string>
+    <string name="error_unknown">不明なエラー</string>
+    <string name="error_vpn_not_available">VPNが利用できません</string>
+    <string name="error_biometric_not_available">生体認証が利用できません</string>
+    <string name="error_encryption_failed">暗号化に失敗しました</string>
+    
+    <!-- Success Messages -->
+    <string name="success_keyword_added">キーワードが正常に追加されました</string>
+    <string name="success_keyword_updated">キーワードが正常に更新されました</string>
+    <string name="success_keyword_deleted">キーワードが正常に削除されました</string>
+    <string name="success_app_blocked">アプリが正常にブロックされました</string>
+    <string name="success_app_unblocked">アプリのブロックが正常に解除されました</string>
+    <string name="success_rule_added">ルールが正常に追加されました</string>
+    <string name="success_settings_saved">設定が正常に保存されました</string>
+    
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_title">プライバシーポリシー</string>
+    <string name="privacy_policy_content">
+        <![CDATA[
+        <h2>プライバシーポリシー</h2>
+        <p>インターネットガードプロでは、お客様のプライバシーと個人データを保護することに努めています。</p>
+        
+        <h3>データ収集</h3>
+        <p>お客様から個人データを収集することはありません。すべてのデータはお客様のデバイス上でローカルに処理されます。</p>
+        
+        <h3>暗号化</h3>
+        <p>すべてのデータは軍事レベルの暗号化標準を使用して暗号化されています。</p>
+        
+        <h3>データ共有なし</h3>
+        <p>お客様のデータを第三者と共有することはありません。</p>
+        
+        <h3>データ制御</h3>
+        <p>お客様はデータを完全に制御でき、いつでも削除できます。</p>
+        ]]>
+    </string>
+</resources>

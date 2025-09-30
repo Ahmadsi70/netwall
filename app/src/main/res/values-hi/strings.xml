@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">इंटरनेट गार्ड प्रो</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">डैशबोर्ड</string>
+    <string name="nav_apps">ऐप्स</string>
+    <string name="nav_keywords">कीवर्ड</string>
+    <string name="nav_rules">नियम</string>
+    <string name="nav_analytics">विश्लेषण</string>
+    <string name="nav_settings">सेटिंग्स</string>
+    <string name="nav_education">शिक्षा</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">डैशबोर्ड</string>
+    <string name="vpn_status">VPN स्थिति</string>
+    <string name="vpn_enabled">सक्षम</string>
+    <string name="vpn_disabled">अक्षम</string>
+    <string name="blocked_apps">अवरुद्ध ऐप्स</string>
+    <string name="blocked_keywords">अवरुद्ध कीवर्ड</string>
+    <string name="time_saved">बचाया गया समय</string>
+    <string name="ai_suggestions">AI सुझाव</string>
+    <string name="refresh">रिफ्रेश करें</string>
+    
+    <!-- App List -->
+    <string name="app_list_title">ऐप सूची</string>
+    <string name="search_apps">ऐप्स खोजें</string>
+    <string name="filter_category">श्रेणी के अनुसार फिल्टर करें</string>
+    <string name="all_categories">सभी श्रेणियां</string>
+    <string name="social_media">सोशल मीडिया</string>
+    <string name="games">गेम्स</string>
+    <string name="entertainment">मनोरंजन</string>
+    <string name="productivity">उत्पादकता</string>
+    <string name="system">सिस्टम</string>
+    <string name="other">अन्य</string>
+    <string name="block_app">ऐप अवरुद्ध करें</string>
+    <string name="unblock_app">ऐप अनब्लॉक करें</string>
+    <string name="app_details">ऐप विवरण</string>
+    <string name="blocking_mode">अवरोधन मोड</string>
+    <string name="always_block">हमेशा अवरुद्ध करें</string>
+    <string name="schedule_block">निर्धारित अवरोधन</string>
+    <string name="time_limit">समय सीमा</string>
+    <string name="focus_mode">फोकस मोड</string>
+    
+    <!-- Keyword List -->
+    <string name="keyword_list_title">कीवर्ड सूची</string>
+    <string name="add_keyword">कीवर्ड जोड़ें</string>
+    <string name="search_keywords">कीवर्ड खोजें</string>
+    <string name="keyword">कीवर्ड</string>
+    <string name="language">भाषा</string>
+    <string name="category">श्रेणी</string>
+    <string name="case_sensitive">केस संवेदी</string>
+    <string name="regex">रेगुलर एक्सप्रेशन</string>
+    <string name="active">सक्रिय</string>
+    <string name="inactive">निष्क्रिय</string>
+    <string name="edit_keyword">कीवर्ड संपादित करें</string>
+    <string name="delete_keyword">कीवर्ड हटाएं</string>
+    <string name="confirm_delete">हटाने की पुष्टि करें</string>
+    <string name="delete_keyword_message">क्या आप वाकई इस कीवर्ड को हटाना चाहते हैं?</string>
+    <string name="yes">हां</string>
+    <string name="no">नहीं</string>
+    <string name="save">सहेजें</string>
+    <string name="cancel">रद्द करें</string>
+    
+    <!-- Rules -->
+    <string name="rules_title">नियम</string>
+    <string name="add_rule">नियम जोड़ें</string>
+    <string name="rule_name">नियम नाम</string>
+    <string name="rule_description">नियम विवरण</string>
+    <string name="rule_conditions">नियम शर्तें</string>
+    <string name="rule_actions">नियम क्रियाएं</string>
+    <string name="time_based">समय आधारित</string>
+    <string name="location_based">स्थान आधारित</string>
+    <string name="battery_based">बैटरी आधारित</string>
+    <string name="app_based">ऐप आधारित</string>
+    <string name="keyword_based">कीवर्ड आधारित</string>
+    
+    <!-- Analytics -->
+    <string name="analytics_title">विश्लेषण</string>
+    <string name="usage_stats">उपयोग आंकड़े</string>
+    <string name="blocking_stats">अवरोधन आंकड़े</string>
+    <string name="time_analysis">समय विश्लेषण</string>
+    <string name="app_usage">ऐप उपयोग</string>
+    <string name="keyword_blocks">कीवर्ड अवरोधन</string>
+    <string name="daily_report">दैनिक रिपोर्ट</string>
+    <string name="weekly_report">साप्ताहिक रिपोर्ट</string>
+    <string name="monthly_report">मासिक रिपोर्ट</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="general_settings">सामान्य सेटिंग्स</string>
+    <string name="security_settings">सुरक्षा सेटिंग्स</string>
+    <string name="privacy_settings">गोपनीयता सेटिंग्स</string>
+    <string name="notification_settings">अधिसूचना सेटिंग्स</string>
+    <string name="language_settings">भाषा सेटिंग्स</string>
+    <string name="theme_settings">थीम सेटिंग्स</string>
+    <string name="data_management">डेटा प्रबंधन</string>
+    <string name="export_data">डेटा निर्यात करें</string>
+    <string name="import_data">डेटा आयात करें</string>
+    <string name="clear_data">डेटा साफ करें</string>
+    <string name="about">के बारे में</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
+    <string name="terms_of_service">सेवा की शर्तें</string>
+    <string name="version">संस्करण</string>
+    
+    <!-- Security -->
+    <string name="biometric_auth">बायोमेट्रिक प्रमाणीकरण</string>
+    <string name="enable_biometric">बायोमेट्रिक प्रमाणीकरण सक्षम करें</string>
+    <string name="disable_biometric">बायोमेट्रिक प्रमाणीकरण अक्षम करें</string>
+    <string name="database_encryption">डेटाबेस एन्क्रिप्शन</string>
+    <string name="advanced_privacy">उन्नत गोपनीयता</string>
+    <string name="security_score">सुरक्षा स्कोर</string>
+    <string name="permissions">अनुमतियां</string>
+    <string name="vpn_permission">VPN अनुमति</string>
+    <string name="accessibility_permission">एक्सेसिबिलिटी अनुमति</string>
+    <string name="usage_stats_permission">उपयोग आंकड़े अनुमति</string>
+    <string name="location_permission">स्थान अनुमति</string>
+    
+    <!-- Education -->
+    <string name="education_title">शिक्षा</string>
+    <string name="digital_wellness">डिजिटल कल्याण</string>
+    <string name="internet_safety">इंटरनेट सुरक्षा</string>
+    <string name="parental_controls">पैतृक नियंत्रण</string>
+    <string name="privacy_tips">गोपनीयता सुझाव</string>
+    <string name="security_tips">सुरक्षा सुझाव</string>
+    <string name="read_more">और पढ़ें</string>
+    <string name="read_less">कम पढ़ें</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">इंटरनेट गार्ड प्रो में आपका स्वागत है</string>
+    <string name="welcome_description">इंटरनेट एक्सेस को नियंत्रित करें और सभी ऐप्स में अनुपयुक्त सामग्री को अवरुद्ध करें</string>
+    <string name="permissions_title">आवश्यक अनुमतियां</string>
+    <string name="permissions_description">ऐप के सही तरीके से काम करने के लिए हमें कुछ अनुमतियों की आवश्यकता है</string>
+    <string name="features_title">मुख्य विशेषताएं</string>
+    <string name="features_description">इंटरनेट उपयोग को नियंत्रित करने में आपकी मदद करने वाली शक्तिशाली विशेषताओं की खोज करें</string>
+    <string name="ready_title">शुरू करने के लिए तैयार</string>
+    <string name="ready_description">सब कुछ तैयार है! अब आप ऐप का उपयोग शुरू कर सकते हैं</string>
+    <string name="get_started">शुरू करें</string>
+    <string name="next">अगला</string>
+    <string name="skip">छोड़ें</string>
+    <string name="finish">समाप्त करें</string>
+    
+    <!-- Common -->
+    <string name="ok">ठीक है</string>
+    <string name="error">त्रुटि</string>
+    <string name="success">सफलता</string>
+    <string name="warning">चेतावनी</string>
+    <string name="info">जानकारी</string>
+    <string name="loading">लोड हो रहा है...</string>
+    <string name="retry">पुनः प्रयास करें</string>
+    <string name="close">बंद करें</string>
+    <string name="back">वापस</string>
+    <string name="done">हो गया</string>
+    <string name="edit">संपादित करें</string>
+    <string name="delete">हटाएं</string>
+    <string name="add">जोड़ें</string>
+    <string name="remove">हटाएं</string>
+    <string name="enable">सक्षम करें</string>
+    <string name="disable">अक्षम करें</string>
+    <string name="on">चालू</string>
+    <string name="off">बंद</string>
+    
+    <!-- Time -->
+    <string name="hours">घंटे</string>
+    <string name="minutes">मिनट</string>
+    <string name="seconds">सेकंड</string>
+    <string name="days">दिन</string>
+    <string name="weeks">सप्ताह</string>
+    <string name="months">महीने</string>
+    <string name="years">साल</string>
+    
+    <!-- Categories -->
+    <string name="content">सामग्री</string>
+    <string name="gambling">जुआ</string>
+    <string name="violence">हिंसा</string>
+    <string name="adult">वयस्क</string>
+    <string name="hate_speech">घृणा भाषण</string>
+    <string name="custom">कस्टम</string>
+    
+    <!-- Languages -->
+    <string name="english">अंग्रेजी</string>
+    <string name="arabic">अरबी</string>
+    <string name="persian">फारसी</string>
+    <string name="chinese">चीनी</string>
+    <string name="spanish">स्पेनिश</string>
+    <string name="french">फ्रेंच</string>
+    <string name="german">जर्मन</string>
+    <string name="russian">रूसी</string>
+    <string name="japanese">जापानी</string>
+    <string name="korean">कोरियाई</string>
+    <string name="hindi">हिंदी</string>
+    <string name="portuguese">पुर्तगाली</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">नेटवर्क त्रुटि</string>
+    <string name="error_permission_denied">अनुमति अस्वीकृत</string>
+    <string name="error_invalid_input">अमान्य इनपुट</string>
+    <string name="error_database">डेटाबेस त्रुटि</string>
+    <string name="error_unknown">अज्ञात त्रुटि</string>
+    <string name="error_vpn_not_available">VPN उपलब्ध नहीं</string>
+    <string name="error_biometric_not_available">बायोमेट्रिक प्रमाणीकरण उपलब्ध नहीं</string>
+    <string name="error_encryption_failed">एन्क्रिप्शन विफल</string>
+    
+    <!-- Success Messages -->
+    <string name="success_keyword_added">कीवर्ड सफलतापूर्वक जोड़ा गया</string>
+    <string name="success_keyword_updated">कीवर्ड सफलतापूर्वक अपडेट किया गया</string>
+    <string name="success_keyword_deleted">कीवर्ड सफलतापूर्वक हटाया गया</string>
+    <string name="success_app_blocked">ऐप सफलतापूर्वक अवरुद्ध किया गया</string>
+    <string name="success_app_unblocked">ऐप सफलतापूर्वक अनब्लॉक किया गया</string>
+    <string name="success_rule_added">नियम सफलतापूर्वक जोड़ा गया</string>
+    <string name="success_settings_saved">सेटिंग्स सफलतापूर्वक सहेजी गईं</string>
+    
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_title">गोपनीयता नीति</string>
+    <string name="privacy_policy_content">
+        <![CDATA[
+        <h2>गोपनीयता नीति</h2>
+        <p>इंटरनेट गार्ड प्रो में, हम आपकी गोपनीयता और व्यक्तिगत डेटा की सुरक्षा के लिए प्रतिबद्ध हैं।</p>
+        
+        <h3>डेटा संग्रह</h3>
+        <p>हम आपसे कोई व्यक्तिगत डेटा एकत्र नहीं करते। सभी डेटा आपके डिवाइस पर स्थानीय रूप से संसाधित होता है।</p>
+        
+        <h3>एन्क्रिप्शन</h3>
+        <p>सभी डेटा सैन्य-ग्रेड एन्क्रिप्शन मानकों का उपयोग करके एन्क्रिप्ट किया जाता है।</p>
+        
+        <h3>डेटा साझाकरण नहीं</h3>
+        <p>हम आपका डेटा किसी तीसरे पक्ष के साथ साझा नहीं करते।</p>
+        
+        <h3>डेटा नियंत्रण</h3>
+        <p>आपके पास अपने डेटा पर पूर्ण नियंत्रण है और आप इसे कभी भी हटा सकते हैं।</p>
+        ]]>
+    </string>
+</resources>

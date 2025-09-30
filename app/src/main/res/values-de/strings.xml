@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Internet Wächter Pro</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_apps">Apps</string>
+    <string name="nav_keywords">Schlüsselwörter</string>
+    <string name="nav_rules">Regeln</string>
+    <string name="nav_analytics">Analysen</string>
+    <string name="nav_settings">Einstellungen</string>
+    <string name="nav_education">Bildung</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">Dashboard</string>
+    <string name="vpn_status">VPN-Status</string>
+    <string name="vpn_enabled">Aktiviert</string>
+    <string name="vpn_disabled">Deaktiviert</string>
+    <string name="blocked_apps">Blockierte Apps</string>
+    <string name="blocked_keywords">Blockierte Schlüsselwörter</string>
+    <string name="time_saved">Gesparte Zeit</string>
+    <string name="ai_suggestions">KI-Vorschläge</string>
+    <string name="refresh">Aktualisieren</string>
+    
+    <!-- App List -->
+    <string name="app_list_title">App-Liste</string>
+    <string name="search_apps">Apps suchen</string>
+    <string name="filter_category">Nach Kategorie filtern</string>
+    <string name="all_categories">Alle Kategorien</string>
+    <string name="social_media">Soziale Medien</string>
+    <string name="games">Spiele</string>
+    <string name="entertainment">Unterhaltung</string>
+    <string name="productivity">Produktivität</string>
+    <string name="system">System</string>
+    <string name="other">Andere</string>
+    <string name="block_app">App blockieren</string>
+    <string name="unblock_app">App entsperren</string>
+    <string name="app_details">App-Details</string>
+    <string name="blocking_mode">Blockierungsmodus</string>
+    <string name="always_block">Immer blockieren</string>
+    <string name="schedule_block">Geplante Blockierung</string>
+    <string name="time_limit">Zeitlimit</string>
+    <string name="focus_mode">Fokus-Modus</string>
+    
+    <!-- Keyword List -->
+    <string name="keyword_list_title">Schlüsselwort-Liste</string>
+    <string name="add_keyword">Schlüsselwort hinzufügen</string>
+    <string name="search_keywords">Schlüsselwörter suchen</string>
+    <string name="keyword">Schlüsselwort</string>
+    <string name="language">Sprache</string>
+    <string name="category">Kategorie</string>
+    <string name="case_sensitive">Groß-/Kleinschreibung beachten</string>
+    <string name="regex">Regulärer Ausdruck</string>
+    <string name="active">Aktiv</string>
+    <string name="inactive">Inaktiv</string>
+    <string name="edit_keyword">Schlüsselwort bearbeiten</string>
+    <string name="delete_keyword">Schlüsselwort löschen</string>
+    <string name="confirm_delete">Löschen bestätigen</string>
+    <string name="delete_keyword_message">Sind Sie sicher, dass Sie dieses Schlüsselwort löschen möchten?</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nein</string>
+    <string name="save">Speichern</string>
+    <string name="cancel">Abbrechen</string>
+    
+    <!-- Rules -->
+    <string name="rules_title">Regeln</string>
+    <string name="add_rule">Regel hinzufügen</string>
+    <string name="rule_name">Regelname</string>
+    <string name="rule_description">Regelbeschreibung</string>
+    <string name="rule_conditions">Regelbedingungen</string>
+    <string name="rule_actions">Regelaktionen</string>
+    <string name="time_based">Zeitbasiert</string>
+    <string name="location_based">Standortbasiert</string>
+    <string name="battery_based">Batteriebasiert</string>
+    <string name="app_based">App-basiert</string>
+    <string name="keyword_based">Schlüsselwort-basiert</string>
+    
+    <!-- Analytics -->
+    <string name="analytics_title">Analysen</string>
+    <string name="usage_stats">Nutzungsstatistiken</string>
+    <string name="blocking_stats">Blockierungsstatistiken</string>
+    <string name="time_analysis">Zeitanalyse</string>
+    <string name="app_usage">App-Nutzung</string>
+    <string name="keyword_blocks">Schlüsselwort-Blockierungen</string>
+    <string name="daily_report">Tagesbericht</string>
+    <string name="weekly_report">Wochenbericht</string>
+    <string name="monthly_report">Monatsbericht</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Einstellungen</string>
+    <string name="general_settings">Allgemeine Einstellungen</string>
+    <string name="security_settings">Sicherheitseinstellungen</string>
+    <string name="privacy_settings">Datenschutzeinstellungen</string>
+    <string name="notification_settings">Benachrichtigungseinstellungen</string>
+    <string name="language_settings">Spracheinstellungen</string>
+    <string name="theme_settings">Theme-Einstellungen</string>
+    <string name="data_management">Datenverwaltung</string>
+    <string name="export_data">Daten exportieren</string>
+    <string name="import_data">Daten importieren</string>
+    <string name="clear_data">Daten löschen</string>
+    <string name="about">Über</string>
+    <string name="privacy_policy">Datenschutzrichtlinie</string>
+    <string name="terms_of_service">Nutzungsbedingungen</string>
+    <string name="version">Version</string>
+    
+    <!-- Security -->
+    <string name="biometric_auth">Biometrische Authentifizierung</string>
+    <string name="enable_biometric">Biometrische Authentifizierung aktivieren</string>
+    <string name="disable_biometric">Biometrische Authentifizierung deaktivieren</string>
+    <string name="database_encryption">Datenbankverschlüsselung</string>
+    <string name="advanced_privacy">Erweiterte Privatsphäre</string>
+    <string name="security_score">Sicherheitsbewertung</string>
+    <string name="permissions">Berechtigungen</string>
+    <string name="vpn_permission">VPN-Berechtigung</string>
+    <string name="accessibility_permission">Barrierefreiheitsberechtigung</string>
+    <string name="usage_stats_permission">Nutzungsstatistik-Berechtigung</string>
+    <string name="location_permission">Standortberechtigung</string>
+    
+    <!-- Education -->
+    <string name="education_title">Bildung</string>
+    <string name="digital_wellness">Digitales Wohlbefinden</string>
+    <string name="internet_safety">Internetsicherheit</string>
+    <string name="parental_controls">Kindersicherung</string>
+    <string name="privacy_tips">Datenschutztipps</string>
+    <string name="security_tips">Sicherheitstipps</string>
+    <string name="read_more">Mehr lesen</string>
+    <string name="read_less">Weniger lesen</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">Willkommen bei Internet Wächter Pro</string>
+    <string name="welcome_description">Kontrollieren Sie den Internetzugang und blockieren Sie unangemessene Inhalte in allen Apps</string>
+    <string name="permissions_title">Erforderliche Berechtigungen</string>
+    <string name="permissions_description">Wir benötigen bestimmte Berechtigungen, um sicherzustellen, dass die App ordnungsgemäß funktioniert</string>
+    <string name="features_title">Hauptfunktionen</string>
+    <string name="features_description">Entdecken Sie die leistungsstarken Funktionen, die Ihnen helfen, die Internetnutzung zu kontrollieren</string>
+    <string name="ready_title">Bereit zu starten</string>
+    <string name="ready_description">Alles ist bereit! Sie können jetzt mit der Nutzung der App beginnen</string>
+    <string name="get_started">Loslegen</string>
+    <string name="next">Weiter</string>
+    <string name="skip">Überspringen</string>
+    <string name="finish">Beenden</string>
+    
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="error">Fehler</string>
+    <string name="success">Erfolg</string>
+    <string name="warning">Warnung</string>
+    <string name="info">Information</string>
+    <string name="loading">Laden...</string>
+    <string name="retry">Wiederholen</string>
+    <string name="close">Schließen</string>
+    <string name="back">Zurück</string>
+    <string name="done">Fertig</string>
+    <string name="edit">Bearbeiten</string>
+    <string name="delete">Löschen</string>
+    <string name="add">Hinzufügen</string>
+    <string name="remove">Entfernen</string>
+    <string name="enable">Aktivieren</string>
+    <string name="disable">Deaktivieren</string>
+    <string name="on">Ein</string>
+    <string name="off">Aus</string>
+    
+    <!-- Time -->
+    <string name="hours">Stunden</string>
+    <string name="minutes">Minuten</string>
+    <string name="seconds">Sekunden</string>
+    <string name="days">Tage</string>
+    <string name="weeks">Wochen</string>
+    <string name="months">Monate</string>
+    <string name="years">Jahre</string>
+    
+    <!-- Categories -->
+    <string name="content">Inhalt</string>
+    <string name="gambling">Glücksspiel</string>
+    <string name="violence">Gewalt</string>
+    <string name="adult">Erwachsene</string>
+    <string name="hate_speech">Hassrede</string>
+    <string name="custom">Benutzerdefiniert</string>
+    
+    <!-- Languages -->
+    <string name="english">Englisch</string>
+    <string name="arabic">Arabisch</string>
+    <string name="persian">Persisch</string>
+    <string name="chinese">Chinesisch</string>
+    <string name="spanish">Spanisch</string>
+    <string name="french">Französisch</string>
+    <string name="german">Deutsch</string>
+    <string name="russian">Russisch</string>
+    <string name="japanese">Japanisch</string>
+    <string name="korean">Koreanisch</string>
+    <string name="hindi">Hindi</string>
+    <string name="portuguese">Portugiesisch</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">Netzwerkfehler</string>
+    <string name="error_permission_denied">Berechtigung verweigert</string>
+    <string name="error_invalid_input">Ungültige Eingabe</string>
+    <string name="error_database">Datenbankfehler</string>
+    <string name="error_unknown">Unbekannter Fehler</string>
+    <string name="error_vpn_not_available">VPN nicht verfügbar</string>
+    <string name="error_biometric_not_available">Biometrische Authentifizierung nicht verfügbar</string>
+    <string name="error_encryption_failed">Verschlüsselung fehlgeschlagen</string>
+    
+    <!-- Success Messages -->
+    <string name="success_keyword_added">Schlüsselwort erfolgreich hinzugefügt</string>
+    <string name="success_keyword_updated">Schlüsselwort erfolgreich aktualisiert</string>
+    <string name="success_keyword_deleted">Schlüsselwort erfolgreich gelöscht</string>
+    <string name="success_app_blocked">App erfolgreich blockiert</string>
+    <string name="success_app_unblocked">App erfolgreich entsperrt</string>
+    <string name="success_rule_added">Regel erfolgreich hinzugefügt</string>
+    <string name="success_settings_saved">Einstellungen erfolgreich gespeichert</string>
+    
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_title">Datenschutzrichtlinie</string>
+    <string name="privacy_policy_content">
+        <![CDATA[
+        <h2>Datenschutzrichtlinie</h2>
+        <p>Bei Internet Wächter Pro verpflichten wir uns, Ihre Privatsphäre und persönlichen Daten zu schützen.</p>
+        
+        <h3>Datensammlung</h3>
+        <p>Wir sammeln keine persönlichen Daten von Ihnen. Alle Daten werden lokal auf Ihrem Gerät verarbeitet.</p>
+        
+        <h3>Verschlüsselung</h3>
+        <p>Alle Daten werden mit militärischen Verschlüsselungsstandards verschlüsselt.</p>
+        
+        <h3>Keine Datenweitergabe</h3>
+        <p>Wir teilen Ihre Daten nicht mit Dritten.</p>
+        
+        <h3>Datenkontrolle</h3>
+        <p>Sie haben vollständige Kontrolle über Ihre Daten und können sie jederzeit löschen.</p>
+        ]]>
+    </string>
+</resources>

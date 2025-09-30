@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Guardião da Internet Pro</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">Painel</string>
+    <string name="nav_apps">Aplicativos</string>
+    <string name="nav_keywords">Palavras-chave</string>
+    <string name="nav_rules">Regras</string>
+    <string name="nav_analytics">Análises</string>
+    <string name="nav_settings">Configurações</string>
+    <string name="nav_education">Educação</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">Painel de Controle</string>
+    <string name="vpn_status">Status VPN</string>
+    <string name="vpn_enabled">Habilitado</string>
+    <string name="vpn_disabled">Desabilitado</string>
+    <string name="blocked_apps">Aplicativos Bloqueados</string>
+    <string name="blocked_keywords">Palavras-chave Bloqueadas</string>
+    <string name="time_saved">Tempo Economizado</string>
+    <string name="ai_suggestions">Sugestões IA</string>
+    <string name="refresh">Atualizar</string>
+    
+    <!-- App List -->
+    <string name="app_list_title">Lista de Aplicativos</string>
+    <string name="search_apps">Pesquisar Aplicativos</string>
+    <string name="filter_category">Filtrar por Categoria</string>
+    <string name="all_categories">Todas as Categorias</string>
+    <string name="social_media">Redes Sociais</string>
+    <string name="games">Jogos</string>
+    <string name="entertainment">Entretenimento</string>
+    <string name="productivity">Produtividade</string>
+    <string name="system">Sistema</string>
+    <string name="other">Outros</string>
+    <string name="block_app">Bloquear Aplicativo</string>
+    <string name="unblock_app">Desbloquear Aplicativo</string>
+    <string name="app_details">Detalhes do Aplicativo</string>
+    <string name="blocking_mode">Modo de Bloqueio</string>
+    <string name="always_block">Bloquear Sempre</string>
+    <string name="schedule_block">Bloqueio Agendado</string>
+    <string name="time_limit">Limite de Tempo</string>
+    <string name="focus_mode">Modo Foco</string>
+    
+    <!-- Keyword List -->
+    <string name="keyword_list_title">Lista de Palavras-chave</string>
+    <string name="add_keyword">Adicionar Palavra-chave</string>
+    <string name="search_keywords">Pesquisar Palavras-chave</string>
+    <string name="keyword">Palavra-chave</string>
+    <string name="language">Idioma</string>
+    <string name="category">Categoria</string>
+    <string name="case_sensitive">Diferencia Maiúsculas</string>
+    <string name="regex">Expressão Regular</string>
+    <string name="active">Ativo</string>
+    <string name="inactive">Inativo</string>
+    <string name="edit_keyword">Editar Palavra-chave</string>
+    <string name="delete_keyword">Excluir Palavra-chave</string>
+    <string name="confirm_delete">Confirmar Exclusão</string>
+    <string name="delete_keyword_message">Tem certeza de que deseja excluir esta palavra-chave?</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="save">Salvar</string>
+    <string name="cancel">Cancelar</string>
+    
+    <!-- Rules -->
+    <string name="rules_title">Regras</string>
+    <string name="add_rule">Adicionar Regra</string>
+    <string name="rule_name">Nome da Regra</string>
+    <string name="rule_description">Descrição da Regra</string>
+    <string name="rule_conditions">Condições da Regra</string>
+    <string name="rule_actions">Ações da Regra</string>
+    <string name="time_based">Baseado em Tempo</string>
+    <string name="location_based">Baseado em Localização</string>
+    <string name="battery_based">Baseado em Bateria</string>
+    <string name="app_based">Baseado em Aplicativo</string>
+    <string name="keyword_based">Baseado em Palavra-chave</string>
+    
+    <!-- Analytics -->
+    <string name="analytics_title">Análises</string>
+    <string name="usage_stats">Estatísticas de Uso</string>
+    <string name="blocking_stats">Estatísticas de Bloqueio</string>
+    <string name="time_analysis">Análise de Tempo</string>
+    <string name="app_usage">Uso de Aplicativos</string>
+    <string name="keyword_blocks">Bloqueios de Palavras-chave</string>
+    <string name="daily_report">Relatório Diário</string>
+    <string name="weekly_report">Relatório Semanal</string>
+    <string name="monthly_report">Relatório Mensal</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Configurações</string>
+    <string name="general_settings">Configurações Gerais</string>
+    <string name="security_settings">Configurações de Segurança</string>
+    <string name="privacy_settings">Configurações de Privacidade</string>
+    <string name="notification_settings">Configurações de Notificação</string>
+    <string name="language_settings">Configurações de Idioma</string>
+    <string name="theme_settings">Configurações de Tema</string>
+    <string name="data_management">Gerenciamento de Dados</string>
+    <string name="export_data">Exportar Dados</string>
+    <string name="import_data">Importar Dados</string>
+    <string name="clear_data">Limpar Dados</string>
+    <string name="about">Sobre</string>
+    <string name="privacy_policy">Política de Privacidade</string>
+    <string name="terms_of_service">Termos de Serviço</string>
+    <string name="version">Versão</string>
+    
+    <!-- Security -->
+    <string name="biometric_auth">Autenticação Biométrica</string>
+    <string name="enable_biometric">Habilitar Autenticação Biométrica</string>
+    <string name="disable_biometric">Desabilitar Autenticação Biométrica</string>
+    <string name="database_encryption">Criptografia do Banco de Dados</string>
+    <string name="advanced_privacy">Privacidade Avançada</string>
+    <string name="security_score">Pontuação de Segurança</string>
+    <string name="permissions">Permissões</string>
+    <string name="vpn_permission">Permissão VPN</string>
+    <string name="accessibility_permission">Permissão de Acessibilidade</string>
+    <string name="usage_stats_permission">Permissão de Estatísticas de Uso</string>
+    <string name="location_permission">Permissão de Localização</string>
+    
+    <!-- Education -->
+    <string name="education_title">Educação</string>
+    <string name="digital_wellness">Bem-estar Digital</string>
+    <string name="internet_safety">Segurança na Internet</string>
+    <string name="parental_controls">Controles Parentais</string>
+    <string name="privacy_tips">Dicas de Privacidade</string>
+    <string name="security_tips">Dicas de Segurança</string>
+    <string name="read_more">Ler Mais</string>
+    <string name="read_less">Ler Menos</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">Bem-vindo ao Guardião da Internet Pro</string>
+    <string name="welcome_description">Controle o acesso à internet e bloqueie conteúdo inadequado em todos os aplicativos</string>
+    <string name="permissions_title">Permissões Necessárias</string>
+    <string name="permissions_description">Precisamos de certas permissões para garantir que o aplicativo funcione corretamente</string>
+    <string name="features_title">Recursos Principais</string>
+    <string name="features_description">Descubra os recursos poderosos que ajudam você a controlar o uso da internet</string>
+    <string name="ready_title">Pronto para Começar</string>
+    <string name="ready_description">Tudo está pronto! Agora você pode começar a usar o aplicativo</string>
+    <string name="get_started">Começar</string>
+    <string name="next">Próximo</string>
+    <string name="skip">Pular</string>
+    <string name="finish">Finalizar</string>
+    
+    <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="error">Erro</string>
+    <string name="success">Sucesso</string>
+    <string name="warning">Aviso</string>
+    <string name="info">Informação</string>
+    <string name="loading">Carregando...</string>
+    <string name="retry">Tentar Novamente</string>
+    <string name="close">Fechar</string>
+    <string name="back">Voltar</string>
+    <string name="done">Concluído</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
+    <string name="add">Adicionar</string>
+    <string name="remove">Remover</string>
+    <string name="enable">Habilitar</string>
+    <string name="disable">Desabilitar</string>
+    <string name="on">Ligado</string>
+    <string name="off">Desligado</string>
+    
+    <!-- Time -->
+    <string name="hours">Horas</string>
+    <string name="minutes">Minutos</string>
+    <string name="seconds">Segundos</string>
+    <string name="days">Dias</string>
+    <string name="weeks">Semanas</string>
+    <string name="months">Meses</string>
+    <string name="years">Anos</string>
+    
+    <!-- Categories -->
+    <string name="content">Conteúdo</string>
+    <string name="gambling">Jogos de Azar</string>
+    <string name="violence">Violência</string>
+    <string name="adult">Adulto</string>
+    <string name="hate_speech">Discurso de Ódio</string>
+    <string name="custom">Personalizado</string>
+    
+    <!-- Languages -->
+    <string name="english">Inglês</string>
+    <string name="arabic">Árabe</string>
+    <string name="persian">Persa</string>
+    <string name="chinese">Chinês</string>
+    <string name="spanish">Espanhol</string>
+    <string name="french">Francês</string>
+    <string name="german">Alemão</string>
+    <string name="russian">Russo</string>
+    <string name="japanese">Japonês</string>
+    <string name="korean">Coreano</string>
+    <string name="hindi">Hindi</string>
+    <string name="portuguese">Português</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">Erro de Rede</string>
+    <string name="error_permission_denied">Permissão Negada</string>
+    <string name="error_invalid_input">Entrada Inválida</string>
+    <string name="error_database">Erro de Banco de Dados</string>
+    <string name="error_unknown">Erro Desconhecido</string>
+    <string name="error_vpn_not_available">VPN Não Disponível</string>
+    <string name="error_biometric_not_available">Autenticação Biométrica Não Disponível</string>
+    <string name="error_encryption_failed">Falha na Criptografia</string>
+    
+    <!-- Success Messages -->
+    <string name="success_keyword_added">Palavra-chave Adicionada com Sucesso</string>
+    <string name="success_keyword_updated">Palavra-chave Atualizada com Sucesso</string>
+    <string name="success_keyword_deleted">Palavra-chave Excluída com Sucesso</string>
+    <string name="success_app_blocked">Aplicativo Bloqueado com Sucesso</string>
+    <string name="success_app_unblocked">Aplicativo Desbloqueado com Sucesso</string>
+    <string name="success_rule_added">Regra Adicionada com Sucesso</string>
+    <string name="success_settings_saved">Configurações Salvas com Sucesso</string>
+    
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_title">Política de Privacidade</string>
+    <string name="privacy_policy_content">
+        <![CDATA[
+        <h2>Política de Privacidade</h2>
+        <p>No Guardião da Internet Pro, nos comprometemos a proteger sua privacidade e dados pessoais.</p>
+        
+        <h3>Coleta de Dados</h3>
+        <p>Não coletamos dados pessoais de você. Todos os dados são processados localmente em seu dispositivo.</p>
+        
+        <h3>Criptografia</h3>
+        <p>Todos os dados são criptografados usando padrões de criptografia de nível militar.</p>
+        
+        <h3>Não Compartilhamos Dados</h3>
+        <p>Não compartilhamos seus dados com terceiros.</p>
+        
+        <h3>Controle de Dados</h3>
+        <p>Você tem controle total sobre seus dados e pode excluí-los a qualquer momento.</p>
+        ]]>
+    </string>
+</resources>

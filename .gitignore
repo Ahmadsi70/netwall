@@ -1,0 +1,20 @@
+﻿# Files to ignore in git
+node_modules/
+.env
+*.log
+.DS_Store
+Thumbs.db
+
+# Build outputs
+app/build/
+.gradle/
+build/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db

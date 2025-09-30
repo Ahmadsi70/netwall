@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">حارس الإنترنت المحترف</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">الرئيسية</string>
+    <string name="nav_apps">التطبيقات</string>
+    <string name="nav_keywords">الكلمات المفتاحية</string>
+    <string name="nav_rules">القواعد</string>
+    <string name="nav_analytics">التحليلات</string>
+    <string name="nav_settings">الإعدادات</string>
+    <string name="nav_education">التعليم</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">لوحة التحكم</string>
+    <string name="vpn_status">حالة VPN</string>
+    <string name="vpn_enabled">مفعل</string>
+    <string name="vpn_disabled">معطل</string>
+    <string name="blocked_apps">التطبيقات المحظورة</string>
+    <string name="blocked_keywords">الكلمات المحظورة</string>
+    <string name="time_saved">الوقت المحفوظ</string>
+    <string name="ai_suggestions">اقتراحات الذكاء الاصطناعي</string>
+    <string name="refresh">تحديث</string>
+    
+    <!-- App List -->
+    <string name="app_list_title">قائمة التطبيقات</string>
+    <string name="search_apps">البحث في التطبيقات</string>
+    <string name="filter_category">تصفية حسب الفئة</string>
+    <string name="all_categories">جميع الفئات</string>
+    <string name="social_media">وسائل التواصل الاجتماعي</string>
+    <string name="games">الألعاب</string>
+    <string name="entertainment">الترفيه</string>
+    <string name="productivity">الإنتاجية</string>
+    <string name="system">النظام</string>
+    <string name="other">أخرى</string>
+    <string name="block_app">حظر التطبيق</string>
+    <string name="unblock_app">إلغاء حظر التطبيق</string>
+    <string name="app_details">تفاصيل التطبيق</string>
+    <string name="blocking_mode">وضع الحظر</string>
+    <string name="always_block">حظر دائم</string>
+    <string name="schedule_block">حظر مجدول</string>
+    <string name="time_limit">حد زمني</string>
+    <string name="focus_mode">وضع التركيز</string>
+    
+    <!-- Keyword List -->
+    <string name="keyword_list_title">قائمة الكلمات المفتاحية</string>
+    <string name="add_keyword">إضافة كلمة مفتاحية</string>
+    <string name="search_keywords">البحث في الكلمات</string>
+    <string name="keyword">الكلمة المفتاحية</string>
+    <string name="language">اللغة</string>
+    <string name="category">الفئة</string>
+    <string name="case_sensitive">حساس للأحرف</string>
+    <string name="regex">تعبير منتظم</string>
+    <string name="active">نشط</string>
+    <string name="inactive">غير نشط</string>
+    <string name="edit_keyword">تعديل الكلمة المفتاحية</string>
+    <string name="delete_keyword">حذف الكلمة المفتاحية</string>
+    <string name="confirm_delete">تأكيد الحذف</string>
+    <string name="delete_keyword_message">هل أنت متأكد من حذف هذه الكلمة المفتاحية؟</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="save">حفظ</string>
+    <string name="cancel">إلغاء</string>
+    
+    <!-- Rules -->
+    <string name="rules_title">القواعد</string>
+    <string name="add_rule">إضافة قاعدة</string>
+    <string name="rule_name">اسم القاعدة</string>
+    <string name="rule_description">وصف القاعدة</string>
+    <string name="rule_conditions">شروط القاعدة</string>
+    <string name="rule_actions">إجراءات القاعدة</string>
+    <string name="time_based">مبني على الوقت</string>
+    <string name="location_based">مبني على الموقع</string>
+    <string name="battery_based">مبني على البطارية</string>
+    <string name="app_based">مبني على التطبيق</string>
+    <string name="keyword_based">مبني على الكلمة المفتاحية</string>
+    
+    <!-- Analytics -->
+    <string name="analytics_title">التحليلات</string>
+    <string name="usage_stats">إحصائيات الاستخدام</string>
+    <string name="blocking_stats">إحصائيات الحظر</string>
+    <string name="time_analysis">تحليل الوقت</string>
+    <string name="app_usage">استخدام التطبيقات</string>
+    <string name="keyword_blocks">حظر الكلمات</string>
+    <string name="daily_report">التقرير اليومي</string>
+    <string name="weekly_report">التقرير الأسبوعي</string>
+    <string name="monthly_report">التقرير الشهري</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="general_settings">الإعدادات العامة</string>
+    <string name="security_settings">إعدادات الأمان</string>
+    <string name="privacy_settings">إعدادات الخصوصية</string>
+    <string name="notification_settings">إعدادات الإشعارات</string>
+    <string name="language_settings">إعدادات اللغة</string>
+    <string name="theme_settings">إعدادات المظهر</string>
+    <string name="data_management">إدارة البيانات</string>
+    <string name="export_data">تصدير البيانات</string>
+    <string name="import_data">استيراد البيانات</string>
+    <string name="clear_data">مسح البيانات</string>
+    <string name="about">حول</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="terms_of_service">شروط الخدمة</string>
+    <string name="version">الإصدار</string>
+    
+    <!-- Security -->
+    <string name="biometric_auth">المصادقة البيومترية</string>
+    <string name="enable_biometric">تفعيل المصادقة البيومترية</string>
+    <string name="disable_biometric">إلغاء تفعيل المصادقة البيومترية</string>
+    <string name="database_encryption">تشفير قاعدة البيانات</string>
+    <string name="advanced_privacy">الخصوصية المتقدمة</string>
+    <string name="security_score">نقاط الأمان</string>
+    <string name="permissions">الأذونات</string>
+    <string name="vpn_permission">إذن VPN</string>
+    <string name="accessibility_permission">إذن إمكانية الوصول</string>
+    <string name="usage_stats_permission">إذن إحصائيات الاستخدام</string>
+    <string name="location_permission">إذن الموقع</string>
+    
+    <!-- Education -->
+    <string name="education_title">التعليم</string>
+    <string name="digital_wellness">العافية الرقمية</string>
+    <string name="internet_safety">أمان الإنترنت</string>
+    <string name="parental_controls">التحكم الأبوي</string>
+    <string name="privacy_tips">نصائح الخصوصية</string>
+    <string name="security_tips">نصائح الأمان</string>
+    <string name="read_more">اقرأ المزيد</string>
+    <string name="read_less">اقرأ أقل</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">مرحباً بك في حارس الإنترنت المحترف</string>
+    <string name="welcome_description">تحكم في وصول الإنترنت وحظر المحتوى غير المناسب عبر جميع التطبيقات</string>
+    <string name="permissions_title">الأذونات المطلوبة</string>
+    <string name="permissions_description">نحتاج إلى أذونات معينة لضمان عمل التطبيق بشكل صحيح</string>
+    <string name="features_title">الميزات الرئيسية</string>
+    <string name="features_description">اكتشف الميزات القوية التي تساعدك في التحكم في استخدام الإنترنت</string>
+    <string name="ready_title">جاهز للبدء</string>
+    <string name="ready_description">كل شيء جاهز! يمكنك الآن البدء في استخدام التطبيق</string>
+    <string name="get_started">ابدأ الآن</string>
+    <string name="next">التالي</string>
+    <string name="skip">تخطي</string>
+    <string name="finish">إنهاء</string>
+    
+    <!-- Common -->
+    <string name="ok">موافق</string>
+    <string name="error">خطأ</string>
+    <string name="success">نجح</string>
+    <string name="warning">تحذير</string>
+    <string name="info">معلومات</string>
+    <string name="loading">جاري التحميل...</string>
+    <string name="retry">إعادة المحاولة</string>
+    <string name="close">إغلاق</string>
+    <string name="back">رجوع</string>
+    <string name="done">تم</string>
+    <string name="edit">تعديل</string>
+    <string name="delete">حذف</string>
+    <string name="add">إضافة</string>
+    <string name="remove">إزالة</string>
+    <string name="enable">تفعيل</string>
+    <string name="disable">إلغاء تفعيل</string>
+    <string name="on">تشغيل</string>
+    <string name="off">إيقاف</string>
+    
+    <!-- Time -->
+    <string name="hours">ساعات</string>
+    <string name="minutes">دقائق</string>
+    <string name="seconds">ثواني</string>
+    <string name="days">أيام</string>
+    <string name="weeks">أسابيع</string>
+    <string name="months">أشهر</string>
+    <string name="years">سنوات</string>
+    
+    <!-- Categories -->
+    <string name="content">محتوى</string>
+    <string name="gambling">مقامرة</string>
+    <string name="violence">عنف</string>
+    <string name="adult">بالغين</string>
+    <string name="hate_speech">خطاب كراهية</string>
+    <string name="custom">مخصص</string>
+    
+    <!-- Languages -->
+    <string name="english">الإنجليزية</string>
+    <string name="arabic">العربية</string>
+    <string name="persian">الفارسية</string>
+    <string name="chinese">الصينية</string>
+    <string name="spanish">الإسبانية</string>
+    <string name="french">الفرنسية</string>
+    <string name="german">الألمانية</string>
+    <string name="russian">الروسية</string>
+    <string name="japanese">اليابانية</string>
+    <string name="korean">الكورية</string>
+    <string name="hindi">الهندية</string>
+    <string name="portuguese">البرتغالية</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">خطأ في الشبكة</string>
+    <string name="error_permission_denied">تم رفض الإذن</string>
+    <string name="error_invalid_input">إدخال غير صحيح</string>
+    <string name="error_database">خطأ في قاعدة البيانات</string>
+    <string name="error_unknown">خطأ غير معروف</string>
+    <string name="error_vpn_not_available">VPN غير متاح</string>
+    <string name="error_biometric_not_available">المصادقة البيومترية غير متاحة</string>
+    <string name="error_encryption_failed">فشل في التشفير</string>
+    
+    <!-- Success Messages -->
+    <string name="success_keyword_added">تمت إضافة الكلمة المفتاحية بنجاح</string>
+    <string name="success_keyword_updated">تم تحديث الكلمة المفتاحية بنجاح</string>
+    <string name="success_keyword_deleted">تم حذف الكلمة المفتاحية بنجاح</string>
+    <string name="success_app_blocked">تم حظر التطبيق بنجاح</string>
+    <string name="success_app_unblocked">تم إلغاء حظر التطبيق بنجاح</string>
+    <string name="success_rule_added">تمت إضافة القاعدة بنجاح</string>
+    <string name="success_settings_saved">تم حفظ الإعدادات بنجاح</string>
+    
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_title">سياسة الخصوصية</string>
+    <string name="privacy_policy_content">
+        <![CDATA[
+        <h2>سياسة الخصوصية</h2>
+        <p>نحن في حارس الإنترنت المحترف نلتزم بحماية خصوصيتك وبياناتك الشخصية.</p>
+        
+        <h3>جمع البيانات</h3>
+        <p>لا نجمع أي بيانات شخصية منك. جميع البيانات تتم معالجتها محلياً على جهازك.</p>
+        
+        <h3>التشفير</h3>
+        <p>جميع البيانات مشفرة باستخدام معايير التشفير العسكرية.</p>
+        
+        <h3>عدم مشاركة البيانات</h3>
+        <p>لا نشارك بياناتك مع أي طرف ثالث.</p>
+        
+        <h3>التحكم في البيانات</h3>
+        <p>لديك تحكم كامل في بياناتك ويمكنك حذفها في أي وقت.</p>
+        ]]>
+    </string>
+</resources>

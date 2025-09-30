@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+	<item
+		android:id="@+id/appListFragment"
+		android:icon="@drawable/ic_apps"
+		android:title="Apps" />
+
+	<item
+		android:id="@+id/keywordListFragment"
+		android:icon="@drawable/ic_keyword_block"
+		android:title="Keywords" />
+
+	<item
+		android:id="@+id/blockedItemsFragment"
+		android:icon="@android:drawable/ic_menu_view"
+		android:title="Blocked" />
+</menu>

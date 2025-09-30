@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">网络守护专业版</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">仪表板</string>
+    <string name="nav_apps">应用</string>
+    <string name="nav_keywords">关键词</string>
+    <string name="nav_rules">规则</string>
+    <string name="nav_analytics">分析</string>
+    <string name="nav_settings">设置</string>
+    <string name="nav_education">教育</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">仪表板</string>
+    <string name="vpn_status">VPN状态</string>
+    <string name="vpn_enabled">已启用</string>
+    <string name="vpn_disabled">已禁用</string>
+    <string name="blocked_apps">被阻止的应用</string>
+    <string name="blocked_keywords">被阻止的关键词</string>
+    <string name="time_saved">节省时间</string>
+    <string name="ai_suggestions">AI建议</string>
+    <string name="refresh">刷新</string>
+    
+    <!-- App List -->
+    <string name="app_list_title">应用列表</string>
+    <string name="search_apps">搜索应用</string>
+    <string name="filter_category">按类别筛选</string>
+    <string name="all_categories">所有类别</string>
+    <string name="social_media">社交媒体</string>
+    <string name="games">游戏</string>
+    <string name="entertainment">娱乐</string>
+    <string name="productivity">生产力</string>
+    <string name="system">系统</string>
+    <string name="other">其他</string>
+    <string name="block_app">阻止应用</string>
+    <string name="unblock_app">取消阻止应用</string>
+    <string name="app_details">应用详情</string>
+    <string name="blocking_mode">阻止模式</string>
+    <string name="always_block">始终阻止</string>
+    <string name="schedule_block">定时阻止</string>
+    <string name="time_limit">时间限制</string>
+    <string name="focus_mode">专注模式</string>
+    
+    <!-- Keyword List -->
+    <string name="keyword_list_title">关键词列表</string>
+    <string name="add_keyword">添加关键词</string>
+    <string name="search_keywords">搜索关键词</string>
+    <string name="keyword">关键词</string>
+    <string name="language">语言</string>
+    <string name="category">类别</string>
+    <string name="case_sensitive">区分大小写</string>
+    <string name="regex">正则表达式</string>
+    <string name="active">活跃</string>
+    <string name="inactive">非活跃</string>
+    <string name="edit_keyword">编辑关键词</string>
+    <string name="delete_keyword">删除关键词</string>
+    <string name="confirm_delete">确认删除</string>
+    <string name="delete_keyword_message">您确定要删除此关键词吗？</string>
+    <string name="yes">是</string>
+    <string name="no">否</string>
+    <string name="save">保存</string>
+    <string name="cancel">取消</string>
+    
+    <!-- Rules -->
+    <string name="rules_title">规则</string>
+    <string name="add_rule">添加规则</string>
+    <string name="rule_name">规则名称</string>
+    <string name="rule_description">规则描述</string>
+    <string name="rule_conditions">规则条件</string>
+    <string name="rule_actions">规则操作</string>
+    <string name="time_based">基于时间</string>
+    <string name="location_based">基于位置</string>
+    <string name="battery_based">基于电池</string>
+    <string name="app_based">基于应用</string>
+    <string name="keyword_based">基于关键词</string>
+    
+    <!-- Analytics -->
+    <string name="analytics_title">分析</string>
+    <string name="usage_stats">使用统计</string>
+    <string name="blocking_stats">阻止统计</string>
+    <string name="time_analysis">时间分析</string>
+    <string name="app_usage">应用使用</string>
+    <string name="keyword_blocks">关键词阻止</string>
+    <string name="daily_report">日报</string>
+    <string name="weekly_report">周报</string>
+    <string name="monthly_report">月报</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">设置</string>
+    <string name="general_settings">常规设置</string>
+    <string name="security_settings">安全设置</string>
+    <string name="privacy_settings">隐私设置</string>
+    <string name="notification_settings">通知设置</string>
+    <string name="language_settings">语言设置</string>
+    <string name="theme_settings">主题设置</string>
+    <string name="data_management">数据管理</string>
+    <string name="export_data">导出数据</string>
+    <string name="import_data">导入数据</string>
+    <string name="clear_data">清除数据</string>
+    <string name="about">关于</string>
+    <string name="privacy_policy">隐私政策</string>
+    <string name="terms_of_service">服务条款</string>
+    <string name="version">版本</string>
+    
+    <!-- Security -->
+    <string name="biometric_auth">生物识别认证</string>
+    <string name="enable_biometric">启用生物识别认证</string>
+    <string name="disable_biometric">禁用生物识别认证</string>
+    <string name="database_encryption">数据库加密</string>
+    <string name="advanced_privacy">高级隐私</string>
+    <string name="security_score">安全评分</string>
+    <string name="permissions">权限</string>
+    <string name="vpn_permission">VPN权限</string>
+    <string name="accessibility_permission">无障碍权限</string>
+    <string name="usage_stats_permission">使用统计权限</string>
+    <string name="location_permission">位置权限</string>
+    
+    <!-- Education -->
+    <string name="education_title">教育</string>
+    <string name="digital_wellness">数字健康</string>
+    <string name="internet_safety">网络安全</string>
+    <string name="parental_controls">家长控制</string>
+    <string name="privacy_tips">隐私提示</string>
+    <string name="security_tips">安全提示</string>
+    <string name="read_more">阅读更多</string>
+    <string name="read_less">阅读更少</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">欢迎使用网络守护专业版</string>
+    <string name="welcome_description">控制互联网访问并阻止所有应用中的不当内容</string>
+    <string name="permissions_title">所需权限</string>
+    <string name="permissions_description">我们需要某些权限以确保应用正常工作</string>
+    <string name="features_title">主要功能</string>
+    <string name="features_description">发现帮助您控制互联网使用的强大功能</string>
+    <string name="ready_title">准备开始</string>
+    <string name="ready_description">一切就绪！您现在可以开始使用应用了</string>
+    <string name="get_started">开始使用</string>
+    <string name="next">下一步</string>
+    <string name="skip">跳过</string>
+    <string name="finish">完成</string>
+    
+    <!-- Common -->
+    <string name="ok">确定</string>
+    <string name="error">错误</string>
+    <string name="success">成功</string>
+    <string name="warning">警告</string>
+    <string name="info">信息</string>
+    <string name="loading">加载中...</string>
+    <string name="retry">重试</string>
+    <string name="close">关闭</string>
+    <string name="back">返回</string>
+    <string name="done">完成</string>
+    <string name="edit">编辑</string>
+    <string name="delete">删除</string>
+    <string name="add">添加</string>
+    <string name="remove">移除</string>
+    <string name="enable">启用</string>
+    <string name="disable">禁用</string>
+    <string name="on">开启</string>
+    <string name="off">关闭</string>
+    
+    <!-- Time -->
+    <string name="hours">小时</string>
+    <string name="minutes">分钟</string>
+    <string name="seconds">秒</string>
+    <string name="days">天</string>
+    <string name="weeks">周</string>
+    <string name="months">月</string>
+    <string name="years">年</string>
+    
+    <!-- Categories -->
+    <string name="content">内容</string>
+    <string name="gambling">赌博</string>
+    <string name="violence">暴力</string>
+    <string name="adult">成人</string>
+    <string name="hate_speech">仇恨言论</string>
+    <string name="custom">自定义</string>
+    
+    <!-- Languages -->
+    <string name="english">英语</string>
+    <string name="arabic">阿拉伯语</string>
+    <string name="persian">波斯语</string>
+    <string name="chinese">中文</string>
+    <string name="spanish">西班牙语</string>
+    <string name="french">法语</string>
+    <string name="german">德语</string>
+    <string name="russian">俄语</string>
+    <string name="japanese">日语</string>
+    <string name="korean">韩语</string>
+    <string name="hindi">印地语</string>
+    <string name="portuguese">葡萄牙语</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">网络错误</string>
+    <string name="error_permission_denied">权限被拒绝</string>
+    <string name="error_invalid_input">输入无效</string>
+    <string name="error_database">数据库错误</string>
+    <string name="error_unknown">未知错误</string>
+    <string name="error_vpn_not_available">VPN不可用</string>
+    <string name="error_biometric_not_available">生物识别认证不可用</string>
+    <string name="error_encryption_failed">加密失败</string>
+    
+    <!-- Success Messages -->
+    <string name="success_keyword_added">关键词添加成功</string>
+    <string name="success_keyword_updated">关键词更新成功</string>
+    <string name="success_keyword_deleted">关键词删除成功</string>
+    <string name="success_app_blocked">应用阻止成功</string>
+    <string name="success_app_unblocked">应用取消阻止成功</string>
+    <string name="success_rule_added">规则添加成功</string>
+    <string name="success_settings_saved">设置保存成功</string>
+    
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_title">隐私政策</string>
+    <string name="privacy_policy_content">
+        <![CDATA[
+        <h2>隐私政策</h2>
+        <p>我们网络守护专业版致力于保护您的隐私和个人数据。</p>
+        
+        <h3>数据收集</h3>
+        <p>我们不收集您的任何个人数据。所有数据都在您的设备上本地处理。</p>
+        
+        <h3>加密</h3>
+        <p>所有数据都使用军用级加密标准进行加密。</p>
+        
+        <h3>不共享数据</h3>
+        <p>我们不与任何第三方共享您的数据。</p>
+        
+        <h3>数据控制</h3>
+        <p>您完全控制您的数据，可以随时删除。</p>
+        ]]>
+    </string>
+</resources>

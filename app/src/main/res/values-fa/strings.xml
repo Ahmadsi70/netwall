@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">نگهبان اینترنت پرو</string>
+	<string name="accessibility_service_description">کلمات کلیدی غیرمجاز را در اپلیکیشن‌ها برای کنترل والدین مسدود می‌کند.</string>
+	
+	<!-- Navigation -->
+	<string name="nav_dashboard">داشبورد</string>
+	<string name="nav_apps">اپلیکیشن‌ها</string>
+	<string name="nav_keywords">کلمات کلیدی</string>
+	<string name="nav_rules">قوانین</string>
+	<string name="nav_analytics">تحلیل‌ها</string>
+	<string name="nav_settings">تنظیمات</string>
+	<string name="nav_education">آموزش</string>
+	
+	<!-- Dashboard -->
+	<string name="dashboard_title">داشبورد</string>
+	<string name="vpn_status">وضعیت VPN</string>
+	<string name="vpn_connected">متصل</string>
+	<string name="vpn_not_connected">قطع</string>
+	<string name="vpn_connect">اتصال</string>
+	<string name="vpn_disconnect">قطع اتصال</string>
+	<string name="content_blocked">محتوای مسدود شده</string>
+	<string name="time_saved">زمان ذخیره شده</string>
+	<string name="ai_suggestions">پیشنهادات هوشمند</string>
+	<string name="refresh">بروزرسانی</string>
+	
+	<!-- Analytics -->
+	<string name="analytics_title">تحلیل‌ها</string>
+	<string name="total_blocked">کل مسدود شده</string>
+	<string name="blocking_trend">روند مسدودسازی (7 روز)</string>
+	<string name="app_usage">استفاده از اپلیکیشن (دقیقه)</string>
+	<string name="keyword_distribution">توزیع کلمات کلیدی</string>
+	<string name="blocking_activity_time">فعالیت مسدودسازی بر اساس زمان</string>
+	
+	<!-- Settings -->
+	<string name="settings_title">تنظیمات</string>
+	<string name="appearance">ظاهر</string>
+	<string name="theme">تم</string>
+	<string name="language">زبان</string>
+	<string name="notifications">اعلان‌ها</string>
+	<string name="enable_notifications">فعال کردن اعلان‌ها</string>
+	<string name="notifications_description">دریافت هشدار درباره محتوای مسدود شده و فعالیت اپلیکیشن</string>
+	<string name="privacy_security">حریم خصوصی و امنیت</string>
+	<string name="privacy_settings">تنظیمات حریم خصوصی</string>
+	<string name="privacy_description">مدیریت تنظیمات حریم خصوصی و داده‌ها</string>
+	<string name="data_management">مدیریت داده</string>
+	<string name="export_data">صادرات داده</string>
+	<string name="export_data_description">صادرات قوانین و تنظیمات شما</string>
+	<string name="import_data">واردات داده</string>
+	<string name="import_data_description">واردات قوانین و تنظیمات از فایل</string>
+	<string name="clear_all_data">پاک کردن همه داده‌ها</string>
+	<string name="clear_data_description">حذف دائمی همه داده‌های اپلیکیشن</string>
+	<string name="about">درباره</string>
+	<string name="about_app">درباره نگهبان اینترنت پرو</string>
+	<string name="version">نسخه 1.0.0</string>
+	
+	<!-- Education -->
+	<string name="education_title">آموزش</string>
+	<string name="digital_wellness_education">آموزش سلامت دیجیتال</string>
+	<string name="education_description">درباره امنیت اینترنت، سلامت دیجیتال و بهره‌وری بیاموزید</string>
+	
+	<!-- Onboarding -->
+	<string name="welcome_title">به نگهبان اینترنت پرو خوش آمدید</string>
+	<string name="welcome_description">با ویژگی‌های مسدودسازی هوشمند و بهره‌وری، کنترل استفاده از اینترنت خود را در دست بگیرید.</string>
+	<string name="permissions_title">اعطای مجوزها</string>
+	<string name="permissions_description">برای مسدودسازی محتوا و نظارت مؤثر بر اپلیکیشن‌ها به مجوزهای VPN و دسترسی نیاز داریم. داده‌های شما خصوصی و امن باقی می‌ماند.</string>
+	<string name="features_title">ویژگی‌های قدرتمند</string>
+	<string name="features_description">اپلیکیشن‌ها را مسدود کنید، کلمات کلیدی را فیلتر کنید، قوانین سفارشی ایجاد کنید و پیشنهادات هوشمند دریافت کنید تا بهره‌وری خود را بهبود بخشید.</string>
+	<string name="ready_title">همه چیز آماده است!</string>
+	<string name="ready_description">نگهبان اینترنت پرو آماده است تا به شما کمک کند متمرکز و بهره‌ور باشید. بیایید شروع کنیم!</string>
+	<string name="skip">رد کردن</string>
+	<string name="next">بعدی</string>
+	<string name="get_started">شروع کنید</string>
+	
+	<!-- Common -->
+	<string name="ok">تأیید</string>
+	<string name="cancel">لغو</string>
+	<string name="apply">اعمال</string>
+	<string name="dismiss">رد</string>
+	<string name="edit">ویرایش</string>
+	<string name="delete">حذف</string>
+	<string name="save">ذخیره</string>
+	<string name="loading">در حال بارگذاری...</string>
+	<string name="error">خطا</string>
+	<string name="success">موفقیت</string>
+	<string name="confirmation">تأیید</string>
+</resources>

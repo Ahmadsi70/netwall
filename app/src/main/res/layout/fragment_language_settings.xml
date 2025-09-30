@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:title="Language Settings"
+			app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="16dp">
+
+			<!-- Current Language Info -->
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:padding="16dp">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Current Language"
+						android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+					<TextView
+						android:id="@+id/text_current_language"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="8dp"
+						android:text="English"
+						android:textAppearance="@style/TextAppearance.Material3.BodyLarge" />
+
+					<TextView
+						android:id="@+id/text_language_direction"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="4dp"
+						android:text="Direction: LTR"
+						android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					<TextView
+						android:id="@+id/text_rtl_status"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="4dp"
+						android:text="LTR Language"
+						android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Language Selection -->
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:padding="16dp">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Select Language"
+						android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="8dp"
+						android:text="Choose your preferred language from the list below"
+						android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					<androidx.recyclerview.widget.RecyclerView
+						android:id="@+id/recycler_view_languages"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="16dp"
+						android:nestedScrollingEnabled="false" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Action Buttons -->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:gravity="end">
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/btn_reset_to_system"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginEnd="8dp"
+					android:text="Reset to System"
+					style="@style/Widget.Material3.Button.OutlinedButton" />
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/btn_apply_language"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Apply Language" />
+
+			</LinearLayout>
+
+			<!-- Language Info -->
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:padding="16dp">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Language Information"
+						android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="8dp"
+						android:text="• Changing language will affect the entire app interface"
+						android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="4dp"
+						android:text="• RTL languages will change text direction"
+						android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="4dp"
+						android:text="• Some features may require app restart"
+						android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+		</LinearLayout>
+
+	</androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

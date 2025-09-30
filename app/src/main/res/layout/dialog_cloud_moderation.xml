@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:orientation="vertical"
+	android:padding="16dp">
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Cloud AI Moderation"
+		android:textStyle="bold"
+		android:textSize="18sp"
+		android:paddingBottom="12dp" />
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="AI-powered content detection using advanced machine learning"
+		android:textSize="14sp"
+		android:textColor="#666666"
+		android:paddingBottom="16dp" />
+
+	<Switch
+		android:id="@+id/switch_opt_in"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Enable Cloud AI Moderation"
+		android:textSize="16sp"
+		android:paddingBottom="8dp" />
+
+	<!-- Status Card -->
+	<com.google.android.material.card.MaterialCardView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="8dp"
+		android:layout_marginBottom="16dp"
+		app:cardBackgroundColor="#E3F2FD"
+		app:cardElevation="2dp"
+		app:cardCornerRadius="8dp">
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="16dp">
+			
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="ℹ️ How it works"
+				android:textStyle="bold"
+				android:textSize="14sp"
+				android:textColor="#1565C0"
+				android:paddingBottom="8dp" />
+			
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="• Uses secure cloud AI for enhanced accuracy\n• All text is redacted before sending (emails, phones, URLs masked)\n• Powered by OpenAI's advanced models\n• Completely free for all users\n• No registration or API key needed"
+				android:textSize="13sp"
+				android:textColor="#424242"
+				android:lineSpacingExtra="2dp" />
+		</LinearLayout>
+	</com.google.android.material.card.MaterialCardView>
+
+	<!-- Features Card -->
+	<com.google.android.material.card.MaterialCardView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="16dp"
+		app:cardBackgroundColor="#E8F5E9"
+		app:cardElevation="2dp"
+		app:cardCornerRadius="8dp">
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:padding="16dp">
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="✨ Features"
+				android:textStyle="bold"
+				android:textSize="14sp"
+				android:textColor="#2E7D32"
+				android:paddingBottom="8dp" />
+
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="✅ Multi-language support (Persian, English, Arabic)\n✅ Context-aware detection\n✅ Real-time processing\n✅ High accuracy (95%+)\n✅ Privacy-first architecture"
+				android:textSize="13sp"
+				android:textColor="#424242"
+				android:lineSpacingExtra="2dp" />
+		</LinearLayout>
+	</com.google.android.material.card.MaterialCardView>
+
+	<!-- Privacy Notice -->
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="🔒 Privacy Notice"
+		android:textStyle="bold"
+		android:textSize="13sp"
+		android:textColor="#D32F2F"
+		android:paddingBottom="4dp" />
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Your data is always protected. Text is redacted before transmission, processed only for content analysis, and never stored on our servers."
+		android:textSize="12sp"
+		android:textColor="#666666"
+		android:paddingBottom="16dp" />
+
+	<!-- Combined Mode Info -->
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="💡 Detection Priority: Cloud AI → Local AI → Keyword Matching"
+		android:textSize="12sp"
+		android:textStyle="italic"
+		android:textColor="#FF6F00"
+		android:paddingTop="8dp" />
+
+</LinearLayout>
+
+

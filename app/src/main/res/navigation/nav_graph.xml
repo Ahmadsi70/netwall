@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:id="@+id/nav_graph"
+	app:startDestination="@id/appListFragment">
+
+	<fragment
+		android:id="@+id/appListFragment"
+		android:name="com.internetguard.pro.ui.fragment.AppListFragment"
+		android:label="Apps" />
+
+	<fragment
+		android:id="@+id/keywordListFragment"
+		android:name="com.internetguard.pro.ui.fragment.KeywordListFragment"
+		android:label="Keywords" />
+
+	<fragment
+		android:id="@+id/blockedItemsFragment"
+		android:name="com.internetguard.pro.ui.fragment.BlockedItemsFragment"
+		android:label="Blocked Items" />
+
+	<fragment
+		android:id="@+id/apiTestFragment"
+		android:name="com.internetguard.pro.ui.fragment.ApiTestFragment"
+		android:label="API Test" />
+
+</navigation>

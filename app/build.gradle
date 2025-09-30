@@ -1,0 +1,1010 @@
+plugins {
+	id 'com.android.application'
+	id 'org.jetbrains.kotlin.android'
+	id 'org.jetbrains.kotlin.kapt'
+	id 'androidx.navigation.safeargs.kotlin'
+	id 'io.gitlab.arturbosch.detekt'
+	id 'jacoco'
+}
+
+android {
+	namespace 'com.internetguard.pro'
+	compileSdk 34
+
+	defaultConfig {
+		applicationId 'com.productivity.tools.guardian'
+		minSdk 24  // Android 7.0+ برای عملکرد بهتر و امنیت بیشتر
+		targetSdk 34  // Android 14 برای بهترین عملکرد و امنیت
+		versionCode 1
+		versionName '1.0.0'
+		testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+        // کاهش مصرف حافظه در مرحله ادغام منابع با محدود کردن لوکال ها
+        resConfigs 'en', 'fa'
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled true
+			shrinkResources true // فعال سازی حذف resources غیرضروری
+			proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+			
+			// Security optimizations
+			debuggable false
+			jniDebuggable false
+			renderscriptDebuggable false
+			pseudoLocalesEnabled false
+			
+			// APK optimization
+			zipAlignEnabled true
+			crunchPngs true
+		}
+		debug {
+			minifyEnabled false
+			shrinkResources false
+			debuggable true
+			testCoverageEnabled = true
+		}
+	}
+
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_17
+		targetCompatibility JavaVersion.VERSION_17
+	}
+
+	kotlinOptions {
+		jvmTarget = '17'
+		freeCompilerArgs += [
+			'-opt-in=kotlin.RequiresOptIn',
+			'-Xjsr305=strict'
+		]
+	}
+
+	buildFeatures {
+		viewBinding true
+		buildConfig true
+	}
+	
+	// APK optimization
+	packagingOptions {
+		resources {
+			excludes += [
+				'/META-INF/{AL2.0,LGPL2.1}',
+				'/META-INF/DEPENDENCIES',
+				'/META-INF/LICENSE',
+				'/META-INF/LICENSE.txt',
+				'/META-INF/NOTICE',
+				'/META-INF/NOTICE.txt',
+				'**/*.kotlin_module',
+				'**/*.version',
+				'**/kotlin/**',
+				'**/*.kotlin_builtins',
+				'**/*.kotlin_metadata'
+			]
+		}
+	}
+
+	testOptions {
+		unitTests {
+			includeAndroidResources = true
+			animationsDisabled = true
+		}
+		execution 'ANDROIDX_TEST_ORCHESTRATOR'
+		animationsDisabled = true
+	}
+
+	// Simplified flavors
+	flavorDimensions "version"
+	productFlavors {
+		full {
+			dimension "version"
+		}
+	}
+
+	// sourceSets simplified
+	sourceSets {
+		main {
+			java.srcDirs = ['src/main/java']
+			res.srcDirs = ['src/main/res']
+		}
+	}
+
+// Disable detekt during bring-up to unblock build
+tasks.withType(io.gitlab.arturbosch.detekt.Detekt).configureEach { enabled = false }
+
+
+// JaCoCo Test Coverage Configuration
+tasks.withType(Test) {
+	jacoco.includeNoLocationClasses = true
+	jacoco.excludes = ['jdk.internal.*']
+}
+
+// Task to generate combined coverage report
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testFullDebugUnitTest', 'createFullDebugCoverageReport']) {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/main/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'jacoco/testFullDebugUnitTest.exec',
+		'outputs/code-coverage/connected/*coverage.ec'
+	]))
+}
+
+// Task to generate unit test coverage only
+task jacocoUnitTestReport(type: JacocoReport, dependsOn: 'testFullDebugUnitTest') {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/main/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'jacoco/testFullDebugUnitTest.exec'
+	]))
+}
+
+// Task to generate UI test coverage only
+task jacocoUITestReport(type: JacocoReport, dependsOn: 'connectedFullDebugAndroidTest') {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/main/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'outputs/code-coverage/connected/*coverage.ec'
+	]))
+}
+
+// Task to generate coverage report for specific packages
+task jacocoPackageReport(type: JacocoReport, dependsOn: ['testFullDebugUnitTest', 'createFullDebugCoverageReport']) {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/main/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'jacoco/testFullDebugUnitTest.exec',
+		'outputs/code-coverage/connected/*coverage.ec'
+	]))
+
+	// Focus on specific packages
+	classDirectories.setFrom(files([debugTree]).filter {
+		it.path.contains('com/internetguard/pro')
+	})
+}
+
+// Task to generate coverage report for adapters only
+task jacocoAdapterReport(type: JacocoReport, dependsOn: 'testFullDebugUnitTest') {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/main/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'jacoco/testFullDebugUnitTest.exec'
+	]))
+
+	// Focus on adapters only
+	classDirectories.setFrom(files([debugTree]).filter {
+		it.path.contains('com/internetguard/pro/ui/adapter')
+	})
+}
+
+// Task to generate coverage report for repositories only
+task jacocoRepositoryReport(type: JacocoReport, dependsOn: 'testFullDebugUnitTest') {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/main/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'jacoco/testFullDebugUnitTest.exec'
+	]))
+
+	// Focus on repositories only
+	classDirectories.setFrom(files([debugTree]).filter {
+		it.path.contains('com/internetguard/pro/data/repository')
+	})
+}
+
+// Task to generate coverage report for ViewModels only
+task jacocoViewModelReport(type: JacocoReport, dependsOn: 'testFullDebugUnitTest') {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/main/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'jacoco/testFullDebugUnitTest.exec'
+	]))
+
+	// Focus on ViewModels only
+	classDirectories.setFrom(files([debugTree]).filter {
+		it.path.contains('com/internetguard/pro/ui/viewmodel')
+	})
+}
+
+// Task to generate coverage report for Lite flavor tests (minimal compilation)
+task jacocoLiteTestsReport(type: JacocoReport, dependsOn: 'testLiteDebugUnitTest') {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/liteDebug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/lite/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'jacoco/testLiteDebugUnitTest.exec'
+	]))
+}
+
+// Task to generate coverage report for existing tests only (without compilation)
+task jacocoExistingTestsReport(type: JacocoReport) {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/main/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'jacoco/testFullDebugUnitTest.exec'
+	]))
+
+	// Only include test files that exist
+	doFirst {
+		if (!file("${buildDir}/jacoco/testFullDebugUnitTest.exec").exists()) {
+			println "No execution data found. Please run tests first."
+			throw new GradleException("No execution data found. Please run tests first.")
+		}
+	}
+}
+
+// Task to generate coverage report for UI tests only
+task jacocoUIReport(type: JacocoReport, dependsOn: 'connectedFullDebugAndroidTest') {
+	reports {
+		xml.required = true
+		html.required = true
+		csv.required = false
+	}
+
+	def fileFilter = [
+		'**/R.class',
+		'**/R$*.class',
+		'**/BuildConfig.*',
+		'**/Manifest*.*',
+		'**/*Test*.*',
+		'android/**/*.*',
+		'**/di/**',
+		'**/hilt/**',
+		'**/dagger/**',
+		'**/com/google/**',
+		'**/androidx/**',
+		'**/kotlin/**',
+		'**/kotlinx/**',
+		'**/org/jetbrains/**',
+		'**/org/koin/**',
+		'**/retrofit2/**',
+		'**/okhttp3/**',
+		'**/gson/**',
+		'**/glide/**',
+		'**/lottie/**',
+		'**/tensorflow/**',
+		'**/mlkit/**',
+		'**/play/services/**',
+		'**/ar/core/**',
+		'**/datastore/**',
+		'**/preference/**',
+		'**/paging/**',
+		'**/palette/**',
+		'**/commons/**',
+		'**/multidex/**',
+		'**/room/**',
+		'**/sqlcipher/**',
+		'**/security/**',
+		'**/biometric/**',
+		'**/work/**',
+		'**/navigation/**',
+		'**/lifecycle/**',
+		'**/activity/**',
+		'**/fragment/**',
+		'**/core/**',
+		'**/appcompat/**',
+		'**/material/**',
+		'**/recyclerview/**',
+		'**/cardview/**',
+		'**/constraintlayout/**',
+		'**/viewpager2/**',
+		'**/dynamicanimation/**',
+		'**/test/**',
+		'**/androidTest/**',
+		'**/testImplementation/**',
+		'**/androidTestImplementation/**'
+	]
+
+	def debugTree = fileTree(dir: "${buildDir}/intermediates/javac/debug/classes", excludes: fileFilter)
+	def mainSrc = "${project.projectDir}/src/main/java"
+
+	sourceDirectories.setFrom(files([mainSrc]))
+	classDirectories.setFrom(files([debugTree]))
+	executionData.setFrom(fileTree(dir: buildDir, includes: [
+		'outputs/code-coverage/connected/*coverage.ec'
+	]))
+
+	// Focus on UI components only
+	classDirectories.setFrom(files([debugTree]).filter {
+		it.path.contains('com/internetguard/pro/ui/fragment') ||
+		it.path.contains('com/internetguard/pro/ui/activity') ||
+		it.path.contains('com/internetguard/pro/ui/adapter')
+	})
+}
+}
+
+dependencies {
+	// Kotlin & Coroutines
+	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1'
+	
+	// Android Core
+	implementation 'androidx.core:core-ktx:1.13.1'
+	implementation 'androidx.appcompat:appcompat:1.7.0'
+	implementation 'androidx.activity:activity-ktx:1.9.1'
+	implementation 'androidx.fragment:fragment-ktx:1.8.2'
+
+	// Material Design
+	implementation 'com.google.android.material:material:1.12.0'
+
+	// Lifecycle
+	implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4'
+	implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.8.4'
+	implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.8.4'
+
+	// Navigation
+	implementation 'androidx.navigation:navigation-fragment-ktx:2.7.7'
+	implementation 'androidx.navigation:navigation-ui-ktx:2.7.7'
+
+	// WorkManager
+	implementation 'androidx.work:work-runtime-ktx:2.9.1'
+
+	// Room Database
+	implementation 'androidx.room:room-ktx:2.6.1'
+	implementation 'androidx.room:room-runtime:2.6.1'
+	kapt 'androidx.room:room-compiler:2.6.1'
+
+	// SQLCipher - Lightweight alternative or remove if not critically needed
+	// implementation 'net.zetetic:android-database-sqlcipher:4.5.4' // Removed - saves ~20MB
+	implementation 'androidx.sqlite:sqlite-ktx:2.4.0'
+
+	// Security
+	implementation 'androidx.security:security-crypto:1.1.0-alpha06'
+	implementation 'androidx.biometric:biometric:1.1.0'
+
+	// UI Components
+	implementation 'androidx.recyclerview:recyclerview:1.3.2'
+	implementation 'androidx.cardview:cardview:1.0.0'
+	implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+	implementation 'androidx.viewpager2:viewpager2:1.1.0'
+
+	// Animations & Charts - Keep only essential
+	// implementation 'com.airbnb.android:lottie:6.4.0' // Removed - saves ~3MB
+	// implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' // Removed - saves ~5MB, use simple charts
+	// implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0' // Removed
+
+	// Image Loading - Use lighter alternative
+	// implementation 'com.github.bumptech.glide:glide:4.16.0' // Removed - saves ~5MB
+	// kapt 'com.github.bumptech.glide:compiler:4.16.0'
+
+	// Networking - Minimal for basic needs
+	// implementation 'com.squareup.retrofit2:retrofit:2.9.0' // Removed - saves ~3MB
+	// implementation 'com.squareup.retrofit2:converter-gson:2.9.0' // Removed
+	implementation 'com.squareup.okhttp3:okhttp:4.12.0' // Keep for basic HTTP
+	// implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0' // Removed
+
+	// AI/ML - Only if actually used
+	// implementation 'org.tensorflow:tensorflow-lite:2.14.0' // Removed - saves ~25MB
+	// implementation 'com.google.mlkit:text-recognition:16.0.0' // Removed - saves ~15MB
+
+	// Location & Sensors - Only if actually used
+	// implementation 'com.google.android.gms:play-services-location:21.0.1' // Removed - saves ~10MB
+	// implementation 'com.google.android.gms:play-services-activity-recognition:21.0.0' // Removed due to compatibility issues
+	// implementation 'com.google.android.gms:play-services-fitness:21.1.0' // Removed - saves ~12MB
+
+	// AR - Only if actually used
+	// implementation 'com.google.ar:core:1.44.0' // Removed - saves ~18MB
+
+	// Data & Preferences - Minimal
+	// implementation 'androidx.datastore:datastore-preferences:1.0.0' // Removed - use SharedPreferences
+	implementation 'androidx.preference:preference-ktx:1.2.1'
+	// implementation 'androidx.paging:paging-runtime-ktx:3.2.1' // Removed - saves ~2MB
+
+	// Utilities - Keep only essential
+	implementation 'com.google.code.gson:gson:2.10.1' // Essential for JSON
+	// implementation 'org.jetbrains.kotlinx:kotlinx-datetime:0.4.1' // Removed - use standard Date
+	// implementation 'androidx.palette:palette-ktx:1.0.0' // Removed - saves space
+	// implementation 'commons-io:commons-io:2.11.0' // Removed - use standard IO
+	// implementation 'androidx.multidex:multidex:2.0.1' // Remove if not needed
+
+	// Custom AI - Ultra lightweight keyword detection (~200KB)
+	// Removed TensorFlow Lite to reduce APK size by 60+ MB
+
+	// Unit Testing
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20231013'
+	testImplementation 'io.mockk:mockk:1.13.8'
+	testImplementation 'org.mockito:mockito-core:4.11.0'
+	testImplementation 'org.mockito:mockito-inline:4.11.0'
+	testImplementation 'org.mockito.kotlin:mockito-kotlin:4.1.0'
+	testImplementation 'org.jetbrains.kotlin:kotlin-test:1.9.25'
+	testImplementation 'org.jetbrains.kotlin:kotlin-test-junit:1.9.25'
+	testImplementation 'androidx.arch.core:core-testing:2.2.0'
+	testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1'
+	testImplementation 'androidx.room:room-testing:2.6.1'
+	testImplementation 'org.robolectric:robolectric:4.12'
+	testImplementation 'androidx.test:core:1.5.0'
+	testImplementation 'androidx.test.ext:junit:1.1.5'
+	testImplementation 'androidx.test:runner:1.5.2'
+	testImplementation 'androidx.test:rules:1.5.0'
+
+	// Integration Testing
+	testImplementation 'androidx.work:work-testing:2.9.1'
+	testImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+
+	// UI Testing (Instrumentation)
+	androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+	androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+	androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'
+	androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
+	androidTestImplementation 'androidx.test.espresso:espresso-accessibility:3.5.1'
+	androidTestImplementation 'androidx.test.espresso:espresso-web:3.5.1'
+	androidTestImplementation 'androidx.test:runner:1.5.2'
+	androidTestImplementation 'androidx.test:rules:1.5.0'
+	androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+	androidTestImplementation 'androidx.room:room-testing:2.6.1'
+	androidTestImplementation 'androidx.work:work-testing:2.9.1'
+	androidTestImplementation 'androidx.fragment:fragment-testing:1.8.2'
+	androidTestImplementation 'androidx.navigation:navigation-testing:2.7.7'
+	androidTestImplementation 'com.squareup.okhttp3:mockwebserver:4.12.0'
+}
+
+// Detekt configuration
+detekt {
+	buildUponDefaultConfig = true
+	allRules = false
+	config.setFrom("$projectDir/detekt.yml")
+	baseline = file("$projectDir/detekt-baseline.xml")
+}

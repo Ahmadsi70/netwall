@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:title="Security Settings"
+			app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<!-- Security Score Card -->
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_security"
+						android:contentDescription="Security" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Security Score"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:id="@+id/security_score_text"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="0/100"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineLarge"
+							android:textColor="@color/error_color" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Biometric Authentication Card -->
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/biometric_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_fingerprint"
+						android:contentDescription="Biometric" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Biometric Authentication"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:id="@+id/biometric_description"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Secure access to sensitive features"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<com.google.android.material.switchmaterial.SwitchMaterial
+						android:id="@+id/biometric_switch"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Database Encryption Card -->
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/encryption_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_encryption"
+						android:contentDescription="Encryption" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Database Encryption"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:id="@+id/encryption_status_text"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Enabled"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Advanced Privacy Card -->
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/privacy_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_privacy"
+						android:contentDescription="Privacy" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Advanced Privacy"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:id="@+id/privacy_status_text"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Private DNS, VPN Passthrough"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Security Status Card -->
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/security_status_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_info"
+						android:contentDescription="Info" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Security Status"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="View detailed security analysis"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Clear Data Card -->
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/clear_data_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_delete"
+						android:contentDescription="Clear data"
+						android:tint="@color/delete_color" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Clear All Data"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Permanently delete all app data"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+		</LinearLayout>
+
+	</androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:title="Privacy Policy"
+			app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<!-- Privacy Header Card -->
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_privacy"
+						android:contentDescription="Privacy" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Your Privacy Matters"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="All data stays on your device"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Key Privacy Points -->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical"
+				android:padding="16dp">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="Key Privacy Points"
+					android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="16dp"
+					android:orientation="vertical">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:layout_marginBottom="12dp">
+
+						<ImageView
+							android:layout_width="20dp"
+							android:layout_height="20dp"
+							android:layout_gravity="center_vertical"
+							android:layout_marginEnd="12dp"
+							android:src="@drawable/ic_check_circle"
+							android:contentDescription="Check"
+							android:tint="@color/success_color" />
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="All processing happens locally on your device"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:layout_marginBottom="12dp">
+
+						<ImageView
+							android:layout_width="20dp"
+							android:layout_height="20dp"
+							android:layout_gravity="center_vertical"
+							android:layout_marginEnd="12dp"
+							android:src="@drawable/ic_check_circle"
+							android:contentDescription="Check"
+							android:tint="@color/success_color" />
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="No data is collected or shared with third parties"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:layout_marginBottom="12dp">
+
+						<ImageView
+							android:layout_width="20dp"
+							android:layout_height="20dp"
+							android:layout_gravity="center_vertical"
+							android:layout_marginEnd="12dp"
+							android:src="@drawable/ic_check_circle"
+							android:contentDescription="Check"
+							android:tint="@color/success_color" />
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="All data is encrypted using SQLCipher"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:layout_marginBottom="12dp">
+
+						<ImageView
+							android:layout_width="20dp"
+							android:layout_height="20dp"
+							android:layout_gravity="center_vertical"
+							android:layout_marginEnd="12dp"
+							android:src="@drawable/ic_check_circle"
+							android:contentDescription="Check"
+							android:tint="@color/success_color" />
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="Biometric authentication protects sensitive operations"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+			<!-- Privacy Policy Content -->
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<ScrollView
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:maxHeight="400dp">
+
+					<TextView
+						android:id="@+id/privacy_content"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:padding="16dp"
+						android:textAppearance="@style/TextAppearance.Material3.BodySmall"
+						android:lineSpacingMultiplier="1.2"
+						android:textIsSelectable="true" />
+
+				</ScrollView>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Contact Information -->
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:padding="16dp">
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="Questions About Privacy?"
+						android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+					<TextView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginTop="8dp"
+						android:text="Contact us at privacy@internetguardpro.com"
+						android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+		</LinearLayout>
+
+	</androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

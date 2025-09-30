@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Name -->
+    <string name="app_name">Интернет Страж Про</string>
+    
+    <!-- Navigation -->
+    <string name="nav_dashboard">Панель</string>
+    <string name="nav_apps">Приложения</string>
+    <string name="nav_keywords">Ключевые слова</string>
+    <string name="nav_rules">Правила</string>
+    <string name="nav_analytics">Аналитика</string>
+    <string name="nav_settings">Настройки</string>
+    <string name="nav_education">Образование</string>
+    
+    <!-- Dashboard -->
+    <string name="dashboard_title">Панель управления</string>
+    <string name="vpn_status">Статус VPN</string>
+    <string name="vpn_enabled">Включен</string>
+    <string name="vpn_disabled">Отключен</string>
+    <string name="blocked_apps">Заблокированные приложения</string>
+    <string name="blocked_keywords">Заблокированные ключевые слова</string>
+    <string name="time_saved">Сэкономленное время</string>
+    <string name="ai_suggestions">ИИ предложения</string>
+    <string name="refresh">Обновить</string>
+    
+    <!-- App List -->
+    <string name="app_list_title">Список приложений</string>
+    <string name="search_apps">Поиск приложений</string>
+    <string name="filter_category">Фильтр по категории</string>
+    <string name="all_categories">Все категории</string>
+    <string name="social_media">Социальные сети</string>
+    <string name="games">Игры</string>
+    <string name="entertainment">Развлечения</string>
+    <string name="productivity">Продуктивность</string>
+    <string name="system">Система</string>
+    <string name="other">Другие</string>
+    <string name="block_app">Заблокировать приложение</string>
+    <string name="unblock_app">Разблокировать приложение</string>
+    <string name="app_details">Детали приложения</string>
+    <string name="blocking_mode">Режим блокировки</string>
+    <string name="always_block">Всегда блокировать</string>
+    <string name="schedule_block">Запланированная блокировка</string>
+    <string name="time_limit">Временной лимит</string>
+    <string name="focus_mode">Режим фокуса</string>
+    
+    <!-- Keyword List -->
+    <string name="keyword_list_title">Список ключевых слов</string>
+    <string name="add_keyword">Добавить ключевое слово</string>
+    <string name="search_keywords">Поиск ключевых слов</string>
+    <string name="keyword">Ключевое слово</string>
+    <string name="language">Язык</string>
+    <string name="category">Категория</string>
+    <string name="case_sensitive">Учитывать регистр</string>
+    <string name="regex">Регулярное выражение</string>
+    <string name="active">Активно</string>
+    <string name="inactive">Неактивно</string>
+    <string name="edit_keyword">Редактировать ключевое слово</string>
+    <string name="delete_keyword">Удалить ключевое слово</string>
+    <string name="confirm_delete">Подтвердить удаление</string>
+    <string name="delete_keyword_message">Вы уверены, что хотите удалить это ключевое слово?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    
+    <!-- Rules -->
+    <string name="rules_title">Правила</string>
+    <string name="add_rule">Добавить правило</string>
+    <string name="rule_name">Название правила</string>
+    <string name="rule_description">Описание правила</string>
+    <string name="rule_conditions">Условия правила</string>
+    <string name="rule_actions">Действия правила</string>
+    <string name="time_based">На основе времени</string>
+    <string name="location_based">На основе местоположения</string>
+    <string name="battery_based">На основе батареи</string>
+    <string name="app_based">На основе приложения</string>
+    <string name="keyword_based">На основе ключевого слова</string>
+    
+    <!-- Analytics -->
+    <string name="analytics_title">Аналитика</string>
+    <string name="usage_stats">Статистика использования</string>
+    <string name="blocking_stats">Статистика блокировки</string>
+    <string name="time_analysis">Анализ времени</string>
+    <string name="app_usage">Использование приложений</string>
+    <string name="keyword_blocks">Блокировки ключевых слов</string>
+    <string name="daily_report">Ежедневный отчет</string>
+    <string name="weekly_report">Еженедельный отчет</string>
+    <string name="monthly_report">Ежемесячный отчет</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="general_settings">Общие настройки</string>
+    <string name="security_settings">Настройки безопасности</string>
+    <string name="privacy_settings">Настройки конфиденциальности</string>
+    <string name="notification_settings">Настройки уведомлений</string>
+    <string name="language_settings">Настройки языка</string>
+    <string name="theme_settings">Настройки темы</string>
+    <string name="data_management">Управление данными</string>
+    <string name="export_data">Экспорт данных</string>
+    <string name="import_data">Импорт данных</string>
+    <string name="clear_data">Очистить данные</string>
+    <string name="about">О программе</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="terms_of_service">Условия использования</string>
+    <string name="version">Версия</string>
+    
+    <!-- Security -->
+    <string name="biometric_auth">Биометрическая аутентификация</string>
+    <string name="enable_biometric">Включить биометрическую аутентификацию</string>
+    <string name="disable_biometric">Отключить биометрическую аутентификацию</string>
+    <string name="database_encryption">Шифрование базы данных</string>
+    <string name="advanced_privacy">Расширенная конфиденциальность</string>
+    <string name="security_score">Оценка безопасности</string>
+    <string name="permissions">Разрешения</string>
+    <string name="vpn_permission">Разрешение VPN</string>
+    <string name="accessibility_permission">Разрешение доступности</string>
+    <string name="usage_stats_permission">Разрешение статистики использования</string>
+    <string name="location_permission">Разрешение местоположения</string>
+    
+    <!-- Education -->
+    <string name="education_title">Образование</string>
+    <string name="digital_wellness">Цифровое благополучие</string>
+    <string name="internet_safety">Безопасность в интернете</string>
+    <string name="parental_controls">Родительский контроль</string>
+    <string name="privacy_tips">Советы по конфиденциальности</string>
+    <string name="security_tips">Советы по безопасности</string>
+    <string name="read_more">Читать далее</string>
+    <string name="read_less">Читать меньше</string>
+    
+    <!-- Onboarding -->
+    <string name="welcome_title">Добро пожаловать в Интернет Страж Про</string>
+    <string name="welcome_description">Контролируйте доступ к интернету и блокируйте неподходящий контент во всех приложениях</string>
+    <string name="permissions_title">Необходимые разрешения</string>
+    <string name="permissions_description">Нам нужны определенные разрешения, чтобы приложение работало правильно</string>
+    <string name="features_title">Основные функции</string>
+    <string name="features_description">Откройте для себя мощные функции, которые помогут вам контролировать использование интернета</string>
+    <string name="ready_title">Готово к началу</string>
+    <string name="ready_description">Все готово! Теперь вы можете начать использовать приложение</string>
+    <string name="get_started">Начать</string>
+    <string name="next">Далее</string>
+    <string name="skip">Пропустить</string>
+    <string name="finish">Завершить</string>
+    
+    <!-- Common -->
+    <string name="ok">ОК</string>
+    <string name="error">Ошибка</string>
+    <string name="success">Успех</string>
+    <string name="warning">Предупреждение</string>
+    <string name="info">Информация</string>
+    <string name="loading">Загрузка...</string>
+    <string name="retry">Повторить</string>
+    <string name="close">Закрыть</string>
+    <string name="back">Назад</string>
+    <string name="done">Готово</string>
+    <string name="edit">Редактировать</string>
+    <string name="delete">Удалить</string>
+    <string name="add">Добавить</string>
+    <string name="remove">Удалить</string>
+    <string name="enable">Включить</string>
+    <string name="disable">Отключить</string>
+    <string name="on">Включено</string>
+    <string name="off">Отключено</string>
+    
+    <!-- Time -->
+    <string name="hours">Часы</string>
+    <string name="minutes">Минуты</string>
+    <string name="seconds">Секунды</string>
+    <string name="days">Дни</string>
+    <string name="weeks">Недели</string>
+    <string name="months">Месяцы</string>
+    <string name="years">Годы</string>
+    
+    <!-- Categories -->
+    <string name="content">Контент</string>
+    <string name="gambling">Азартные игры</string>
+    <string name="violence">Насилие</string>
+    <string name="adult">Для взрослых</string>
+    <string name="hate_speech">Речь ненависти</string>
+    <string name="custom">Пользовательский</string>
+    
+    <!-- Languages -->
+    <string name="english">Английский</string>
+    <string name="arabic">Арабский</string>
+    <string name="persian">Персидский</string>
+    <string name="chinese">Китайский</string>
+    <string name="spanish">Испанский</string>
+    <string name="french">Французский</string>
+    <string name="german">Немецкий</string>
+    <string name="russian">Русский</string>
+    <string name="japanese">Японский</string>
+    <string name="korean">Корейский</string>
+    <string name="hindi">Хинди</string>
+    <string name="portuguese">Португальский</string>
+    
+    <!-- Error Messages -->
+    <string name="error_network">Ошибка сети</string>
+    <string name="error_permission_denied">Разрешение отклонено</string>
+    <string name="error_invalid_input">Неверный ввод</string>
+    <string name="error_database">Ошибка базы данных</string>
+    <string name="error_unknown">Неизвестная ошибка</string>
+    <string name="error_vpn_not_available">VPN недоступен</string>
+    <string name="error_biometric_not_available">Биометрическая аутентификация недоступна</string>
+    <string name="error_encryption_failed">Ошибка шифрования</string>
+    
+    <!-- Success Messages -->
+    <string name="success_keyword_added">Ключевое слово успешно добавлено</string>
+    <string name="success_keyword_updated">Ключевое слово успешно обновлено</string>
+    <string name="success_keyword_deleted">Ключевое слово успешно удалено</string>
+    <string name="success_app_blocked">Приложение успешно заблокировано</string>
+    <string name="success_app_unblocked">Приложение успешно разблокировано</string>
+    <string name="success_rule_added">Правило успешно добавлено</string>
+    <string name="success_settings_saved">Настройки успешно сохранены</string>
+    
+    <!-- Privacy Policy -->
+    <string name="privacy_policy_title">Политика конфиденциальности</string>
+    <string name="privacy_policy_content">
+        <![CDATA[
+        <h2>Политика конфиденциальности</h2>
+        <p>В Интернет Страж Про мы обязуемся защищать вашу конфиденциальность и личные данные.</p>
+        
+        <h3>Сбор данных</h3>
+        <p>Мы не собираем никаких личных данных от вас. Все данные обрабатываются локально на вашем устройстве.</p>
+        
+        <h3>Шифрование</h3>
+        <p>Все данные зашифрованы с использованием военных стандартов шифрования.</p>
+        
+        <h3>Не передаем данные</h3>
+        <p>Мы не передаем ваши данные третьим лицам.</p>
+        
+        <h3>Контроль данных</h3>
+        <p>У вас есть полный контроль над вашими данными, и вы можете удалить их в любое время.</p>
+        ]]>
+    </string>
+</resources>

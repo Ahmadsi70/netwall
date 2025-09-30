@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<com.google.android.material.appbar.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<com.google.android.material.appbar.MaterialToolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:title="Settings"
+			app:titleTextAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+	</com.google.android.material.appbar.AppBarLayout>
+
+	<androidx.core.widget.NestedScrollView
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
+
+			<!-- Appearance Section -->
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="16dp"
+				android:layout_marginBottom="8dp"
+				android:text="Appearance"
+				android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
+
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/theme_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_theme"
+						android:contentDescription="Theme" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Theme"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:id="@+id/theme_value_text"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Light"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/language_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_language"
+						android:contentDescription="Language" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Language"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:id="@+id/language_value_text"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="English"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Notifications Section -->
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="16dp"
+				android:layout_marginBottom="8dp"
+				android:text="Notifications"
+				android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
+
+			<com.google.android.material.card.MaterialCardView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_notifications"
+						android:contentDescription="Notifications" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Enable Notifications"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Receive alerts about blocked content and app activity"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<com.google.android.material.switchmaterial.SwitchMaterial
+						android:id="@+id/notification_switch"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Privacy Section -->
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="16dp"
+				android:layout_marginBottom="8dp"
+				android:text="Privacy &amp; Security"
+				android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
+
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/privacy_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_privacy"
+						android:contentDescription="Privacy" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Privacy Settings"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Manage your privacy and data settings"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- Data Management Section -->
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="16dp"
+				android:layout_marginBottom="8dp"
+				android:text="Data Management"
+				android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
+
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/export_data_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_export"
+						android:contentDescription="Export" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Export Data"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Export your rules and settings"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/import_data_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_import"
+						android:contentDescription="Import" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Import Data"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Import rules and settings from file"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/clear_data_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_delete"
+						android:contentDescription="Clear data"
+						android:tint="@color/delete_color" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Clear All Data"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Permanently delete all app data"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+			<!-- About Section -->
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="16dp"
+				android:layout_marginTop="16dp"
+				android:layout_marginBottom="8dp"
+				android:text="About"
+				android:textAppearance="@style/TextAppearance.Material3.LabelLarge" />
+
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/about_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="8dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal"
+					android:padding="16dp">
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:layout_marginEnd="12dp"
+						android:src="@drawable/ic_info"
+						android:contentDescription="About" />
+
+					<LinearLayout
+						android:layout_width="0dp"
+						android:layout_height="wrap_content"
+						android:layout_weight="1"
+						android:orientation="vertical">
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="About InternetGuard Pro"
+							android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall" />
+
+						<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_marginTop="4dp"
+							android:text="Version 1.0.0"
+							android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+					</LinearLayout>
+
+					<ImageView
+						android:layout_width="24dp"
+						android:layout_height="24dp"
+						android:layout_gravity="center_vertical"
+						android:src="@drawable/ic_chevron_right"
+						android:contentDescription="Navigate" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
+
+		</LinearLayout>
+
+	</androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
