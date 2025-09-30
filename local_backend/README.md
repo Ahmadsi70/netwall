@@ -90,3 +90,45 @@ http://localhost:3000/api/suggest
 ##  Security Note
 
 This is a **local development server**. For production, use proper authentication and security measures.
+
+## 🎯 **آماده برای Railway Deployment!**
+
+### **✅ کارهای انجام شده:**
+
+1. **📁 Git Repository:** آماده و commit شده
+2. **📄 فایل‌های لازم:** README, .env.example, .gitignore
+3. **🚀 کد سرور:** با سیستم اشتراک Premium
+4. **📱 برنامه Android:** کامپایل شده
+
+### **🚀 مراحل بعدی:**
+
+#### **مرحله 1: GitHub Repository**
+```bash
+<code_block_to_apply_changes_from>
+```
+
+#### **مرحله 2: Railway Deployment**
+1. **برو به [railway.app](https://railway.app)**
+2. **Sign up با GitHub**
+3. **New Project → Deploy from GitHub repo**
+4. **Repository را انتخاب کن**
+5. **Root Directory: `local_backend`**
+6. **Deploy!**
+
+#### **مرحله 3: دریافت URL**
+- Railway یک URL مثل `https://your-app-name.railway.app` می‌دهد
+- این URL را کپی کن
+
+#### **مرحله 4: تغییر URL در برنامه**
+```bash
+# جایگزین کن:
+http://localhost:3000 → https://your-app-name.railway.app
+```
+
+### **🎉 نتیجه:**
+- **✅ سرور ابری:** آماده
+- **✅ HTTPS:** فعال
+- **✅ Premium System:** کار می‌کند
+- **✅ Google Play:** آماده
+
+**آیا می‌خواهید ادامه دهیم؟** 🚀
