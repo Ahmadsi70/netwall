@@ -91,7 +91,7 @@ class KeywordAccessibilityService : AccessibilityService() {
                 val optIn = getCloudOptInFromPrefs()
                 if (optIn) {
                     // Always use proxy server with developer's API key
-                    val proxyUrl = "http://localhost:3000/api/moderate"
+                    val proxyUrl = com.internetguard.pro.ai.api.RemoteConfig.MODERATE_URL
                     moderationClient = RemoteModerationClient(endpoint = proxyUrl, timeoutMs = 2500)
                     Log.i(TAG, "Cloud moderation client initialized with developer proxy")
                 } else {

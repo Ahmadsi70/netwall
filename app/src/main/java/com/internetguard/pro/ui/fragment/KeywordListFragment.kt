@@ -192,7 +192,7 @@ class KeywordListFragment : Fragment() {
             }
             // Try remote AI suggestions (developer's proxy)
             viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
-                val suggestUrl = "http://localhost:3000/api/suggest"
+                val suggestUrl = com.internetguard.pro.ai.api.RemoteConfig.SUGGEST_URL
                 val client = com.internetguard.pro.ai.api.RemoteModerationClient(endpoint = suggestUrl, timeoutMs = 2500)
                 val suggest = (client as com.internetguard.pro.ai.api.SuggestionClient).suggest(inputKeyword, null, null)
                 val any = suggest.synonyms.isNotEmpty() || suggest.variants.isNotEmpty() || suggest.obfuscations.isNotEmpty()

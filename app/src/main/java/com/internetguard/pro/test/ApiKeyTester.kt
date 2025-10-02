@@ -19,8 +19,8 @@ class ApiKeyTester {
         private const val TAG = "ApiKeyTester"
         
         // Proxy URLs
-        private const val PROXY_MODERATE_URL = "http://localhost:3000/api/moderate"
-        private const val PROXY_SUGGEST_URL = "http://localhost:3000/api/suggest"
+        private val PROXY_MODERATE_URL = com.internetguard.pro.ai.api.RemoteConfig.MODERATE_URL
+        private val PROXY_SUGGEST_URL = com.internetguard.pro.ai.api.RemoteConfig.SUGGEST_URL
     }
     
     /**
