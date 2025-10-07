@@ -304,11 +304,13 @@ app.post('/api/suggest', rateLimitMiddleware, authenticate, checkSubscription, a
         if (OPENAI_API_KEY) {
             try {
                 // Use system prompt from configuration
-                const systemPrompt = systemPromptConfig.prompt_templates?.suggestion || `You are a content moderation assistant for InternetGuard Pro. Generate related terms for blocking inappropriate content.
-                
+                const systemPrompt = systemPromptConfig.prompt_templates?.suggestion || `You are a helpful assistant that generates related terms for any given keyword. Your task is to provide synonyms, variants, and obfuscations for content filtering purposes.
+
+IMPORTANT: You MUST always return at least 3-5 related terms for ANY keyword, even if it's a neutral word.
+
 Return ONLY a valid JSON object with these fields:
 {
-  "synonyms": ["word1", "word2"],
+  "synonyms": ["word1", "word2", "word3"],
   "variants": ["variant1", "variant2"], 
   "obfuscations": ["w0rd", "w*rd"],
   "regex": ["pattern1", "pattern2"],
@@ -316,7 +318,12 @@ Return ONLY a valid JSON object with these fields:
   "notes": "brief explanation"
 }
 
-For ANY keyword, generate related terms including synonyms, variants, and obfuscations. Focus on harmful content categories: violence, sexual content, drugs, hate speech, self-harm, gambling, scams. For neutral words, generate general related terms.`;
+Examples:
+- For "test": synonyms could be ["exam", "trial", "check", "assessment"]
+- For "game": synonyms could be ["play", "match", "contest", "competition"]
+- For "violence": synonyms could be ["aggression", "force", "harm", "attack"]
+
+Always provide meaningful related terms for any input keyword.`;
 
                 const userMessage = `Keyword: "${keyword}"${language ? `\nLanguage: ${language}` : ''}${category ? `\nCategory: ${category}` : ''}\n\nReturn JSON with up to 12 synonyms/variants/obfuscations and safe regex patterns.`;
 
