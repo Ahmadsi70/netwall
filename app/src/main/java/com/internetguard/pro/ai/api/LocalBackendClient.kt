@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
 class LocalBackendClient(
     private val endpoint: String,
     private val timeoutMs: Long = 5000
-) : ModerationClient {
+) : ModerationClient, SuggestionClient {
     
     companion object {
         private const val TAG = "LocalBackendClient"
@@ -62,7 +62,7 @@ class LocalBackendClient(
         }
     }
 
-    suspend fun suggest(keyword: String, language: String?, category: String?): SuggestResult {
+    override suspend fun suggest(keyword: String, language: String?, category: String?): SuggestResult {
         return withContext(Dispatchers.IO) {
             try {
                 val payload = JSONObject().apply {

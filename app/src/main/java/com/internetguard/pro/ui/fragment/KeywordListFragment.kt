@@ -487,7 +487,7 @@ class KeywordListFragment : Fragment() {
                 try {
                     val suggestUrl = com.internetguard.pro.ai.api.RemoteConfig.SUGGEST_URL
                     val client = com.internetguard.pro.ai.api.LocalBackendClient(endpoint = suggestUrl, timeoutMs = 2500)
-                    val suggest = (client as com.internetguard.pro.ai.api.SuggestionClient).suggest(inputKeyword, null, null)
+                    val suggest = client.suggest(inputKeyword, null, null)
                     val any = suggest.synonyms.isNotEmpty() || suggest.variants.isNotEmpty() || suggest.obfuscations.isNotEmpty()
                     withContext(Dispatchers.Main) {
                         if (any) {

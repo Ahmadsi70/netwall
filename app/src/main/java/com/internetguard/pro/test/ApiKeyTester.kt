@@ -105,7 +105,7 @@ class ApiKeyTester {
             val client = LocalBackendClient(
                 endpoint = PROXY_SUGGEST_URL,
                 timeoutMs = 10000
-            ) as com.internetguard.pro.ai.api.SuggestionClient
+            )
             
             val result = client.suggest("test", "English", "General")
             
