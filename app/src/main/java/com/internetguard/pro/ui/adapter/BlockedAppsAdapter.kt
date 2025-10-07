@@ -38,9 +38,9 @@ class BlockedAppsAdapter(
             
             // Show block status
             val status = when {
-                app.blockWifi && app.blockCellular -> "مسدود: WiFi + Cellular"
-                app.blockWifi -> "مسدود: WiFi"
-                app.blockCellular -> "مسدود: Cellular"
+                app.blockWifi && app.blockCellular -> "Blocked: Wi‑Fi + Cellular"
+                app.blockWifi -> "Blocked: Wi‑Fi"
+                app.blockCellular -> "Blocked: Cellular"
                 else -> ""
             }
             blockStatus.text = status

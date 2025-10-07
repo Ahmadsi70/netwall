@@ -9,7 +9,7 @@ enum class AppCategory(
     val keywords: List<String>
 ) {
     SOCIAL_MEDIA(
-        displayName = "شبکه‌های اجتماعی",
+        displayName = "Social Networks",
         emoji = "📱",
         keywords = listOf(
             // Popular social media
@@ -17,12 +17,12 @@ enum class AppCategory(
             "whatsapp", "telegram", "viber", "imo", "wechat", "line",
             "messenger", "meta", "threads",
             // Persian variations
-            "اینستاگرام", "فیسبوک", "تلگرام", "واتساپ"
+            "instagram", "facebook", "telegram", "whatsapp"
         )
     ),
     
     GAMES(
-        displayName = "بازی‌ها",
+        displayName = "Games",
         emoji = "🎮",
         keywords = listOf(
             // Popular games
@@ -32,12 +32,12 @@ enum class AppCategory(
             // Game stores
             "game.store", "epic.games",
             // Persian
-            "بازی", "گیم"
+            "game", "play"
         )
     ),
     
     BROWSERS(
-        displayName = "مرورگرها",
+        displayName = "Browsers",
         emoji = "🌐",
         keywords = listOf(
             "chrome", "firefox", "opera", "brave", "edge", "safari",

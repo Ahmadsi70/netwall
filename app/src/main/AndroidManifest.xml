@@ -34,12 +34,16 @@
 			</intent-filter>
 		</activity>
 
+		<activity
+			android:name=".ui.activity.TestActivity"
+			android:exported="false"
+			android:theme="@style/Theme.InternetGuardPro" />
+
 
 		<service
 			android:name=".services.KeywordAccessibilityService"
 			android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
-			android:exported="true"
-			android:foregroundServiceType="dataSync">
+			android:exported="true">
 			<intent-filter>
 				<action android:name="android.accessibilityservice.AccessibilityService" />
 			</intent-filter>

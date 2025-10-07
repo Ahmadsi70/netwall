@@ -41,6 +41,8 @@ class AppListFragment : Fragment() {
 	private lateinit var appListAdapter: AppListAdapter
 	private lateinit var recyclerView: RecyclerView
 	private lateinit var toolbar: com.google.android.material.appbar.MaterialToolbar
+	private lateinit var loadingOverlay: View
+	private var searchJob: kotlinx.coroutines.Job? = null
 	
 	// VPN permission broadcast receiver
 	private val vpnPermissionReceiver = object : BroadcastReceiver() {
@@ -63,18 +65,31 @@ class AppListFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		
-		initViews(view)
-		setupRecyclerView()
-		setupViewModel()
-		setupClickListeners()
-		observeViewModel()
-		applyInitialFilterIfFromDashboard()
+		// 🌍 LANGUAGE: Apply system language to fragment
+		val systemLanguage = com.internetguard.pro.utils.LanguageManager.getBestMatchingLanguage(requireContext())
+		com.internetguard.pro.utils.LanguageManager.applyLanguage(requireContext(), systemLanguage)
 		
-		// Register VPN permission broadcast receiver
-		registerVpnPermissionReceiver()
-		
-		// Check VPN permission before allowing app blocking
-		checkVpnPermission()
+		try {
+			initViews(view)
+			setupRecyclerView()
+			setupViewModel()
+			setupClickListeners()
+			observeViewModel()
+			applyInitialFilterIfFromDashboard()
+			
+			// Register VPN permission broadcast receiver
+			registerVpnPermissionReceiver()
+			
+			// Check VPN permission before allowing app blocking
+			checkVpnPermission()
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error in onViewCreated: ${e.message}", e)
+			// Show error to user safely
+			val context = context
+			if (context != null) {
+				android.widget.Toast.makeText(context, "Error loading app list: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+			}
+		}
 	}
 	
 	override fun onDestroyView() {
@@ -87,18 +102,34 @@ class AppListFragment : Fragment() {
 	 * Register VPN permission broadcast receiver
 	 */
 	private fun registerVpnPermissionReceiver() {
-		val filter = IntentFilter("com.internetguard.pro.REQUEST_VPN_PERMISSION")
-		requireContext().registerReceiver(vpnPermissionReceiver, filter)
+		val context = context
+		if (context == null) {
+			Log.w("AppListFragment", "Context is null, cannot register VPN permission receiver")
+			return
+		}
+		
+		try {
+			val filter = IntentFilter("com.internetguard.pro.REQUEST_VPN_PERMISSION")
+			context.registerReceiver(vpnPermissionReceiver, filter)
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error registering VPN permission receiver: ${e.message}", e)
+		}
 	}
 	
 	/**
 	 * Unregister VPN permission broadcast receiver
 	 */
 	private fun unregisterVpnPermissionReceiver() {
+		val context = context
+		if (context == null) {
+			Log.w("AppListFragment", "Context is null, cannot unregister VPN permission receiver")
+			return
+		}
+		
 		try {
-			requireContext().unregisterReceiver(vpnPermissionReceiver)
+			context.unregisterReceiver(vpnPermissionReceiver)
 		} catch (e: Exception) {
-			Log.e("AppListFragment", "Error unregistering VPN permission receiver", e)
+			Log.e("AppListFragment", "Error unregistering VPN permission receiver: ${e.message}", e)
 		}
 	}
 	
@@ -106,20 +137,44 @@ class AppListFragment : Fragment() {
 	 * Show VPN permission dialog
 	 */
 	private fun showVpnPermissionDialog(message: String) {
-		Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG)
-			.setAction("Grant Permission") {
-				checkVpnPermission()
+		val view = view
+		if (view == null) {
+			Log.w("AppListFragment", "View is null, cannot show VPN permission dialog")
+			return
+		}
+		
+		try {
+			Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+				.setAction("Grant Permission") {
+					checkVpnPermission()
+				}
+				.show()
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error showing VPN permission dialog: ${e.message}", e)
+			val context = context
+			if (context != null) {
+				android.widget.Toast.makeText(context, message, android.widget.Toast.LENGTH_LONG).show()
 			}
-			.show()
+		}
 	}
 	
 	/**
 	 * Check VPN permission
 	 */
 	private fun checkVpnPermission() {
-		val intent = VpnService.prepare(requireContext())
-		if (intent != null) {
-			startActivityForResult(intent, VPN_REQUEST_CODE)
+		val context = context
+		if (context == null) {
+			Log.w("AppListFragment", "Context is null, cannot check VPN permission")
+			return
+		}
+		
+		try {
+			val intent = VpnService.prepare(context)
+			if (intent != null) {
+				startActivityForResult(intent, VPN_REQUEST_CODE)
+			}
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error checking VPN permission: ${e.message}", e)
 		}
 	}
 	
@@ -140,26 +195,51 @@ class AppListFragment : Fragment() {
 	 * Initializes view references
 	 */
 	private fun initViews(view: View) {
-		recyclerView = view.findViewById(R.id.app_list_recycler)
-		toolbar = view.findViewById(R.id.toolbar)
+		try {
+			recyclerView = view.findViewById(R.id.app_list_recycler)
+			toolbar = view.findViewById(R.id.toolbar)
+			loadingOverlay = view.findViewById(R.id.loading_overlay)
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error initializing views: ${e.message}", e)
+			// Show error to user
+			val context = context
+			if (context != null) {
+				android.widget.Toast.makeText(context, "Error initializing interface: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+			}
+		}
 	}
 	
 	/**
 	 * Sets up RecyclerView with adapter and layout manager
 	 */
 	private fun setupRecyclerView() {
-		appListAdapter = AppListAdapter(
-			onWifiToggle = { packageName, isBlocked ->
-				viewModel.updateWifiBlocking(packageName, isBlocked)
-			},
-			onCellularToggle = { packageName, isBlocked ->
-				viewModel.updateCellularBlocking(packageName, isBlocked)
+		try {
+			appListAdapter = AppListAdapter(
+				onWifiToggle = { packageName, isBlocked ->
+					viewModel.updateWifiBlocking(packageName, isBlocked)
+				},
+				onCellularToggle = { packageName, isBlocked ->
+					viewModel.updateCellularBlocking(packageName, isBlocked)
+				}
+			)
+			
+			val context = context
+			if (context == null) {
+				Log.w("AppListFragment", "Context is null, cannot setup RecyclerView")
+				return
 			}
-		)
-		
-		recyclerView.apply {
-			adapter = appListAdapter
-			layoutManager = LinearLayoutManager(context)
+			
+			recyclerView.apply {
+				adapter = appListAdapter
+				layoutManager = LinearLayoutManager(context)
+			}
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error setting up RecyclerView: ${e.message}", e)
+			// Show error to user
+			val context = context
+			if (context != null) {
+				android.widget.Toast.makeText(context, "Error setting up app list: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+			}
 		}
 	}
 	
@@ -167,38 +247,80 @@ class AppListFragment : Fragment() {
 	 * Sets up ViewModel
 	 */
 	private fun setupViewModel() {
-		viewModel = ViewModelProvider(this)[AppListViewModel::class.java]
+		try {
+			viewModel = ViewModelProvider(this)[AppListViewModel::class.java]
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error setting up ViewModel: ${e.message}", e)
+			// Show error to user
+			val context = context
+			if (context != null) {
+				android.widget.Toast.makeText(context, "Error initializing app system: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+			}
+		}
 	}
 
     private fun applyInitialFilterIfFromDashboard() {
-        // نمایش همه اپ‌ها به‌صورت پیش‌فرض تا کاربر بتواند راحت انتخاب کند
-        viewModel.setShowBlockedOnly(false)
-        viewModel.loadInstalledApps()
+        try {
+            // Show all apps by default so user can easily select
+            viewModel.setShowBlockedOnly(false)
+            viewModel.loadInstalledApps()
+        } catch (e: Exception) {
+            Log.e("AppListFragment", "Error applying initial filter: ${e.message}", e)
+            // Show error to user
+            val context = context
+            if (context != null) {
+                android.widget.Toast.makeText(context, "Error loading apps: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+            }
+        }
     }
 	
 	/**
 	 * Sets up click listeners and search
 	 */
 	private fun setupClickListeners() {
-		// Toolbar menu with SearchView
-		toolbar.setOnMenuItemClickListener { menuItem ->
-			when (menuItem.itemId) {
-				R.id.action_search -> {
-					val searchView = menuItem.actionView as? androidx.appcompat.widget.SearchView
-					searchView?.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
-						override fun onQueryTextSubmit(query: String?): Boolean {
-							viewModel.filterApps(query ?: "")
-							return true
+		try {
+			// Toolbar menu with SearchView
+			toolbar.setOnMenuItemClickListener { menuItem ->
+				when (menuItem.itemId) {
+					R.id.action_search -> {
+						try {
+							val searchView = menuItem.actionView as? androidx.appcompat.widget.SearchView
+							searchView?.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+								override fun onQueryTextSubmit(query: String?): Boolean {
+									try {
+										viewModel.filterApps(query ?: "")
+									} catch (e: Exception) {
+										Log.e("AppListFragment", "Error filtering apps on submit: ${e.message}", e)
+									}
+									return true
+								}
+								override fun onQueryTextChange(newText: String?): Boolean {
+									try {
+										searchJob?.cancel()
+										searchJob = viewLifecycleOwner.lifecycleScope.launch {
+											kotlinx.coroutines.delay(300)
+											viewModel.filterApps(newText ?: "")
+										}
+									} catch (e: Exception) {
+										Log.e("AppListFragment", "Error filtering apps on change: ${e.message}", e)
+									}
+									return true
+								}
+							})
+						} catch (e: Exception) {
+							Log.e("AppListFragment", "Error setting up search view: ${e.message}", e)
 						}
-						
-						override fun onQueryTextChange(newText: String?): Boolean {
-							viewModel.filterApps(newText ?: "")
-							return true
-						}
-					})
-					true
+						true
+					}
+					else -> false
 				}
-				else -> false
+			}
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error setting up click listeners: ${e.message}", e)
+			// Show error to user
+			val context = context
+			if (context != null) {
+				android.widget.Toast.makeText(context, "Error setting up interface: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
 			}
 		}
 	}
@@ -207,14 +329,37 @@ class AppListFragment : Fragment() {
 	 * Observes ViewModel LiveData
 	 */
 	private fun observeViewModel() {
-		viewModel.appList.observe(viewLifecycleOwner) { apps ->
-			appListAdapter.submitList(apps)
-		}
-		
-		viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
-			errorMessage?.let {
-				showErrorSnackbar(it)
-				viewModel.clearError()
+		try {
+			viewModel.appList.observe(viewLifecycleOwner) { apps ->
+				try {
+					appListAdapter.submitList(apps)
+				} catch (e: Exception) {
+					Log.e("AppListFragment", "Error updating app list: ${e.message}", e)
+				}
+			}
+			viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+				try {
+					loadingOverlay.visibility = if (isLoading == true) View.VISIBLE else View.GONE
+				} catch (e: Exception) {
+					Log.e("AppListFragment", "Error updating loading state: ${e.message}", e)
+				}
+			}
+			viewModel.errorMessage.observe(viewLifecycleOwner) { errorMessage ->
+				try {
+					errorMessage?.let {
+						showErrorSnackbar(it)
+						viewModel.clearError()
+					}
+				} catch (e: Exception) {
+					Log.e("AppListFragment", "Error showing error message: ${e.message}", e)
+				}
+			}
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error setting up ViewModel observers: ${e.message}", e)
+			// Show error to user
+			val context = context
+			if (context != null) {
+				android.widget.Toast.makeText(context, "Error setting up app monitoring: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
 			}
 		}
 	}
@@ -223,6 +368,26 @@ class AppListFragment : Fragment() {
 	 * Shows error message in Snackbar
 	 */
 	private fun showErrorSnackbar(message: String) {
-		Snackbar.make(requireView(), message, Snackbar.LENGTH_LONG).show()
+		val view = view
+		if (view == null) {
+			Log.w("AppListFragment", "View is null, cannot show error snackbar")
+			// Fallback to Toast
+			val context = context
+			if (context != null) {
+				android.widget.Toast.makeText(context, message, android.widget.Toast.LENGTH_LONG).show()
+			}
+			return
+		}
+		
+		try {
+			Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
+		} catch (e: Exception) {
+			Log.e("AppListFragment", "Error showing error snackbar: ${e.message}", e)
+			// Fallback to Toast
+			val context = context
+			if (context != null) {
+				android.widget.Toast.makeText(context, message, android.widget.Toast.LENGTH_LONG).show()
+			}
+		}
 	}
 }

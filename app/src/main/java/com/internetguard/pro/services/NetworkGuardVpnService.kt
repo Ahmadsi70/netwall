@@ -47,10 +47,10 @@ class NetworkGuardVpnService : VpnService() {
     private val vpnThread = AtomicBoolean(false)
     private var connectivityCallback: ConnectivityManager.NetworkCallback? = null
     @Volatile private var currentTransport: Transport = Transport.NONE
-    // دقیق‌سازی قوانین بر اساس نوع شبکه (سطح نمونه)
+    // Rule refinement based on network type (instance level)
     private val blockedWifiApps = ConcurrentHashMap<String, Boolean>()
     private val blockedCellularApps = ConcurrentHashMap<String, Boolean>()
-    // مجموعه آخرین اپ‌های مسیریابی‌شده داخل VPN (برای جلوگیری از ری‌استارت‌های غیرضروری)
+    // Set of last routed apps inside VPN (to prevent unnecessary restarts)
     private var lastConfiguredAllowedApps: Set<String> = emptySet()
     // VPN Update Manager for batching updates
     private lateinit var vpnUpdateManager: VpnUpdateManager
@@ -65,7 +65,7 @@ class NetworkGuardVpnService : VpnService() {
         // Start as foreground service
         startForegroundService()
         registerNetworkCallback()
-        // تعیین اولیه نوع شبکه فعال
+        // Initial determination of active network type
         try {
             val cm = getSystemService(ConnectivityManager::class.java)
             val caps = cm.getNetworkCapabilities(cm.activeNetwork)
@@ -117,7 +117,7 @@ class NetworkGuardVpnService : VpnService() {
             ACTION_START_VPN -> {
                 val packageName = intent.getStringExtra("block_app")
                 if (packageName != null) {
-                    // پیش‌فرض: هر دو شبکه را بلاک کن
+                    // Default: block both networks
                     blockApp(packageName, networkType = intent.getStringExtra("network_type"))
                 }
                 startVpn()
@@ -176,14 +176,14 @@ class NetworkGuardVpnService : VpnService() {
                 .setSession("NetworkGuard")
                 .addAddress("10.0.0.2", 32)
                 .addDnsServer("8.8.8.8")
-                // IPv6 پشتیبانی
+                // IPv6 support
                 .also {
                     try {
                         it.addAddress("fd00:1:2:3::2", 128)
                     } catch (_: Exception) {}
                 }
 
-            // فقط ترافیک اپ‌های بلاک‌شده را داخل VPN تونل کن تا بتوانیم آن را drop کنیم
+            // Only tunnel blocked apps' traffic inside VPN so we can drop it
             val allowedApps = getActiveBlockedPackages()
             for (pkg in allowedApps) {
                 try {
@@ -193,13 +193,13 @@ class NetworkGuardVpnService : VpnService() {
                 }
             }
 
-            // اگر هیچ اپی برای تونل‌کردن نبود، مسیر دهی عمومی لازم نیست
+            // If no apps to tunnel, no general routing needed
             if (allowedApps.isNotEmpty()) {
                 builder.addRoute("0.0.0.0", 0)
                 try { builder.addRoute("::", 0) } catch (_: Exception) {}
             }
 
-            // Log حذف شده برای بهینه‌سازی عملکرد
+            // Log removed for performance optimization
 
             vpnInterface = builder.establish()
             if (vpnInterface == null) {
@@ -254,15 +254,15 @@ class NetworkGuardVpnService : VpnService() {
         }
         
         vpnThread.set(true)
-        scope.launch(Dispatchers.IO) { // مشخص کردن dispatcher برای عملیات I/O
+        scope.launch(Dispatchers.IO) { // Specify dispatcher for I/O operations
             try {
                 val vpnInput = FileInputStream(vpnInterface?.fileDescriptor)
                 
-                // بهینه‌سازی: استفاده از buffer بزرگ‌تر برای عملکرد بهتر
+                // Optimization: use larger buffer for better performance
                 val buffer = ByteBuffer.allocateDirect(65536) // 64KB buffer
                 val tempArray = ByteArray(65536)
                 
-                // بهینه‌سازی: کش کردن لیست اپ‌های بلاک شده
+                // Optimization: cache blocked apps list
                 var cachedBlockedApps = getActiveBlockedPackages()
                 var lastCacheUpdate = System.currentTimeMillis()
                 val cacheUpdateInterval = 5000L // 5 seconds
@@ -271,14 +271,14 @@ class NetworkGuardVpnService : VpnService() {
                     try {
                         val bytesRead = vpnInput.read(tempArray)
                         if (bytesRead > 0) {
-                            // به‌روزرسانی cache اپ‌های بلاک شده
+                            // Update blocked apps cache
                             val currentTime = System.currentTimeMillis()
                             if (currentTime - lastCacheUpdate > cacheUpdateInterval) {
                                 cachedBlockedApps = getActiveBlockedPackages()
                                 lastCacheUpdate = currentTime
                             }
                             
-                            // اگر هیچ اپی بلاک نشده، پردازش نکن
+                            // If no apps blocked, don't process
                             if (cachedBlockedApps.isEmpty()) {
                                 continue
                             }
@@ -287,13 +287,13 @@ class NetworkGuardVpnService : VpnService() {
                             buffer.put(tempArray, 0, bytesRead)
                             buffer.flip()
                             
-                            // پردازش بسته - همه بسته‌ها drop می‌شوند
-                            // (چون فقط اپ‌های بلاک شده به VPN هدایت شده‌اند)
+                            // Process packet - all packets are dropped
+                            // (because only blocked apps are routed to VPN)
                         }
                     } catch (e: Exception) {
-                        // ادامه حلقه در صورت خطا در یک بسته
+                        // Continue loop in case of error in one packet
                         if (vpnThread.get()) {
-                            Thread.sleep(10) // کمی استراحت
+                            Thread.sleep(10) // Brief rest
                         }
                     }
                 }
@@ -311,13 +311,13 @@ class NetworkGuardVpnService : VpnService() {
      */
     fun processPacket(packet: ByteBuffer): PacketResult {
         try {
-            // اگر هیچ اپ بلاک‌شده‌ای برای شبکه فعال وجود ندارد، اجازه رد و بدل بسته (هیچ بسته‌ای نباید وارد VPN شود)
+            // If no blocked apps for active network, allow packet exchange (no packets should enter VPN)
             val activeBlocked = getActiveBlockedPackages()
             if (activeBlocked.isEmpty()) {
                 return PacketResult(false, null)
             }
 
-            // چون فقط اپ‌های بلاک‌شده به VPN هدایت شده‌اند، همه بسته‌ها باید drop شوند
+            // Since only blocked apps are routed to VPN, all packets should be dropped
             return PacketResult(true, null)
             
         } catch (e: Exception) {
@@ -591,7 +591,7 @@ class NetworkGuardVpnService : VpnService() {
         val packageName: String?
     )
     
-    // ===== کمک‌کننده‌ها (سطح کلاس) =====
+    // ===== Helpers (class level) =====
     private fun getActiveBlockedPackages(): Set<String> {
         return when (currentTransport) {
             Transport.WIFI -> blockedWifiApps.keys.toSet()
@@ -618,7 +618,7 @@ class NetworkGuardVpnService : VpnService() {
             val cm = getSystemService(ConnectivityManager::class.java)
             val callback = object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network) {
-                    // به‌روزرسانی کش نوع شبکه و ری‌کانفیگ در صورت نیاز
+                    // Update network type cache and reconfigure if needed
                     updateCurrentTransport()
                     reconfigureVpnIfNeeded()
                 }

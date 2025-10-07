@@ -1,7 +1,7 @@
 package com.internetguard.pro.test
 
 import android.util.Log
-import com.internetguard.pro.ai.api.RemoteModerationClient
+import com.internetguard.pro.ai.api.LocalBackendClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -61,7 +61,7 @@ class ApiKeyTester {
         return try {
             Log.i(TAG, "Testing moderation endpoint...")
             
-            val client = RemoteModerationClient(
+            val client = LocalBackendClient(
                 endpoint = PROXY_MODERATE_URL,
                 timeoutMs = 5000
             )
@@ -102,7 +102,7 @@ class ApiKeyTester {
         return try {
             Log.i(TAG, "Testing suggestions endpoint...")
             
-            val client = RemoteModerationClient(
+            val client = LocalBackendClient(
                 endpoint = PROXY_SUGGEST_URL,
                 timeoutMs = 10000
             ) as com.internetguard.pro.ai.api.SuggestionClient
@@ -147,7 +147,7 @@ class ApiKeyTester {
         return try {
             Log.i(TAG, "Testing inappropriate content detection...")
             
-            val client = RemoteModerationClient(
+            val client = LocalBackendClient(
                 endpoint = PROXY_MODERATE_URL,
                 timeoutMs = 5000
             )

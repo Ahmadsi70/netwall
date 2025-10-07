@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.internetguard.pro.R
 import com.internetguard.pro.databinding.ActivityMainBinding
+import com.internetguard.pro.utils.LanguageManager
 
 /**
  * Main activity hosting the navigation component and bottom navigation.
@@ -25,13 +26,26 @@ class MainActivity : AppCompatActivity() {
     private var vpnPermissionReceiver: BroadcastReceiver? = null
     private var vpnStatusReceiver: BroadcastReceiver? = null
 	
+	override fun attachBaseContext(newBase: Context) {
+		// 🌍 LANGUAGE: Apply system language before creating the activity
+		val systemLanguage = LanguageManager.getBestMatchingLanguage(newBase)
+		val context = LanguageManager.createContextWithLanguage(newBase, systemLanguage)
+		super.attachBaseContext(context)
+	}
+	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
+		
+		// 🌍 LANGUAGE: Ensure language is applied after context attachment
+		val systemLanguage = LanguageManager.getBestMatchingLanguage(this)
+		LanguageManager.applyLanguage(this, systemLanguage)
+		
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
 		
 		setupNavigation()
 		setupTheme()
+		setupTestButton()
 
         registerVpnPermissionReceiver()
         registerVpnStatusReceiver()
@@ -46,6 +60,25 @@ class MainActivity : AppCompatActivity() {
 		val navController = navHostFragment.navController
 		
 		binding.bottomNavigation.setupWithNavController(navController)
+	}
+	
+	/**
+	 * Sets up test button for development/testing
+	 */
+	private fun setupTestButton() {
+		// Add test button to toolbar if it exists
+		val toolbar = findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+		toolbar?.let {
+			val testButton = android.widget.Button(this).apply {
+				text = "🧪 Test"
+				textSize = 12f
+				setOnClickListener {
+					val intent = Intent(this@MainActivity, TestActivity::class.java)
+					startActivity(intent)
+				}
+			}
+			it.addView(testButton)
+		}
 	}
 	
 	/**

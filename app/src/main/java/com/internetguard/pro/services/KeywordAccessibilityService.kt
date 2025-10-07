@@ -13,11 +13,13 @@ import com.internetguard.pro.InternetGuardProApp
 import com.internetguard.pro.R
 import com.internetguard.pro.ai.CustomSmartDetector
 import com.internetguard.pro.ai.api.ModerationClient
-import com.internetguard.pro.ai.api.RemoteModerationClient
+import com.internetguard.pro.ai.api.LocalBackendClient
 import com.internetguard.pro.utils.TextRedactor
 import com.internetguard.pro.ai.UserAction
 import com.internetguard.pro.data.entities.KeywordBlacklist
 import com.internetguard.pro.data.entities.KeywordLogs
+import com.internetguard.pro.data.entities.AppBlockRules
+import androidx.core.app.NotificationCompat
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -40,8 +42,9 @@ class KeywordAccessibilityService : AccessibilityService() {
 	
 	private val serviceScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 	private val database by lazy { (application as InternetGuardProApp).database }
+	private val appRepository by lazy { com.internetguard.pro.data.repository.AppRepository(database.appBlockRulesDao(), applicationContext) }
 	private val keywordCache = ConcurrentHashMap<Long, KeywordBlacklist>()
-	// بهینه‌سازی: HashMap برای جستجوی سریع کلمات
+	// Optimization: HashMap for fast keyword search
 	private val keywordHashMap = ConcurrentHashMap<String, KeywordBlacklist>()
 	private val keywordHashMapLowercase = ConcurrentHashMap<String, KeywordBlacklist>()
 	private var lastCacheUpdate = 0L
@@ -51,7 +54,7 @@ class KeywordAccessibilityService : AccessibilityService() {
     private lateinit var customAI: CustomSmartDetector
     private var isAIEnabled = true // Opt-in for cloud moderation
     private var aiInitialized = false
-    private var moderationClient: ModerationClient? = null
+    private var moderationClient: LocalBackendClient? = null
 	
 	override fun onServiceConnected() {
 		super.onServiceConnected()
@@ -87,13 +90,13 @@ class KeywordAccessibilityService : AccessibilityService() {
                 aiInitialized = true
                 Log.i(TAG, "Custom AI Engine initialized successfully")
 
-                // Initialize cloud moderation client if opted-in (using developer's proxy)
+                // Initialize cloud moderation client if opted-in (using local backend)
                 val optIn = getCloudOptInFromPrefs()
                 if (optIn) {
-                    // Always use proxy server with developer's API key
-                    val proxyUrl = com.internetguard.pro.ai.api.RemoteConfig.MODERATE_URL
-                    moderationClient = RemoteModerationClient(endpoint = proxyUrl, timeoutMs = 2500)
-                    Log.i(TAG, "Cloud moderation client initialized with developer proxy")
+                    // Use local backend server with subscription system
+                    val backendUrl = com.internetguard.pro.ai.api.RemoteConfig.MODERATE_URL
+                    moderationClient = LocalBackendClient(endpoint = backendUrl, timeoutMs = 2500)
+                    Log.i(TAG, "Local backend client initialized with subscription system")
                 } else {
                     moderationClient = null
                     Log.i(TAG, "Cloud moderation disabled")
@@ -132,22 +135,22 @@ class KeywordAccessibilityService : AccessibilityService() {
 			try {
 				database.keywordBlacklistDao().observeAll()
 					.collect { keywordList: List<KeywordBlacklist> ->
-						// پاک کردن cache های قدیمی
+						// Clear old caches
 						keywordCache.clear()
 						keywordHashMap.clear()
 						keywordHashMapLowercase.clear()
 						
-						// بارگذاری به cache های مختلف برای بهینه‌سازی
+						// Load into different caches for optimization
 						keywordList.forEach { keyword: KeywordBlacklist ->
 							keywordCache[keyword.id] = keyword
 							
-							// HashMap برای جستجوی سریع
+							// HashMap for fast search
 							keywordHashMap[keyword.keyword] = keyword
 							keywordHashMapLowercase[keyword.keyword.lowercase()] = keyword
 							
-							// اضافه کردن کلمات تکی برای جستجوی بهتر
+							// Add single words for better search
 							keyword.keyword.split(" ").forEach { word ->
-								if (word.length > 2) { // فقط کلمات بیش از 2 حرف
+								if (word.length > 2) { // Only words longer than 2 characters
 									keywordHashMap[word] = keyword
 									keywordHashMapLowercase[word.lowercase()] = keyword
 								}
@@ -155,7 +158,7 @@ class KeywordAccessibilityService : AccessibilityService() {
 						}
 						
 						lastCacheUpdate = System.currentTimeMillis()
-						// Log حذف شده برای بهینه‌سازی عملکرد در production
+						// Log removed for performance optimization in production
 					}
 			} catch (e: Exception) {
 				Log.e(TAG, "Failed to load keywords", e)
@@ -183,7 +186,7 @@ class KeywordAccessibilityService : AccessibilityService() {
 		
 		// Extract text from multiple sources
 		val textContent = buildString {
-			// من event text
+			// From event text
 			event.text?.forEach { text ->
 				if (!text.isNullOrBlank()) {
 					append(text.toString())
@@ -191,7 +194,7 @@ class KeywordAccessibilityService : AccessibilityService() {
 				}
 			}
 			
-			// از node content
+			// From node content
 			source?.let { node ->
 				node.text?.let { append(it.toString()).append(" ") }
 				node.contentDescription?.let { append(it.toString()).append(" ") }
@@ -216,13 +219,20 @@ class KeywordAccessibilityService : AccessibilityService() {
 	 * Finds blocked keyword in text content for specific app using Custom AI
 	 */
     private suspend fun findBlockedKeywordForApp(text: String, packageName: String): KeywordBlacklist? {
-        // 1) Try cloud moderation (opt-in)
+        // 🚀 FIXED: Check traditional keyword matching FIRST (user-defined keywords have priority)
+        val traditionalResult = findBlockedKeywordTraditional(text, packageName)
+        if (traditionalResult != null) {
+            Log.d(TAG, "Traditional keyword matching found blocked content: ${traditionalResult.keyword}")
+            return traditionalResult
+        }
+        
+        // 1) Try cloud moderation (opt-in) - only if no traditional keywords matched
         moderationClient?.let { client ->
             try {
                 val redacted = TextRedactor.redact(text)
                 val langHint = detectLanguageHint(text)
                 val res = client.moderate(redacted, langHint)
-                // تصمیم‌گیری بر اساس action در پاسخ سرور؛ در صورت نبود، از confidence استفاده می‌کنیم
+                // Decision based on action in server response; if not available, use confidence
                 val shouldBlock = when (res.action) {
                     "block" -> true
                     "review" -> res.confidence > 0.7f
@@ -246,7 +256,7 @@ class KeywordAccessibilityService : AccessibilityService() {
             }
         }
 
-        // 2) Local custom AI
+        // 2) Local custom AI - only if no traditional keywords matched
         if (isAIEnabled && aiInitialized && ::customAI.isInitialized) {
             try {
                 val aiResult = customAI.detectContent(text)
@@ -266,14 +276,14 @@ class KeywordAccessibilityService : AccessibilityService() {
             }
         }
 
-        // 3) Fallback to traditional matching
-        return findBlockedKeywordTraditional(text, packageName)
+        // No blocking content found
+        return null
     }
 
     private fun getCloudOptInFromPrefs(): Boolean {
         return try {
             val prefs = getSharedPreferences("cloud_moderation_prefs", Context.MODE_PRIVATE)
-            // پیش‌فرض را روشن می‌کنیم تا قابلیت در دسترس باشد، مگر اینکه کاربر خاموش کرده باشد
+            // Default is enabled so feature is available unless user has disabled it
             prefs.getBoolean("opt_in", true)
         } catch (_: Exception) { true }
     }
@@ -281,7 +291,7 @@ class KeywordAccessibilityService : AccessibilityService() {
 
 
     private fun detectLanguageHint(text: String): String? {
-        // تشخیص سبک: اگر حروف فارسی غالب باشد → fa، اگر عربی → ar، در غیر اینصورت null
+        // Style detection: if Persian characters dominate → fa, if Arabic → ar, otherwise null
         val arPersian = text.count { it in '\u0600'..'\u06FF' }
         val latin = text.count { it in 'A'..'Z' || it in 'a'..'z' }
         return when {
@@ -292,7 +302,7 @@ class KeywordAccessibilityService : AccessibilityService() {
     }
 	
 	/**
-	 * Traditional keyword matching (original method)
+	 * Traditional keyword matching (original method) - FIXED
 	 */
 	private suspend fun findBlockedKeywordTraditional(text: String, packageName: String): KeywordBlacklist? {
 		// Get app-specific keyword rules
@@ -302,19 +312,29 @@ class KeywordAccessibilityService : AccessibilityService() {
 		for (rule in appRules) {
 			val keyword = keywordCache[rule.keywordId]
 			if (keyword != null && matchesKeywordEnhanced(text, keyword)) {
+				Log.d(TAG, "Found app-specific blocked keyword: ${keyword.keyword} for app: $packageName")
 				return keyword
 			}
 		}
 		
-		// If no app-specific rules, check global keywords
-		if (appRules.isEmpty()) {
-			for (keyword in keywordCache.values) {
-				if (matchesKeywordEnhanced(text, keyword)) {
-					return keyword
-				}
+		// 🚀 FIXED: Always check global keywords (keywords without specific app assignments)
+		// Get all keywords that don't have specific app rules
+		val allKeywords = keywordCache.values
+		val globalKeywords = allKeywords.filter { keyword ->
+			// Check if this keyword has any app-specific rules
+			val hasAppRules = database.appKeywordRulesDao().getRulesForKeywordSync(keyword.id).isNotEmpty()
+			!hasAppRules // Global keywords are those without app-specific rules
+		}
+		
+		// Check global keywords
+		for (keyword in globalKeywords) {
+			if (matchesKeywordEnhanced(text, keyword)) {
+				Log.d(TAG, "Found global blocked keyword: ${keyword.keyword} for app: $packageName")
+				return keyword
 			}
 		}
 		
+		Log.v(TAG, "No blocked keywords found for app: $packageName in text: ${text.take(50)}")
 		return null
 	}
 	
@@ -331,27 +351,27 @@ class KeywordAccessibilityService : AccessibilityService() {
 	 * Finds blocked keyword in text content - Optimized with HashMap
 	 */
 	private fun findBlockedKeyword(text: String): KeywordBlacklist? {
-		// بهینه‌سازی: جستجوی سریع با HashMap
+		// Optimization: Fast search with HashMap
 		val words = text.split(Regex("\\s+"))
 		
-		// جستجوی مستقیم در HashMap
+		// Direct search in HashMap
 		for (word in words) {
-			// جستجوی دقیق
+			// Exact search
 			keywordHashMap[word]?.let { return it }
 			
-			// جستجوی case-insensitive
+			// Case-insensitive search
 			keywordHashMapLowercase[word.lowercase()]?.let { keyword ->
 				if (!keyword.caseSensitive) return keyword
 			}
 		}
 		
-		// جستجوی کامل متن برای عبارات چندکلمه‌ای
+		// Full text search for multi-word phrases
 		keywordHashMap[text]?.let { return it }
 		keywordHashMapLowercase[text.lowercase()]?.let { keyword ->
 			if (!keyword.caseSensitive) return keyword
 		}
 		
-		// Fallback: جستجوی سنتی فقط برای موارد پیچیده
+		// Fallback: Traditional search only for complex cases
 		for (keyword in keywordCache.values) {
 			if (text.contains(keyword.keyword, ignoreCase = !keyword.caseSensitive)) {
 				if (matchesKeywordEnhanced(text, keyword)) {
@@ -421,7 +441,7 @@ class KeywordAccessibilityService : AccessibilityService() {
 	}
 	
 	/**
-	 * Handles blocked content by clearing input and showing notification
+	 * Handles blocked content by clearing input, blocking app, and showing notification
 	 */
 	private fun handleBlockedContent(
 		keyword: KeywordBlacklist,
@@ -442,6 +462,9 @@ class KeywordAccessibilityService : AccessibilityService() {
 		
 		// Send notification
 		sendBlockingNotification(keyword.keyword, packageName)
+		
+		// 🚀 NEW: Block the app temporarily when inappropriate content is detected
+		blockAppTemporarily(packageName, keyword)
 	}
 	
 	/**
@@ -449,7 +472,7 @@ class KeywordAccessibilityService : AccessibilityService() {
 	 */
 	private fun clearInputField(node: AccessibilityNodeInfo) {
 		try {
-			// پاک کردن node اصلی
+			// Clear main node
 			if (node.isEditable) {
 				val arguments = android.os.Bundle().apply {
 					putCharSequence(AccessibilityNodeInfo.ACTION_ARGUMENT_SET_TEXT_CHARSEQUENCE, "")
@@ -459,7 +482,7 @@ class KeywordAccessibilityService : AccessibilityService() {
 				return
 			}
 			
-			// جستجو در child nodes برای editable fields
+			// Search in child nodes for editable fields
 			findAndClearEditableNodes(node)
 		} catch (e: Exception) {
 			Log.e(TAG, "Failed to clear input field", e)
@@ -467,7 +490,7 @@ class KeywordAccessibilityService : AccessibilityService() {
 	}
 	
 	/**
-	 * جستجو و پاک کردن همه editable nodes
+	 * Search and clear all editable nodes
 	 */
 	private fun findAndClearEditableNodes(node: AccessibilityNodeInfo) {
 		try {
@@ -484,7 +507,7 @@ class KeywordAccessibilityService : AccessibilityService() {
 					return
 				}
 				
-				// بررسی child های عمیق‌تر
+				// Check deeper children
 				findAndClearEditableNodes(child)
 				child.recycle()
 			}
@@ -516,6 +539,175 @@ class KeywordAccessibilityService : AccessibilityService() {
 			"Blocked inappropriate content: $keyword",
 			Toast.LENGTH_SHORT
 		).show()
+	}
+	
+	/**
+	 * 🚀 NEW: Blocks app temporarily when inappropriate content is detected
+	 */
+	private fun blockAppTemporarily(packageName: String, keyword: KeywordBlacklist) {
+		serviceScope.launch {
+			try {
+				Log.i(TAG, "Blocking app $packageName due to inappropriate content: ${keyword.keyword}")
+				
+				// 1. Create or update app block rule in database
+				val existingRule = try {
+					appRepository.getRuleByPackage(packageName)
+				} catch (e: Exception) {
+					Log.e(TAG, "Error getting existing rule for $packageName", e)
+					null
+				}
+				val appInfo = try {
+					val pm = packageManager
+					val app = pm.getApplicationInfo(packageName, 0)
+					com.internetguard.pro.data.model.AppInfo(
+						uid = app.uid,
+						packageName = packageName,
+						appName = pm.getApplicationLabel(app).toString(),
+						icon = null,
+						blockWifi = true,
+						blockCellular = true,
+						blockMode = "keyword_blocked"
+					)
+				} catch (e: Exception) {
+					Log.e(TAG, "Error getting app info for $packageName", e)
+					return@launch
+				}
+				
+				val blockRule = if (existingRule != null) {
+					// Update existing rule to block both WiFi and Cellular
+					existingRule.copy(
+						blockWifi = true,
+						blockCellular = true,
+						blockMode = "keyword_blocked"
+					)
+				} else {
+					// Create new rule
+					AppBlockRules(
+						appUid = appInfo.uid,
+						appPackageName = packageName,
+						appName = appInfo.appName,
+						blockWifi = true,
+						blockCellular = true,
+						blockMode = "keyword_blocked",
+						createdAt = System.currentTimeMillis()
+					)
+				}
+				
+				// Save/update rule in database
+				try {
+					appRepository.saveRule(blockRule)
+				} catch (e: Exception) {
+					Log.e(TAG, "Error saving/updating rule for $packageName", e)
+				}
+				
+				// 2. Send intent to VPN service to block the app
+				val intent = android.content.Intent(this@KeywordAccessibilityService, com.internetguard.pro.services.NetworkGuardVpnService::class.java)
+				intent.action = com.internetguard.pro.services.NetworkGuardVpnService.ACTION_BLOCK_APP
+				intent.putExtra("package_name", packageName)
+				intent.putExtra("block_reason", "inappropriate_content")
+				intent.putExtra("keyword", keyword.keyword)
+				intent.putExtra("block_duration", 10 * 60 * 1000L) // 10 minutes
+				startForegroundService(intent)
+				
+				// 3. Schedule automatic unblocking after 10 minutes
+				scheduleAppUnblocking(packageName, 10 * 60 * 1000L)
+				
+				// 4. Show enhanced notification
+				showAppBlockedNotification(packageName, keyword.keyword)
+				
+				Log.i(TAG, "Successfully blocked app $packageName for 10 minutes due to inappropriate content")
+				
+			} catch (e: Exception) {
+				Log.e(TAG, "Error blocking app $packageName", e)
+			}
+		}
+	}
+	
+	/**
+	 * 🚀 NEW: Schedules automatic unblocking of app after specified duration
+	 */
+	private fun scheduleAppUnblocking(packageName: String, durationMs: Long) {
+		serviceScope.launch {
+			try {
+				kotlinx.coroutines.delay(durationMs)
+				
+				Log.i(TAG, "Auto-unblocking app $packageName after keyword block timeout")
+				
+				// Send intent to VPN service to unblock the app
+				val intent = android.content.Intent(this@KeywordAccessibilityService, com.internetguard.pro.services.NetworkGuardVpnService::class.java)
+				intent.action = com.internetguard.pro.services.NetworkGuardVpnService.ACTION_UNBLOCK_APP
+				intent.putExtra("package_name", packageName)
+				intent.putExtra("unblock_reason", "keyword_block_timeout")
+				startForegroundService(intent)
+				
+				// Update database rule to unblock
+				try {
+					val existingRule = appRepository.getRuleByPackage(packageName)
+					if (existingRule != null) {
+						val updatedRule = existingRule.copy(
+							blockWifi = false,
+							blockCellular = false,
+							blockMode = "manual"
+						)
+						appRepository.updateRule(updatedRule)
+					}
+				} catch (e: Exception) {
+					Log.e(TAG, "Error updating rule for $packageName", e)
+				}
+				
+				// Show unblock notification
+				showAppUnblockedNotification(packageName)
+				
+			} catch (e: Exception) {
+				Log.e(TAG, "Error auto-unblocking app $packageName", e)
+			}
+		}
+	}
+	
+	/**
+	 * 🚀 NEW: Shows notification when app is blocked due to inappropriate content
+	 */
+	private fun showAppBlockedNotification(packageName: String, keyword: String) {
+		try {
+			val notificationManager = getSystemService(android.content.Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+			
+			val notification = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+				.setSmallIcon(android.R.drawable.ic_dialog_alert)
+				.setContentTitle("App Blocked - Inappropriate Content")
+				.setContentText("$packageName blocked for 10 minutes due to: $keyword")
+				.setStyle(NotificationCompat.BigTextStyle()
+					.bigText("The app '$packageName' has been temporarily blocked for 10 minutes because inappropriate content was detected: '$keyword'. The app will be automatically unblocked after this period."))
+				.setPriority(NotificationCompat.PRIORITY_HIGH)
+				.setAutoCancel(true)
+				.build()
+			
+			notificationManager.notify(NOTIFICATION_ID + 1, notification)
+		} catch (e: Exception) {
+			Log.e(TAG, "Error showing app blocked notification", e)
+		}
+	}
+	
+	/**
+	 * 🚀 NEW: Shows notification when app is automatically unblocked
+	 */
+	private fun showAppUnblockedNotification(packageName: String) {
+		try {
+			val notificationManager = getSystemService(android.content.Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+			
+			val notification = NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+				.setSmallIcon(android.R.drawable.ic_dialog_info)
+				.setContentTitle("App Unblocked")
+				.setContentText("$packageName has been automatically unblocked")
+				.setStyle(NotificationCompat.BigTextStyle()
+					.bigText("The app '$packageName' has been automatically unblocked after the keyword block timeout period."))
+				.setPriority(NotificationCompat.PRIORITY_DEFAULT)
+				.setAutoCancel(true)
+				.build()
+			
+			notificationManager.notify(NOTIFICATION_ID + 2, notification)
+		} catch (e: Exception) {
+			Log.e(TAG, "Error showing app unblocked notification", e)
+		}
 	}
 	
 	/**

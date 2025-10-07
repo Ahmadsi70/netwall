@@ -121,6 +121,26 @@ object LanguageManager {
     }
     
     /**
+     * Creates a new context with the specified language.
+     * This is useful for Activities that need to attach a context with a specific language.
+     * 
+     * @param baseContext The base context
+     * @param languageCode The language code to apply
+     * @return A new context with the specified language
+     */
+    fun createContextWithLanguage(baseContext: Context, languageCode: String): Context {
+        if (!isLanguageSupported(languageCode)) {
+            return baseContext
+        }
+        
+        val locale = Locale(languageCode)
+        val config = Configuration(baseContext.resources.configuration)
+        config.setLocale(locale)
+        
+        return baseContext.createConfigurationContext(config)
+    }
+    
+    /**
      * Gets the language direction for a given language.
      * 
      * @param languageCode The language code

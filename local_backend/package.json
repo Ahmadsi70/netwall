@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "local-ai-backend",
   "version": "1.0.0",
   "description": "Local AI Backend for InternetGuard Pro",
@@ -8,13 +8,20 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^4.18.2",
-    "cors": "^2.8.5"
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "keywords": ["ai", "backend", "local", "proxy"],
+  "keywords": [
+    "ai",
+    "backend",
+    "local",
+    "proxy"
+  ],
   "author": "InternetGuard Pro",
   "license": "MIT"
 }

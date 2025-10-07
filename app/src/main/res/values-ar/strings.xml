@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Name -->
-    <string name="app_name">حارس الإنترنت المحترف</string>
+    <string name="app_name">InternetGuard Pro</string>
+    <string name="accessibility_service_description">Blocks inappropriate keywords in applications for parental control.</string>
     
     <!-- Navigation -->
-    <string name="nav_dashboard">الرئيسية</string>
-    <string name="nav_apps">التطبيقات</string>
-    <string name="nav_keywords">الكلمات المفتاحية</string>
-    <string name="nav_rules">القواعد</string>
-    <string name="nav_analytics">التحليلات</string>
-    <string name="nav_settings">الإعدادات</string>
-    <string name="nav_education">التعليم</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_apps">Apps</string>
+    <string name="nav_keywords">Keywords</string>
+    <string name="nav_rules">Rules</string>
+    <string name="nav_analytics">Analytics</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_education">Education</string>
     
     <!-- Dashboard -->
     <string name="dashboard_title">لوحة التحكم</string>
@@ -231,4 +232,56 @@
         <p>لديك تحكم كامل في بياناتك ويمكنك حذفها في أي وقت.</p>
         ]]>
     </string>
+    
+    <!-- Dialog Messages - Arabic -->
+    <string name="dialog_enable_keyword_blocking_title">تفعيل حظر الكلمات المفتاحية</string>
+    <string name="dialog_enable_keyword_blocking_message">لحظر الكلمات المفتاحية غير المناسبة في التطبيقات، تحتاج إلى تفعيل خدمة إمكانية الوصول:\n\n🔍 ما تفعله:\n• مراقبة النص في التطبيقات للكلمات المفتاحية المحظورة\n• حظر المحتوى غير المناسب تلقائياً\n• تعمل بالكامل دون اتصال على جهازك\n\n📱 كيفية التفعيل:\n1. اضغط على \'تفعيل الآن\' أدناه\n2. ابحث عن \'InternetGuard Pro\' في القائمة\n3. قم بتشغيل المفتاح\n4. ارجع إلى هذا التطبيق\n\n🛡️ خصوصيتك محمية - لا تترك البيانات جهازك\nهذا إعداد لمرة واحدة لأمانك.</string>
+    <string name="dialog_permission_required_title">إذن مطلوب</string>
+    <string name="dialog_permission_required_message">لإضافة واستخدام الكلمات المفتاحية للحظر، تحتاج أولاً إلى تفعيل خدمة إمكانية الوصول.\n\nهذا يسمح للتطبيق بمراقبة النص في التطبيقات الأخرى وحظر المحتوى غير المناسب.\n\n🛡️ خصوصيتك محمية - جميع المعالجة تتم محلياً على جهازك.</string>
+    <string name="dialog_help_keyword_blocking_title">المساعدة - حظر الكلمات المفتاحية</string>
+    <string name="dialog_help_keyword_blocking_message">كيفية استخدام حظر الكلمات المفتاحية:\n\n1. فعّل خدمة إمكانية الوصول أولاً\n2. أضف الكلمات المفتاحية التي تريد حظرها\n3. خصص الكلمات المفتاحية لتطبيقات معينة\n4. اختبر اتصال API إذا لزم الأمر\n\nستقوم الخدمة بحظر المحتوى غير المناسب تلقائياً عند اكتشافه.\n\n🛡️ جميع المعالجة تتم محلياً على جهازك للحصول على أقصى خصوصية.</string>
+    <string name="dialog_choose_language_title">اختر اللغة</string>
+    <string name="dialog_privacy_settings_title">إعدادات الخصوصية</string>
+    <string name="dialog_privacy_settings_message">InternetGuard Pro يحترم خصوصيتك. جميع البيانات مخزنة محلياً ولا يتم مشاركتها مع أطراف ثالثة.</string>
+    <string name="dialog_about_title">حول InternetGuard Pro</string>
+    <string name="dialog_about_message">الإصدار 1.0.0\n\nتطبيق حماية إنترنت قوي مع اقتراحات مدعومة بالذكاء الاصطناعي وميزات حظر متقدمة.</string>
+    <string name="dialog_cloud_ai_moderation_title">الاعتدال بالذكاء الاصطناعي السحابي</string>
+    <string name="dialog_clear_all_data_title">مسح جميع البيانات</string>
+    <string name="dialog_clear_all_data_message">سيؤدي هذا إلى حذف جميع بياناتك نهائياً بما في ذلك القواعد والكلمات المفتاحية والإحصائيات. لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="dialog_service_enabled_title">✅ حظر الكلمات المفتاحية نشط</string>
+    <string name="dialog_service_enabled_message">خدمة إمكانية الوصول مفعلة وتعمل بشكل صحيح.\n\nيمكنك الآن إضافة الكلمات المفتاحية وستتم حظرها تلقائياً في التطبيقات الأخرى.</string>
+    <string name="dialog_service_enabled_success_title">🎉 تم تفعيل الخدمة!</string>
+    <string name="dialog_service_enabled_success_message">رائع! حظر الكلمات المفتاحية نشط الآن وسيحميك من المحتوى غير المناسب في التطبيقات.</string>
+    
+    <!-- Dialog Buttons - Arabic -->
+    <string name="button_enable_now">تفعيل الآن</string>
+    <string name="button_show_guide">إظهار الدليل</string>
+    <string name="button_not_now">ليس الآن</string>
+    <string name="button_got_it">فهمت</string>
+    <string name="button_enable_service">تفعيل الخدمة</string>
+    <string name="button_clear">مسح</string>
+    <string name="button_clear_all">مسح الكل</string>
+    
+    <!-- Toast Messages - Arabic -->
+    <string name="toast_cloud_ai_moderation_enabled">✅ تم تفعيل الاعتدال بالذكاء الاصطناعي السحابي</string>
+    <string name="toast_cloud_ai_moderation_disabled">✅ تم إلغاء تفعيل الاعتدال بالذكاء الاصطناعي السحابي</string>
+    <string name="toast_cannot_enable_service">لا يمكن تفعيل الخدمة: النشاط غير متاح</string>
+    <string name="toast_error_enabling_service">خطأ في تفعيل الخدمة: %1$s</string>
+    <string name="toast_error_loading_keywords">خطأ في تحميل الكلمات المفتاحية: %1$s</string>
+    <string name="toast_error_loading_app_list">خطأ في تحميل قائمة التطبيقات: %1$s</string>
+    <string name="toast_error_initializing_interface">خطأ في تهيئة الواجهة: %1$s</string>
+    <string name="toast_error_initializing_keyword_system">خطأ في تهيئة نظام الكلمات المفتاحية: %1$s</string>
+    <string name="toast_error_initializing_app_system">خطأ في تهيئة نظام التطبيقات: %1$s</string>
+    <string name="toast_error_loading_apps">خطأ في تحميل التطبيقات: %1$s</string>
+    <string name="toast_error_setting_up_interface">خطأ في إعداد الواجهة: %1$s</string>
+    <string name="toast_error_setting_up_app_monitoring">خطأ في إعداد مراقبة التطبيقات: %1$s</string>
+    <string name="toast_error_opening_app_assignment_dialog">خطأ في فتح حوار تعيين التطبيق</string>
+    
+    <!-- AI Settings - Arabic -->
+    <string name="dialog_ai_detection_mode_title">وضع اكتشاف الذكاء الاصطناعي</string>
+    <string name="ai_mode_lightweight">خفيف (سريع)</string>
+    <string name="ai_mode_balanced">متوازن (موصى به)</string>
+    <string name="ai_mode_thorough">دقيق (دقيق)</string>
+    <string name="ai_mode_adaptive">تكيفي (ذكي)</string>
+    <string name="toast_mode_changed_to">تم تغيير الوضع إلى: %1$s</string>
 </resources>

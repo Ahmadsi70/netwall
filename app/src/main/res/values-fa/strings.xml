@@ -1,87 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="app_name">نگهبان اینترنت پرو</string>
-	<string name="accessibility_service_description">کلمات کلیدی غیرمجاز را در اپلیکیشن‌ها برای کنترل والدین مسدود می‌کند.</string>
+	<string name="app_name">InternetGuard Pro</string>
+	<string name="accessibility_service_description">Blocks inappropriate keywords in applications for parental control.</string>
 	
 	<!-- Navigation -->
-	<string name="nav_dashboard">داشبورد</string>
-	<string name="nav_apps">اپلیکیشن‌ها</string>
-	<string name="nav_keywords">کلمات کلیدی</string>
-	<string name="nav_rules">قوانین</string>
-	<string name="nav_analytics">تحلیل‌ها</string>
-	<string name="nav_settings">تنظیمات</string>
-	<string name="nav_education">آموزش</string>
+	<string name="nav_dashboard">Dashboard</string>
+	<string name="nav_apps">Apps</string>
+	<string name="nav_keywords">Keywords</string>
+	<string name="nav_rules">Rules</string>
+	<string name="nav_analytics">Analytics</string>
+	<string name="nav_settings">Settings</string>
+	<string name="nav_education">Education</string>
 	
 	<!-- Dashboard -->
-	<string name="dashboard_title">داشبورد</string>
-	<string name="vpn_status">وضعیت VPN</string>
-	<string name="vpn_connected">متصل</string>
-	<string name="vpn_not_connected">قطع</string>
-	<string name="vpn_connect">اتصال</string>
-	<string name="vpn_disconnect">قطع اتصال</string>
-	<string name="content_blocked">محتوای مسدود شده</string>
-	<string name="time_saved">زمان ذخیره شده</string>
-	<string name="ai_suggestions">پیشنهادات هوشمند</string>
-	<string name="refresh">بروزرسانی</string>
+	<string name="dashboard_title">Dashboard</string>
+	<string name="vpn_status">VPN Status</string>
+	<string name="vpn_connected">Connected</string>
+	<string name="vpn_not_connected">Disconnected</string>
+	<string name="vpn_connect">Connect</string>
+	<string name="vpn_disconnect">Disconnect</string>
+	<string name="content_blocked">Content Blocked</string>
+	<string name="time_saved">Time Saved</string>
+	<string name="ai_suggestions">AI Suggestions</string>
+	<string name="refresh">Refresh</string>
 	
 	<!-- Analytics -->
-	<string name="analytics_title">تحلیل‌ها</string>
-	<string name="total_blocked">کل مسدود شده</string>
-	<string name="blocking_trend">روند مسدودسازی (7 روز)</string>
-	<string name="app_usage">استفاده از اپلیکیشن (دقیقه)</string>
-	<string name="keyword_distribution">توزیع کلمات کلیدی</string>
-	<string name="blocking_activity_time">فعالیت مسدودسازی بر اساس زمان</string>
+	<string name="analytics_title">Analytics</string>
+	<string name="total_blocked">Total Blocked</string>
+	<string name="blocking_trend">Blocking Trend (7 Days)</string>
+	<string name="app_usage">App Usage (Minutes)</string>
+	<string name="keyword_distribution">Keyword Distribution</string>
+	<string name="blocking_activity_time">Blocking Activity by Time</string>
 	
 	<!-- Settings -->
-	<string name="settings_title">تنظیمات</string>
-	<string name="appearance">ظاهر</string>
-	<string name="theme">تم</string>
-	<string name="language">زبان</string>
-	<string name="notifications">اعلان‌ها</string>
-	<string name="enable_notifications">فعال کردن اعلان‌ها</string>
-	<string name="notifications_description">دریافت هشدار درباره محتوای مسدود شده و فعالیت اپلیکیشن</string>
-	<string name="privacy_security">حریم خصوصی و امنیت</string>
-	<string name="privacy_settings">تنظیمات حریم خصوصی</string>
-	<string name="privacy_description">مدیریت تنظیمات حریم خصوصی و داده‌ها</string>
-	<string name="data_management">مدیریت داده</string>
-	<string name="export_data">صادرات داده</string>
-	<string name="export_data_description">صادرات قوانین و تنظیمات شما</string>
-	<string name="import_data">واردات داده</string>
-	<string name="import_data_description">واردات قوانین و تنظیمات از فایل</string>
-	<string name="clear_all_data">پاک کردن همه داده‌ها</string>
-	<string name="clear_data_description">حذف دائمی همه داده‌های اپلیکیشن</string>
-	<string name="about">درباره</string>
-	<string name="about_app">درباره نگهبان اینترنت پرو</string>
-	<string name="version">نسخه 1.0.0</string>
+	<string name="settings_title">Settings</string>
+	<string name="appearance">Appearance</string>
+	<string name="theme">Theme</string>
+	<string name="language">Language</string>
+	<string name="notifications">Notifications</string>
+	<string name="enable_notifications">Enable Notifications</string>
+	<string name="notifications_description">Receive alerts about blocked content and app activity</string>
+	<string name="privacy_security">Privacy &amp; Security</string>
+	<string name="privacy_settings">Privacy Settings</string>
+	<string name="privacy_description">Manage privacy settings and data</string>
+	<string name="data_management">Data Management</string>
+	<string name="export_data">Export Data</string>
+	<string name="export_data_description">Export your rules and settings</string>
+	<string name="import_data">Import Data</string>
+	<string name="import_data_description">Import rules and settings from file</string>
+	<string name="clear_all_data">Clear All Data</string>
+	<string name="clear_data_description">Permanently delete all app data</string>
+	<string name="about">About</string>
+	<string name="about_app">About InternetGuard Pro</string>
+	<string name="version">Version 1.0.0</string>
 	
 	<!-- Education -->
-	<string name="education_title">آموزش</string>
-	<string name="digital_wellness_education">آموزش سلامت دیجیتال</string>
-	<string name="education_description">درباره امنیت اینترنت، سلامت دیجیتال و بهره‌وری بیاموزید</string>
+	<string name="education_title">Education</string>
+	<string name="digital_wellness_education">Digital Wellness Education</string>
+	<string name="education_description">Learn about internet security, digital wellness and productivity</string>
 	
 	<!-- Onboarding -->
-	<string name="welcome_title">به نگهبان اینترنت پرو خوش آمدید</string>
-	<string name="welcome_description">با ویژگی‌های مسدودسازی هوشمند و بهره‌وری، کنترل استفاده از اینترنت خود را در دست بگیرید.</string>
-	<string name="permissions_title">اعطای مجوزها</string>
-	<string name="permissions_description">برای مسدودسازی محتوا و نظارت مؤثر بر اپلیکیشن‌ها به مجوزهای VPN و دسترسی نیاز داریم. داده‌های شما خصوصی و امن باقی می‌ماند.</string>
-	<string name="features_title">ویژگی‌های قدرتمند</string>
-	<string name="features_description">اپلیکیشن‌ها را مسدود کنید، کلمات کلیدی را فیلتر کنید، قوانین سفارشی ایجاد کنید و پیشنهادات هوشمند دریافت کنید تا بهره‌وری خود را بهبود بخشید.</string>
-	<string name="ready_title">همه چیز آماده است!</string>
-	<string name="ready_description">نگهبان اینترنت پرو آماده است تا به شما کمک کند متمرکز و بهره‌ور باشید. بیایید شروع کنیم!</string>
-	<string name="skip">رد کردن</string>
-	<string name="next">بعدی</string>
-	<string name="get_started">شروع کنید</string>
+	<string name="welcome_title">Welcome to InternetGuard Pro</string>
+	<string name="welcome_description">Take control of your internet usage with smart blocking features and productivity tools.</string>
+	<string name="permissions_title">Grant Permissions</string>
+	<string name="permissions_description">We need VPN and accessibility permissions to effectively block content and monitor apps. Your data remains private and secure.</string>
+	<string name="features_title">Powerful Features</string>
+	<string name="features_description">Block apps, filter keywords, create custom rules and receive smart suggestions to improve your productivity.</string>
+	<string name="ready_title">Everything is Ready!</string>
+	<string name="ready_description">InternetGuard Pro is ready to help you stay focused and productive. Let\'s get started!</string>
+	<string name="skip">Skip</string>
+	<string name="next">Next</string>
+	<string name="get_started">Get Started</string>
 	
 	<!-- Common -->
-	<string name="ok">تأیید</string>
-	<string name="cancel">لغو</string>
-	<string name="apply">اعمال</string>
-	<string name="dismiss">رد</string>
-	<string name="edit">ویرایش</string>
-	<string name="delete">حذف</string>
-	<string name="save">ذخیره</string>
-	<string name="loading">در حال بارگذاری...</string>
-	<string name="error">خطا</string>
-	<string name="success">موفقیت</string>
-	<string name="confirmation">تأیید</string>
+	<string name="ok">OK</string>
+	<string name="cancel">Cancel</string>
+	<string name="apply">Apply</string>
+	<string name="dismiss">Dismiss</string>
+	<string name="edit">Edit</string>
+	<string name="delete">Delete</string>
+	<string name="save">Save</string>
+	<string name="loading">Loading...</string>
+	<string name="error">Error</string>
+	<string name="success">Success</string>
+	<string name="confirmation">Confirmation</string>
+	
+	<!-- Dialog Messages - Persian -->
+	<string name="dialog_enable_keyword_blocking_title">فعال‌سازی مسدودسازی کلمات کلیدی</string>
+	<string name="dialog_enable_keyword_blocking_message">برای مسدودسازی کلمات کلیدی نامناسب در اپلیکیشن‌ها، باید سرویس دسترسی را فعال کنید:\n\n🔍 عملکرد:\n• نظارت بر متن در اپلیکیشن‌ها برای کلمات کلیدی مسدود شده\n• مسدودسازی خودکار محتوای نامناسب\n• کارکرد کاملاً آفلاین روی دستگاه شما\n\n📱 نحوه فعال‌سازی:\n1. روی \'فعال‌سازی الان\' کلیک کنید\n2. \'InternetGuard Pro\' را در لیست پیدا کنید\n3. کلید را روشن کنید\n4. به این اپلیکیشن برگردید\n\n🛡️ حریم خصوصی شما محافظت می‌شود - هیچ داده‌ای از دستگاه شما خارج نمی‌شود\nاین یک تنظیم یکباره برای امنیت شما است.</string>
+	<string name="dialog_permission_required_title">اجازه مورد نیاز</string>
+	<string name="dialog_permission_required_message">برای اضافه کردن و استفاده از کلمات کلیدی برای مسدودسازی، ابتدا باید سرویس دسترسی را فعال کنید.\n\nاین امکان نظارت بر متن در سایر اپلیکیشن‌ها و مسدودسازی محتوای نامناسب را فراهم می‌کند.\n\n🛡️ حریم خصوصی شما محافظت می‌شود - تمام پردازش‌ها محلی روی دستگاه شما انجام می‌شود.</string>
+	<string name="dialog_help_keyword_blocking_title">راهنما - مسدودسازی کلمات کلیدی</string>
+	<string name="dialog_help_keyword_blocking_message">نحوه استفاده از مسدودسازی کلمات کلیدی:\n\n1. ابتدا سرویس دسترسی را فعال کنید\n2. کلمات کلیدی که می‌خواهید مسدود کنید را اضافه کنید\n3. کلمات کلیدی را به اپلیکیشن‌های خاص اختصاص دهید\n4. در صورت نیاز اتصال API را تست کنید\n\nسرویس به صورت خودکار محتوای نامناسب را هنگام تشخیص مسدود می‌کند.\n\n🛡️ تمام پردازش‌ها محلی روی دستگاه شما برای حداکثر حریم خصوصی انجام می‌شود.</string>
+	<string name="dialog_choose_language_title">انتخاب زبان</string>
+	<string name="dialog_privacy_settings_title">تنظیمات حریم خصوصی</string>
+	<string name="dialog_privacy_settings_message">InternetGuard Pro حریم خصوصی شما را محترم می‌شمارد. تمام داده‌ها محلی ذخیره می‌شوند و هرگز با اشخاص ثالث به اشتراک گذاشته نمی‌شوند.</string>
+	<string name="dialog_about_title">درباره InternetGuard Pro</string>
+	<string name="dialog_about_message">نسخه 1.0.0\n\nیک اپلیکیشن قدرتمند محافظ اینترنت با پیشنهادات هوش مصنوعی و ویژگی‌های پیشرفته مسدودسازی.</string>
+	<string name="dialog_cloud_ai_moderation_title">نظارت هوش مصنوعی ابری</string>
+	<string name="dialog_clear_all_data_title">پاک کردن تمام داده‌ها</string>
+	<string name="dialog_clear_all_data_message">این کار تمام داده‌های شما شامل قوانین، کلمات کلیدی و آمار را به طور دائمی حذف می‌کند. این عمل قابل بازگشت نیست.</string>
+	<string name="dialog_service_enabled_title">✅ مسدودسازی کلمات کلیدی فعال</string>
+	<string name="dialog_service_enabled_message">سرویس دسترسی فعال است و به درستی کار می‌کند.\n\nحالا می‌توانید کلمات کلیدی اضافه کنید و آن‌ها به صورت خودکار در سایر اپلیکیشن‌ها مسدود خواهند شد.</string>
+	<string name="dialog_service_enabled_success_title">🎉 سرویس فعال شد!</string>
+	<string name="dialog_service_enabled_success_message">عالی! مسدودسازی کلمات کلیدی حالا فعال است و شما را از محتوای نامناسب در اپلیکیشن‌ها محافظت می‌کند.</string>
+	
+	<!-- Dialog Buttons - Persian -->
+	<string name="button_enable_now">فعال‌سازی الان</string>
+	<string name="button_show_guide">نمایش راهنما</string>
+	<string name="button_not_now">فعلاً نه</string>
+	<string name="button_got_it">متوجه شدم</string>
+	<string name="button_enable_service">فعال‌سازی سرویس</string>
+	<string name="button_clear">پاک کردن</string>
+	<string name="button_clear_all">پاک کردن همه</string>
+	
+	<!-- Toast Messages - Persian -->
+	<string name="toast_cloud_ai_moderation_enabled">✅ نظارت هوش مصنوعی ابری فعال شد</string>
+	<string name="toast_cloud_ai_moderation_disabled">✅ نظارت هوش مصنوعی ابری غیرفعال شد</string>
+	<string name="toast_cannot_enable_service">نمی‌توان سرویس را فعال کرد: Activity در دسترس نیست</string>
+	<string name="toast_error_enabling_service">خطا در فعال‌سازی سرویس: %1$s</string>
+	<string name="toast_error_loading_keywords">خطا در بارگذاری کلمات کلیدی: %1$s</string>
+	<string name="toast_error_loading_app_list">خطا در بارگذاری لیست اپلیکیشن‌ها: %1$s</string>
+	<string name="toast_error_initializing_interface">خطا در راه‌اندازی رابط: %1$s</string>
+	<string name="toast_error_initializing_keyword_system">خطا در راه‌اندازی سیستم کلمات کلیدی: %1$s</string>
+	<string name="toast_error_initializing_app_system">خطا در راه‌اندازی سیستم اپلیکیشن: %1$s</string>
+	<string name="toast_error_loading_apps">خطا در بارگذاری اپلیکیشن‌ها: %1$s</string>
+	<string name="toast_error_setting_up_interface">خطا در تنظیم رابط: %1$s</string>
+	<string name="toast_error_setting_up_app_monitoring">خطا در تنظیم نظارت اپلیکیشن: %1$s</string>
+	<string name="toast_error_opening_app_assignment_dialog">خطا در باز کردن دیالوگ اختصاص اپلیکیشن</string>
+	
+	<!-- AI Settings - Persian -->
+	<string name="dialog_ai_detection_mode_title">حالت تشخیص هوش مصنوعی</string>
+	<string name="ai_mode_lightweight">سبک (سریع)</string>
+	<string name="ai_mode_balanced">متعادل (توصیه شده)</string>
+	<string name="ai_mode_thorough">کامل (دقیق)</string>
+	<string name="ai_mode_adaptive">انطباقی (هوشمند)</string>
+	<string name="toast_mode_changed_to">حالت تغییر کرد به: %1$s</string>
 </resources>

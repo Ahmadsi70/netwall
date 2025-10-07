@@ -211,23 +211,23 @@ class AISettingsFragment : Fragment() {
      */
     private fun showModeSelectionDialog() {
         val modes = arrayOf(
-            "Lightweight (Fast)",
-            "Balanced (Recommended)", 
-            "Thorough (Accurate)",
-            "Adaptive (Smart)"
+            getString(R.string.ai_mode_lightweight),
+            getString(R.string.ai_mode_balanced), 
+            getString(R.string.ai_mode_thorough),
+            getString(R.string.ai_mode_adaptive)
         )
         
         val currentMode = prefs.getInt(KEY_AI_MODE, 1) // Default to Balanced
         
         androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setTitle("AI Detection Mode")
+            .setTitle(getString(R.string.dialog_ai_detection_mode_title))
             .setSingleChoiceItems(modes, currentMode) { dialog, which ->
                 prefs.edit().putInt(KEY_AI_MODE, which).apply()
                 val modeName = modes[which]
-                showSnackbar("Mode changed to: $modeName")
+                showSnackbar(getString(R.string.toast_mode_changed_to, modeName))
                 dialog.dismiss()
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton(getString(R.string.cancel), null)
             .show()
     }
     

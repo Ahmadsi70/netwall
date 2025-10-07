@@ -49,10 +49,24 @@ class AppListAdapter(
 		private val statusIndicator: View = itemView.findViewById(R.id.status_indicator)
 		private val loadingIndicator: ProgressBar = itemView.findViewById(R.id.loading_indicator)
 		
+		// Performance optimization: Cache for icon loading
+		private var currentPackageName: String? = null
+		
 		fun bind(app: AppInfo) {
-			appName.text = app.appName
-			packageName.text = app.packageName
-			appIcon.setImageDrawable(app.icon)
+			// 🚀 OPTIMIZATION: Only update views if data has changed
+			if (currentPackageName != app.packageName) {
+				appName.text = app.appName
+				packageName.text = app.packageName
+				currentPackageName = app.packageName
+			}
+			
+			// 🚀 OPTIMIZATION: Only set icon if it's different
+			if (app.icon != null) {
+				appIcon.setImageDrawable(app.icon)
+			} else {
+				// Show placeholder or default icon
+				appIcon.setImageResource(android.R.drawable.sym_def_app_icon)
+			}
 			
 			// Remove listeners to prevent triggering during setup
 			wifiSwitch.setOnCheckedChangeListener(null)

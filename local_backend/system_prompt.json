@@ -1,0 +1,208 @@
+{
+  "version": "2.0.0",
+  "app_name": "InternetGuard Pro",
+  "description": "AI-powered parental control and content moderation system",
+  "capabilities": [
+    "App blocking and time management",
+    "Keyword-based content filtering",
+    "AI-powered content detection",
+    "Multi-language support (50+ languages)",
+    "Parental control features",
+    "VPN-based network filtering"
+  ],
+  "content_categories": {
+    "violence": {
+      "description": "Content promoting or depicting violence, aggression, or harm",
+      "examples": ["fight", "kill", "hurt", "attack", "weapon", "blood", "gore"],
+      "severity": "high",
+      "block_threshold": 0.7
+    },
+    "sexual_content": {
+      "description": "Sexually explicit or inappropriate content",
+      "examples": ["porn", "sex", "nude", "adult", "xxx", "nsfw"],
+      "severity": "high",
+      "block_threshold": 0.8
+    },
+    "drugs": {
+      "description": "Content related to illegal drugs, substance abuse, or drug dealing",
+      "examples": ["drug", "cocaine", "heroin", "marijuana", "pills", "high"],
+      "severity": "high",
+      "block_threshold": 0.75
+    },
+    "hate_speech": {
+      "description": "Content promoting hatred, discrimination, or violence against groups",
+      "examples": ["hate", "racist", "discrimination", "slur", "offensive"],
+      "severity": "high",
+      "block_threshold": 0.8
+    },
+    "self_harm": {
+      "description": "Content promoting self-harm, suicide, or dangerous behaviors",
+      "examples": ["suicide", "cut", "harm", "kill myself", "end life"],
+      "severity": "critical",
+      "block_threshold": 0.9
+    },
+    "gambling": {
+      "description": "Content promoting gambling, betting, or financial scams",
+      "examples": ["bet", "casino", "lottery", "poker", "scam", "fraud"],
+      "severity": "medium",
+      "block_threshold": 0.7
+    },
+    "inappropriate": {
+      "description": "General inappropriate content not fitting other categories",
+      "examples": ["inappropriate", "offensive", "disturbing"],
+      "severity": "medium",
+      "block_threshold": 0.6
+    }
+  },
+  "app_categories": {
+    "social_media": {
+      "description": "Social networking and communication apps",
+      "examples": ["instagram", "facebook", "twitter", "tiktok", "snapchat"],
+      "keywords": ["social", "chat", "message", "friend", "follow"]
+    },
+    "games": {
+      "description": "Gaming and entertainment applications",
+      "examples": ["pubg", "minecraft", "roblox", "fortnite", "candy crush"],
+      "keywords": ["game", "play", "gaming", "player", "score"]
+    },
+    "browsers": {
+      "description": "Web browsers and internet access tools",
+      "examples": ["chrome", "firefox", "safari", "edge", "opera"],
+      "keywords": ["browser", "web", "internet", "search", "url"]
+    },
+    "messaging": {
+      "description": "Communication and messaging applications",
+      "examples": ["whatsapp", "telegram", "messenger", "signal", "discord"],
+      "keywords": ["message", "chat", "call", "voice", "video"]
+    },
+    "entertainment": {
+      "description": "Media streaming and entertainment platforms",
+      "examples": ["youtube", "netflix", "spotify", "twitch", "hulu"],
+      "keywords": ["video", "music", "stream", "watch", "listen"]
+    },
+    "shopping": {
+      "description": "E-commerce and shopping applications",
+      "examples": ["amazon", "ebay", "aliexpress", "digikala", "bamilo"],
+      "keywords": ["shop", "buy", "sell", "store", "market"]
+    },
+    "dating": {
+      "description": "Dating and relationship applications",
+      "examples": ["tinder", "bumble", "hinge", "okcupid", "match"],
+      "keywords": ["date", "meet", "relationship", "love", "romance"]
+    },
+    "news": {
+      "description": "News and information applications",
+      "examples": ["bbc", "cnn", "reddit", "google news", "feedly"],
+      "keywords": ["news", "article", "information", "update", "report"]
+    }
+  },
+  "languages": {
+    "supported": ["en", "fa", "ar", "zh", "es", "fr", "de", "ru", "ja", "ko"],
+    "primary": "en",
+    "rtl_languages": ["fa", "ar", "he", "ur"],
+    "character_sets": {
+      "latin": ["en", "es", "fr", "de"],
+      "arabic": ["fa", "ar", "ur"],
+      "chinese": ["zh"],
+      "cyrillic": ["ru"],
+      "hiragana": ["ja"],
+      "hangul": ["ko"]
+    }
+  },
+  "moderation_policy": {
+    "strictness": "high",
+    "target_audience": "minors_and_families",
+    "privacy_focused": true,
+    "local_processing": true,
+    "fallback_enabled": true
+  },
+  "suggestion_guidelines": {
+    "max_suggestions": 12,
+    "include_synonyms": true,
+    "include_variants": true,
+    "include_obfuscations": true,
+    "include_regex": true,
+    "include_categories": true,
+    "obfuscation_patterns": [
+      "character_substitution",
+      "vowel_replacement",
+      "number_substitution",
+      "symbol_replacement",
+      "spacing_variations"
+    ]
+  },
+  "prompt_templates": {
+    "moderation": "You are a strict content moderator for InternetGuard Pro, a parental control app. Analyze the given text and determine if it contains inappropriate content for minors. Consider context, language, and cultural sensitivity. Return a JSON response with inappropriate status, confidence level, category, and reasoning.",
+    "suggestion": "You are an AI assistant for InternetGuard Pro. Generate related terms, synonyms, variants, and obfuscations for the given keyword to help users create comprehensive content filters. Focus on harmful content categories and provide safe regex patterns for pattern matching.",
+    "categorization": "You are a content categorization expert for InternetGuard Pro. Analyze the given content and determine the most appropriate category from the predefined list. Consider the primary purpose and potential risks of the content."
+  },
+  "response_format": {
+    "moderation": {
+      "type": "object",
+      "required": ["inappropriate", "confidence", "category", "language", "reasoning"],
+      "properties": {
+        "inappropriate": {"type": "boolean"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "category": {"type": "string", "enum": ["violence", "sexual_content", "drugs", "hate_speech", "self_harm", "gambling", "inappropriate", "none"]},
+        "language": {"type": "string"},
+        "reasoning": {"type": "string", "maxLength": 200}
+      }
+    },
+    "suggestion": {
+      "type": "object",
+      "required": ["synonyms", "variants", "obfuscations", "regex", "categories", "notes"],
+      "properties": {
+        "synonyms": {"type": "array", "items": {"type": "string"}, "maxItems": 12},
+        "variants": {"type": "array", "items": {"type": "string"}, "maxItems": 12},
+        "obfuscations": {"type": "array", "items": {"type": "string"}, "maxItems": 12},
+        "regex": {"type": "array", "items": {"type": "string"}, "maxItems": 6},
+        "categories": {"type": "array", "items": {"type": "string"}, "maxItems": 6},
+        "notes": {"type": "string", "maxLength": 200}
+      }
+    }
+  },
+  "examples": {
+    "moderation": [
+      {
+        "input": "watch violent movie with blood and gore",
+        "output": {
+          "inappropriate": true,
+          "confidence": 0.9,
+          "category": "violence",
+          "language": "en",
+          "reasoning": "Contains explicit violence and gore content"
+        }
+      },
+      {
+        "input": "educational content about biology",
+        "output": {
+          "inappropriate": false,
+          "confidence": 0.1,
+          "category": "none",
+          "language": "en",
+          "reasoning": "Educational content is appropriate"
+        }
+      }
+    ],
+    "suggestion": [
+      {
+        "input": "violence",
+        "output": {
+          "synonyms": ["aggression", "harm", "hurt", "damage", "attack"],
+          "variants": ["violent", "violently", "aggressive", "aggression"],
+          "obfuscations": ["v1olence", "v*olence", "v10l3nc3", "v!olence"],
+          "regex": ["v[0-9]olence", "v[*]olence", "v[!]olence"],
+          "categories": ["violence", "harmful", "aggression"],
+          "notes": "Content related to violence and aggression"
+        }
+      }
+    ]
+  },
+  "safety_guidelines": {
+    "false_positives": "Minimize false positives for educational or neutral content",
+    "context_awareness": "Consider context and intent when moderating content",
+    "cultural_sensitivity": "Be aware of cultural differences and language nuances",
+    "age_appropriateness": "Focus on content inappropriate for minors and families",
+    "privacy_protection": "Never store or log user content beyond processing"
+  }
+}

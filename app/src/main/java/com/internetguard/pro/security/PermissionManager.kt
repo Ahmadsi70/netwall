@@ -2,6 +2,7 @@ package com.internetguard.pro.security
 
 import android.Manifest
 import android.app.Activity
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.internetguard.pro.R
+import com.internetguard.pro.utils.AccessibilityServiceChecker
 
 /**
  * Manager for handling runtime permissions with clear explanations.
@@ -69,16 +71,26 @@ class PermissionManager(
 	 * Initializes permission launchers
 	 */
 	fun initialize() {
-		permissionLauncher = (fragment ?: activity).registerForActivityResult(
-			ActivityResultContracts.RequestMultiplePermissions()
-		) { permissions ->
-			handlePermissionResults(permissions)
-		}
-		
-		settingsLauncher = (fragment ?: activity).registerForActivityResult(
-			ActivityResultContracts.StartActivityForResult()
-		) { result ->
-			handleSettingsResult(result.resultCode)
+		try {
+			val lifecycleOwner = fragment ?: activity
+			if (lifecycleOwner == null) {
+				android.util.Log.w("PermissionManager", "LifecycleOwner is null, cannot initialize launchers")
+				return
+			}
+			
+			permissionLauncher = lifecycleOwner.registerForActivityResult(
+				ActivityResultContracts.RequestMultiplePermissions()
+			) { permissions ->
+				handlePermissionResults(permissions)
+			}
+			
+			settingsLauncher = lifecycleOwner.registerForActivityResult(
+				ActivityResultContracts.StartActivityForResult()
+			) { result ->
+				handleSettingsResult(result.resultCode)
+			}
+		} catch (e: Exception) {
+			android.util.Log.e("PermissionManager", "Error initializing launchers: ${e.message}", e)
 		}
 	}
 	
@@ -116,6 +128,53 @@ class PermissionManager(
 		return SERVICE_PERMISSIONS.all { permission ->
 			ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
 		}
+	}
+	
+	/**
+	 * Checks if accessibility service is enabled and running
+	 */
+	fun isAccessibilityServiceEnabled(): Boolean {
+		return AccessibilityServiceChecker.isServiceEnabled(context)
+	}
+	
+	/**
+	 * Opens accessibility settings to enable the service
+	 */
+	fun openAccessibilitySettings() {
+		val intent = Intent(android.provider.Settings.ACTION_ACCESSIBILITY_SETTINGS)
+		intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+		context.startActivity(intent)
+	}
+	
+	/**
+	 * Opens accessibility settings with automatic detection when user returns
+	 */
+	fun openAccessibilitySettingsWithDetection() {
+		// Store timestamp to detect when user returns
+		val prefs = context.getSharedPreferences("accessibility_setup", Context.MODE_PRIVATE)
+		prefs.edit().putLong("settings_opened_at", System.currentTimeMillis()).apply()
+		
+		openAccessibilitySettings()
+	}
+	
+	/**
+	 * Checks if user has returned from accessibility settings and service is now enabled
+	 */
+	fun checkAccessibilityServiceAfterSettings(): Boolean {
+		val prefs = context.getSharedPreferences("accessibility_setup", Context.MODE_PRIVATE)
+		val settingsOpenedAt = prefs.getLong("settings_opened_at", 0)
+		
+		// If settings were opened recently (within last 5 minutes) and service is now enabled
+		if (settingsOpenedAt > 0 && 
+			System.currentTimeMillis() - settingsOpenedAt < 300000 && // 5 minutes
+			isAccessibilityServiceEnabled()) {
+			
+			// Clear the timestamp
+			prefs.edit().remove("settings_opened_at").apply()
+			return true
+		}
+		
+		return false
 	}
 	
 	/**
@@ -173,6 +232,97 @@ class PermissionManager(
 					"• Accessibility Service: To monitor app content for keyword blocking\n\n" +
 					"These services run locally and don't access external servers."
 		)
+	}
+	
+	/**
+	 * Requests accessibility service to be enabled with improved UX
+	 */
+	fun requestAccessibilityService() {
+		try {
+			// Check if launchers are available
+			if (settingsLauncher == null) {
+				android.util.Log.w("PermissionManager", "Settings launcher not available, opening settings directly")
+				openAccessibilitySettings()
+				return
+			}
+			
+			MaterialAlertDialogBuilder(activity)
+				.setTitle(activity.getString(R.string.dialog_enable_keyword_blocking_title))
+				.setMessage(activity.getString(R.string.dialog_enable_keyword_blocking_message))
+				.setPositiveButton(activity.getString(R.string.button_enable_now)) { _, _ ->
+					try {
+						openAccessibilitySettingsWithDetection()
+					} catch (e: Exception) {
+						android.util.Log.e("PermissionManager", "Error opening accessibility settings: ${e.message}", e)
+						// Fallback to direct settings
+						openAccessibilitySettings()
+					}
+				}
+				.setNeutralButton(activity.getString(R.string.button_show_guide)) { _, _ ->
+					try {
+						showAccessibilityGuide()
+					} catch (e: Exception) {
+						android.util.Log.e("PermissionManager", "Error showing accessibility guide: ${e.message}", e)
+					}
+				}
+				.setNegativeButton(activity.getString(R.string.button_not_now)) { dialog, _ ->
+					dialog.dismiss()
+				}
+				.setCancelable(false)
+				.show()
+		} catch (e: Exception) {
+			android.util.Log.e("PermissionManager", "Error showing accessibility service dialog: ${e.message}", e)
+			// Fallback: directly open settings
+			try {
+				openAccessibilitySettings()
+			} catch (e2: Exception) {
+				android.util.Log.e("PermissionManager", "Error opening accessibility settings as fallback: ${e2.message}", e2)
+			}
+		}
+	}
+	
+	/**
+	 * Shows detailed step-by-step guide for enabling accessibility service
+	 */
+	fun showAccessibilityGuide() {
+		try {
+			val guideView = activity.layoutInflater.inflate(
+				com.internetguard.pro.R.layout.dialog_accessibility_guide, 
+				null
+			)
+			
+			MaterialAlertDialogBuilder(activity)
+				.setView(guideView)
+				.setPositiveButton("Got it, Enable Now") { _, _ ->
+					try {
+						openAccessibilitySettingsWithDetection()
+					} catch (e: Exception) {
+						android.util.Log.e("PermissionManager", "Error opening accessibility settings from guide: ${e.message}", e)
+					}
+				}
+				.setNegativeButton("Cancel") { dialog, _ ->
+					dialog.dismiss()
+				}
+				.setCancelable(false)
+				.show()
+		} catch (e: Exception) {
+			android.util.Log.e("PermissionManager", "Error showing accessibility guide: ${e.message}", e)
+			// Fallback: show simple dialog
+			try {
+				MaterialAlertDialogBuilder(activity)
+					.setTitle("Enable Accessibility Service")
+					.setMessage("Please go to Settings > Accessibility and enable InternetGuard Pro")
+					.setPositiveButton("Open Settings") { _, _ ->
+						openAccessibilitySettings()
+					}
+					.setNegativeButton("Cancel") { dialog, _ ->
+						dialog.dismiss()
+					}
+					.show()
+			} catch (e2: Exception) {
+				android.util.Log.e("PermissionManager", "Error showing fallback dialog: ${e2.message}", e2)
+			}
+		}
 	}
 	
 	/**
@@ -349,6 +499,27 @@ class PermissionManager(
 				message = "InternetGuard Pro needs these permissions to provide full protection. " +
 						"All data processing happens locally on your device."
 			)
+		} else {
+			// Check accessibility service status after permissions are granted
+			if (!isAccessibilityServiceEnabled()) {
+				requestAccessibilityService()
+			} else {
+				onAllPermissionsGranted()
+			}
+		}
+	}
+	
+	/**
+	 * Checks if all required services are properly configured
+	 */
+	fun checkAllServices() {
+		val hasPermissions = areServicePermissionsGranted()
+		val hasAccessibilityService = isAccessibilityServiceEnabled()
+		
+		if (!hasPermissions) {
+			requestServicePermissions()
+		} else if (!hasAccessibilityService) {
+			requestAccessibilityService()
 		} else {
 			onAllPermissionsGranted()
 		}

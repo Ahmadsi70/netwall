@@ -25,6 +25,8 @@ import com.google.android.material.switchmaterial.SwitchMaterial
 import com.internetguard.pro.R
 import com.internetguard.pro.databinding.FragmentSettingsBinding
 import com.internetguard.pro.ui.viewmodel.SettingsViewModel
+import com.internetguard.pro.security.PermissionManager
+import com.internetguard.pro.utils.AccessibilityServiceChecker
 
 /**
  * Settings fragment for app configuration and preferences.
@@ -38,6 +40,7 @@ class SettingsFragment : Fragment() {
 	private val binding get() = _binding!!
 	
 	private lateinit var viewModel: SettingsViewModel
+	private lateinit var permissionManager: PermissionManager
 	
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -51,9 +54,15 @@ class SettingsFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		
+		// 🌍 LANGUAGE: Apply system language to fragment
+		val systemLanguage = com.internetguard.pro.utils.LanguageManager.getBestMatchingLanguage(requireContext())
+		com.internetguard.pro.utils.LanguageManager.applyLanguage(requireContext(), systemLanguage)
+		
 		setupViewModel()
+		setupPermissionManager()
 		setupClickListeners()
 		observeViewModel()
+		checkAccessibilityStatus()
 	}
 	
 	/**
@@ -61,6 +70,14 @@ class SettingsFragment : Fragment() {
 	 */
 	private fun setupViewModel() {
 		viewModel = ViewModelProvider(this)[SettingsViewModel::class.java]
+	}
+	
+	/**
+	 * Sets up PermissionManager
+	 */
+	private fun setupPermissionManager() {
+		permissionManager = PermissionManager(requireActivity())
+		permissionManager.initialize()
 	}
 	
 	/**
@@ -80,6 +97,11 @@ class SettingsFragment : Fragment() {
 		// Notification settings
 		binding.notificationSwitch.setOnCheckedChangeListener { _, isChecked ->
 			viewModel.setNotificationsEnabled(isChecked)
+		}
+		
+		// Accessibility settings
+		binding.accessibilityCard.setOnClickListener {
+			handleAccessibilityCardClick()
 		}
 		
 		// Privacy settings
@@ -168,12 +190,12 @@ class SettingsFragment : Fragment() {
 		val currentLanguage = viewModel.getCurrentLanguage()
 		
 		MaterialAlertDialogBuilder(requireContext())
-			.setTitle("Choose Language")
+			.setTitle(getString(R.string.dialog_choose_language_title))
 			.setSingleChoiceItems(languages, currentLanguage) { dialog, which ->
 				viewModel.setLanguage(which)
 				dialog.dismiss()
 			}
-			.setNegativeButton("Cancel", null)
+			.setNegativeButton(getString(R.string.cancel), null)
 			.show()
 	}
 	
@@ -182,9 +204,9 @@ class SettingsFragment : Fragment() {
 	 */
 	private fun showPrivacyDialog() {
 		MaterialAlertDialogBuilder(requireContext())
-			.setTitle("Privacy Settings")
-			.setMessage("InternetGuard Pro respects your privacy. All data is stored locally and never shared with third parties.")
-			.setPositiveButton("OK", null)
+			.setTitle(getString(R.string.dialog_privacy_settings_title))
+			.setMessage(getString(R.string.dialog_privacy_settings_message))
+			.setPositiveButton(getString(R.string.ok), null)
 			.show()
 	}
 	
@@ -193,9 +215,9 @@ class SettingsFragment : Fragment() {
 	 */
 	private fun showAboutDialog() {
 		MaterialAlertDialogBuilder(requireContext())
-			.setTitle("About InternetGuard Pro")
-			.setMessage("Version 1.0.0\n\nA powerful internet guard app with AI-powered suggestions and advanced blocking features.")
-			.setPositiveButton("OK", null)
+			.setTitle(getString(R.string.dialog_about_title))
+			.setMessage(getString(R.string.dialog_about_message))
+			.setPositiveButton(getString(R.string.ok), null)
 			.show()
 	}
 
@@ -208,17 +230,21 @@ class SettingsFragment : Fragment() {
         optInSwitch.isChecked = prefs.getBoolean("opt_in", true)
 
 		MaterialAlertDialogBuilder(requireContext())
-			.setTitle("Cloud AI Moderation")
+			.setTitle(getString(R.string.dialog_cloud_ai_moderation_title))
 			.setView(view)
-            .setPositiveButton("Save") { _, _ ->
+            .setPositiveButton(getString(R.string.save)) { _, _ ->
 				prefs.edit()
                     .putBoolean("opt_in", optInSwitch.isChecked)
 					.apply()
 				
-				val status = if (optInSwitch.isChecked) "enabled" else "disabled"
-				Toast.makeText(requireContext(), "✅ Cloud AI Moderation $status", Toast.LENGTH_SHORT).show()
+				val statusMessage = if (optInSwitch.isChecked) {
+					getString(R.string.toast_cloud_ai_moderation_enabled)
+				} else {
+					getString(R.string.toast_cloud_ai_moderation_disabled)
+				}
+				Toast.makeText(requireContext(), statusMessage, Toast.LENGTH_SHORT).show()
 			}
-			.setNegativeButton("Cancel", null)
+			.setNegativeButton(getString(R.string.cancel), null)
 			.show()
 	}
 
@@ -229,12 +255,12 @@ class SettingsFragment : Fragment() {
 	 */
 	private fun showClearDataDialog() {
 		MaterialAlertDialogBuilder(requireContext())
-			.setTitle("Clear All Data")
-			.setMessage("This will permanently delete all your data including rules, keywords, and statistics. This action cannot be undone.")
-			.setPositiveButton("Clear") { _, _ ->
+			.setTitle(getString(R.string.dialog_clear_all_data_title))
+			.setMessage(getString(R.string.dialog_clear_all_data_message))
+			.setPositiveButton(getString(R.string.button_clear)) { _, _ ->
 				viewModel.clearAllData()
 			}
-			.setNegativeButton("Cancel", null)
+			.setNegativeButton(getString(R.string.cancel), null)
 			.show()
 	}
 	
@@ -258,6 +284,71 @@ class SettingsFragment : Fragment() {
 	 */
 	private fun showErrorMessage(message: String) {
 		// Implementation would show an error toast or snackbar
+	}
+	
+	/**
+	 * Handles accessibility card click
+	 */
+	private fun handleAccessibilityCardClick() {
+		if (permissionManager.isAccessibilityServiceEnabled()) {
+			// Service is enabled, show status dialog
+			showAccessibilityStatusDialog()
+		} else {
+			// Service is disabled, request permission
+			permissionManager.requestAccessibilityService()
+		}
+	}
+	
+	/**
+	 * Checks accessibility service status and updates UI
+	 */
+	private fun checkAccessibilityStatus() {
+		val serviceInfo = AccessibilityServiceChecker.getServiceInfo(requireContext())
+		binding.accessibilityStatusText.text = serviceInfo.description
+	}
+	
+	/**
+	 * Shows accessibility status dialog
+	 */
+	private fun showAccessibilityStatusDialog() {
+		val serviceInfo = AccessibilityServiceChecker.getServiceInfo(requireContext())
+		
+		MaterialAlertDialogBuilder(requireContext())
+			.setTitle(getString(R.string.dialog_service_enabled_title))
+			.setMessage(getString(R.string.dialog_service_enabled_message))
+			.setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+				dialog.dismiss()
+			}
+			.setNeutralButton("Open Settings") { _, _ ->
+				permissionManager.openAccessibilitySettings()
+			}
+			.show()
+	}
+	
+	override fun onResume() {
+		super.onResume()
+		// Check accessibility status when returning from settings
+		checkAccessibilityStatus()
+		
+		// Check if user has enabled the service after going to settings
+		if (permissionManager.checkAccessibilityServiceAfterSettings()) {
+			// Show success message
+			showAccessibilitySuccessMessage()
+		}
+	}
+	
+	/**
+	 * Shows success message when accessibility service is enabled
+	 */
+	private fun showAccessibilitySuccessMessage() {
+		MaterialAlertDialogBuilder(requireContext())
+			.setTitle(getString(R.string.dialog_service_enabled_success_title))
+			.setMessage(getString(R.string.dialog_service_enabled_success_message))
+			.setPositiveButton(getString(R.string.ok)) { dialog, _ ->
+				dialog.dismiss()
+			}
+			.setCancelable(false)
+			.show()
 	}
 	
 	override fun onDestroyView() {

@@ -9,7 +9,7 @@
 	<TextView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="اقدامات سریع"
+		android:text="Quick Actions"
 		android:textStyle="bold"
 		android:textSize="20sp"
 		android:gravity="center"
@@ -18,7 +18,7 @@
 	<TextView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="مسدود کردن دسته‌جمعی اپلیکیشن‌ها"
+		android:text="Block apps by category"
 		android:textSize="14sp"
 		android:textColor="#666666"
 		android:gravity="center"
@@ -72,7 +72,7 @@
 						<TextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:text="شبکه‌های اجتماعی"
+							android:text="Social Media"
 							android:textStyle="bold"
 							android:textSize="16sp" />
 
@@ -131,7 +131,7 @@
 						<TextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:text="بازی‌ها"
+							android:text="Games"
 							android:textStyle="bold"
 							android:textSize="16sp" />
 
@@ -190,7 +190,7 @@
 						<TextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:text="مرورگرها"
+							android:text="Browsers"
 							android:textStyle="bold"
 							android:textSize="16sp" />
 
@@ -249,7 +249,7 @@
 						<TextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:text="سرگرمی"
+							android:text="Entertainment"
 							android:textStyle="bold"
 							android:textSize="16sp" />
 
@@ -278,7 +278,7 @@
 		android:id="@+id/btn_close"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:text="بستن"
+		android:text="Close"
 		android:layout_marginTop="16dp"
 		style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
 

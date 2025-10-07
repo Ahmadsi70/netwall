@@ -18,25 +18,51 @@
 
 	</com.google.android.material.appbar.AppBarLayout>
 
-	<androidx.core.widget.NestedScrollView
+	<FrameLayout
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-		<LinearLayout
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/app_list_recycler"
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:orientation="vertical">
+			android:layout_height="match_parent"
+			android:padding="8dp" />
 
-			<!-- App list -->
-			<androidx.recyclerview.widget.RecyclerView
-				android:id="@+id/app_list_recycler"
-				android:layout_width="match_parent"
+		<!-- Loading Overlay -->
+		<LinearLayout
+			android:id="@+id/loading_overlay"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:orientation="vertical"
+			android:gravity="center"
+			android:background="#80000000"
+			android:visibility="gone">
+
+			<com.google.android.material.progressindicator.CircularProgressIndicator
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				app:indicatorSize="48dp"
+				app:trackThickness="6dp" />
+
+			<TextView
+				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:padding="8dp" />
+				android:text="Loading installed apps…"
+				android:textStyle="bold"
+				android:textSize="16sp"
+				android:textColor="@android:color/white"
+				android:layout_marginTop="12dp" />
 
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="This may take a moment on first run"
+				android:textSize="12sp"
+				android:textColor="@android:color/white"
+				android:layout_marginTop="4dp" />
 		</LinearLayout>
 
-	</androidx.core.widget.NestedScrollView>
+	</FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

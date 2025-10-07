@@ -28,7 +28,74 @@
 			android:layout_height="wrap_content"
 			android:orientation="vertical">
 
-			
+			<!-- Accessibility Service Status Card -->
+			<com.google.android.material.card.MaterialCardView
+				android:id="@+id/accessibility_status_card"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_margin="16dp"
+				app:cardCornerRadius="12dp"
+				app:cardElevation="4dp">
+
+				<LinearLayout
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"
+					android:padding="16dp">
+
+					<LinearLayout
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:gravity="center_vertical"
+						android:layout_marginBottom="8dp">
+
+						<View
+							android:id="@+id/status_indicator"
+							android:layout_width="16dp"
+							android:layout_height="16dp"
+							android:layout_marginEnd="8dp"
+							android:background="@drawable/circle_background" />
+
+						<TextView
+							android:layout_width="0dp"
+							android:layout_height="wrap_content"
+							android:layout_weight="1"
+							android:text="Accessibility Service:"
+							android:textSize="16sp"
+							android:textStyle="bold" />
+
+						<TextView
+							android:id="@+id/service_status_text"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:text="Checking..."
+							android:textSize="16sp"
+							android:textStyle="bold" />
+
+					</LinearLayout>
+
+					<TextView
+						android:id="@+id/service_description_text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Checking service status..."
+						android:textSize="14sp"
+						android:textColor="@android:color/darker_gray"
+						android:layout_marginBottom="12dp" />
+
+					<com.google.android.material.button.MaterialButton
+						android:id="@+id/enable_service_button"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:text="Enable Accessibility Service"
+						android:textSize="16sp"
+						app:icon="@drawable/ic_accessibility"
+						style="@style/Widget.Material3.Button" />
+
+				</LinearLayout>
+
+			</com.google.android.material.card.MaterialCardView>
 
 	<!-- Action Buttons -->
 	<LinearLayout
@@ -50,6 +117,38 @@
 					android:layout_height="wrap_content"
 					android:text="Clear All"
 					style="@style/Widget.Material3.Button.TextButton" />
+
+			</LinearLayout>
+
+			<!-- Action Buttons Row -->
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:layout_margin="16dp"
+				android:gravity="center">
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/test_api_button"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:layout_marginEnd="8dp"
+					android:text="Test API"
+					android:textSize="14sp"
+					app:icon="@android:drawable/ic_menu_info_details"
+					style="@style/Widget.Material3.Button.OutlinedButton" />
+
+				<com.google.android.material.button.MaterialButton
+					android:id="@+id/help_button"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					android:layout_marginStart="8dp"
+					android:text="Help"
+					android:textSize="14sp"
+					app:icon="@drawable/ic_info"
+					style="@style/Widget.Material3.Button.OutlinedButton" />
 
 			</LinearLayout>
 

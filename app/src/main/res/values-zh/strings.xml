@@ -231,4 +231,56 @@
         <p>您完全控制您的数据，可以随时删除。</p>
         ]]>
     </string>
+    
+    <!-- Dialog Messages - Chinese -->
+    <string name="dialog_enable_keyword_blocking_title">启用关键词阻止</string>
+    <string name="dialog_enable_keyword_blocking_message">要阻止应用程序中的不当关键词，您需要启用辅助功能服务：\n\n🔍 功能：\n• 监控应用程序中的被阻止关键词\n• 自动阻止不当内容\n• 完全在您的设备上离线工作\n\n📱 如何启用：\n1. 点击下面的"立即启用"\n2. 在列表中找到"InternetGuard Pro"\n3. 打开开关\n4. 返回此应用程序\n\n🛡️ 您的隐私受到保护 - 数据不会离开您的设备\n这是您安全的一次性设置。</string>
+    <string name="dialog_permission_required_title">需要权限</string>
+    <string name="dialog_permission_required_message">要添加和使用关键词进行阻止，您首先需要启用辅助功能服务。\n\n这允许应用程序监控其他应用程序中的文本并阻止不当内容。\n\n🛡️ 您的隐私受到保护 - 所有处理都在您的设备上本地进行。</string>
+    <string name="dialog_help_keyword_blocking_title">帮助 - 关键词阻止</string>
+    <string name="dialog_help_keyword_blocking_message">如何使用关键词阻止：\n\n1. 首先启用辅助功能服务\n2. 添加您要阻止的关键词\n3. 将关键词分配给特定应用程序\n4. 如需要，测试API连接\n\n服务将在检测到不当内容时自动阻止。\n\n🛡️ 所有处理都在您的设备上本地进行，以获得最大隐私。</string>
+    <string name="dialog_choose_language_title">选择语言</string>
+    <string name="dialog_privacy_settings_title">隐私设置</string>
+    <string name="dialog_privacy_settings_message">InternetGuard Pro尊重您的隐私。所有数据都本地存储，从不与第三方共享。</string>
+    <string name="dialog_about_title">关于InternetGuard Pro</string>
+    <string name="dialog_about_message">版本1.0.0\n\n一个强大的互联网守护应用程序，具有AI驱动的建议和高级阻止功能。</string>
+    <string name="dialog_cloud_ai_moderation_title">云端AI审核</string>
+    <string name="dialog_clear_all_data_title">清除所有数据</string>
+    <string name="dialog_clear_all_data_message">这将永久删除您的所有数据，包括规则、关键词和统计信息。此操作无法撤销。</string>
+    <string name="dialog_service_enabled_title">✅ 关键词阻止已激活</string>
+    <string name="dialog_service_enabled_message">辅助功能服务已启用并正常工作。\n\n您现在可以添加关键词，它们将在其他应用程序中自动被阻止。</string>
+    <string name="dialog_service_enabled_success_title">🎉 服务已启用！</string>
+    <string name="dialog_service_enabled_success_message">太好了！关键词阻止现在已激活，将保护您免受应用程序中的不当内容。</string>
+    
+    <!-- Dialog Buttons - Chinese -->
+    <string name="button_enable_now">立即启用</string>
+    <string name="button_show_guide">显示指南</string>
+    <string name="button_not_now">现在不</string>
+    <string name="button_got_it">明白了</string>
+    <string name="button_enable_service">启用服务</string>
+    <string name="button_clear">清除</string>
+    <string name="button_clear_all">清除全部</string>
+    
+    <!-- Toast Messages - Chinese -->
+    <string name="toast_cloud_ai_moderation_enabled">✅ 云端AI审核已启用</string>
+    <string name="toast_cloud_ai_moderation_disabled">✅ 云端AI审核已禁用</string>
+    <string name="toast_cannot_enable_service">无法启用服务：活动不可用</string>
+    <string name="toast_error_enabling_service">启用服务时出错：%1$s</string>
+    <string name="toast_error_loading_keywords">加载关键词时出错：%1$s</string>
+    <string name="toast_error_loading_app_list">加载应用程序列表时出错：%1$s</string>
+    <string name="toast_error_initializing_interface">初始化界面时出错：%1$s</string>
+    <string name="toast_error_initializing_keyword_system">初始化关键词系统时出错：%1$s</string>
+    <string name="toast_error_initializing_app_system">初始化应用程序系统时出错：%1$s</string>
+    <string name="toast_error_loading_apps">加载应用程序时出错：%1$s</string>
+    <string name="toast_error_setting_up_interface">设置界面时出错：%1$s</string>
+    <string name="toast_error_setting_up_app_monitoring">设置应用程序监控时出错：%1$s</string>
+    <string name="toast_error_opening_app_assignment_dialog">打开应用程序分配对话框时出错</string>
+    
+    <!-- AI Settings - Chinese -->
+    <string name="dialog_ai_detection_mode_title">AI检测模式</string>
+    <string name="ai_mode_lightweight">轻量级（快速）</string>
+    <string name="ai_mode_balanced">平衡（推荐）</string>
+    <string name="ai_mode_thorough">彻底（准确）</string>
+    <string name="ai_mode_adaptive">自适应（智能）</string>
+    <string name="toast_mode_changed_to">模式已更改为：%1$s</string>
 </resources>

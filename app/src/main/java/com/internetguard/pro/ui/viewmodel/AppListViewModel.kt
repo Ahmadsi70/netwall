@@ -29,10 +29,14 @@ class AppListViewModel(application: Application) : AndroidViewModel(application)
 	private val perAppNetworkController: PerAppNetworkController
 	private var showBlockedOnly: Boolean = false
 	
-	// بهینه‌سازی: Cache برای اطلاعات اپ‌ها
+	// Optimization: Cache for app information
 	private val appInfoCache = mutableMapOf<String, AppInfo>()
 	private var lastCacheUpdate = 0L
 	private val cacheValidityDuration = 300000L // 5 minutes
+	
+	// Performance optimization: Batch processing
+	private val batchSize = 50 // Process apps in batches
+	private var isProcessingBatch = false
 	
 	// LiveData for app list
 	private val _appList = MutableLiveData<List<AppInfo>>()
@@ -46,7 +50,7 @@ class AppListViewModel(application: Application) : AndroidViewModel(application)
 	private val _errorMessage = MutableLiveData<String?>()
 	val errorMessage: LiveData<String?> = _errorMessage
 
-	// نگه‌داری لیست کامل برای فیلتر سریع بدون لود مجدد
+	// Keep full list for fast filtering without reloading
 	private var fullList: List<AppInfo> = emptyList()
 	
 	init {
@@ -60,24 +64,35 @@ class AppListViewModel(application: Application) : AndroidViewModel(application)
 	 * Loads all installed apps and their blocking status
 	 */
 	fun loadInstalledApps() {
+		// Prevent multiple simultaneous loads
+		if (isProcessingBatch) {
+			Log.d("AppListViewModel", "Already processing apps, skipping duplicate request")
+			return
+		}
+		
 		viewModelScope.launch {
 			_isLoading.value = true
+			isProcessingBatch = true
 			try {
 				val apps = getInstalledApps().let { list ->
 					if (showBlockedOnly) list.filter { it.blockWifi || it.blockCellular } else list
 				}
 				fullList = apps
 				_appList.value = fullList
+				// Load icons asynchronously after initial publish for faster first paint
+				loadIconsAsync()
 			} catch (e: Exception) {
+				Log.e("AppListViewModel", "Error loading apps: ${e.message}", e)
 				_errorMessage.value = "Failed to load apps: ${e.message}"
 			} finally {
 				_isLoading.value = false
+				isProcessingBatch = false
 			}
 		}
 	}
 
 	/**
-	 * فیلتر لیست اپ‌ها بر اساس نام یا نام پکیج (case-insensitive)
+	 * Filter app list by name or package name (case-insensitive)
 	 */
 	fun filterApps(query: String) {
 		val trimmed = query.trim()
@@ -99,66 +114,80 @@ class AppListViewModel(application: Application) : AndroidViewModel(application)
 	 * Gets list of installed apps with their blocking status - HIGHLY OPTIMIZED
 	 */
 	private suspend fun getInstalledApps(): List<AppInfo> = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
-		// بررسی cache validity
+		// Check cache validity
 		val currentTime = System.currentTimeMillis()
 		if (appInfoCache.isNotEmpty() && (currentTime - lastCacheUpdate) < cacheValidityDuration) {
+			Log.d("AppListViewModel", "Using cached app list (${appInfoCache.size} apps)")
 			return@withContext appInfoCache.values.toList()
 		}
 		
-		// 🚀 OPTIMIZATION 1: خواندن همه rules یک‌بار (1 query به جای N query)
+		Log.d("AppListViewModel", "Loading fresh app list...")
+		
+		// 🚀 OPTIMIZATION 1: Read all rules once (1 query instead of N queries)
 		val allRules = repository.getAllRulesList()
 		val rulesMap = allRules.associateBy { it.appPackageName }
 		
-		// 🚀 OPTIMIZATION 2: فیلتر اپ‌های سیستمی و فقط اپ‌های قابل launch
+		// 🚀 OPTIMIZATION 2: Filter system apps and only launchable apps
 		val installedApps = packageManager.getInstalledApplications(0)
 			.filter { app ->
-				// فقط اپ‌های user (نه سیستمی)
+				// Only user apps (not system)
 				(app.flags and ApplicationInfo.FLAG_SYSTEM == 0) &&
-				// نه خود این اپ
+				// Not this app itself
 				app.packageName != getApplication<Application>().packageName &&
-				// فقط اپ‌هایی که قابل launch هستند
+				// Only launchable apps
 				packageManager.getLaunchIntentForPackage(app.packageName) != null
 			}
 		
+		Log.d("AppListViewModel", "Found ${installedApps.size} user apps")
+		
 		val appInfoList = mutableListOf<AppInfo>()
 		
-		// پاک کردن cache قدیمی
+		// Clear old cache
 		appInfoCache.clear()
 		
-		// 🚀 OPTIMIZATION 3: پردازش موازی با chunked
-		for (app in installedApps) {
-			val appName = try {
-				packageManager.getApplicationLabel(app).toString()
-			} catch (e: Exception) {
-				app.packageName
+		// 🚀 OPTIMIZATION 3: Process in batches for better performance
+		val batches = installedApps.chunked(batchSize)
+		var processedCount = 0
+		
+		for (batch in batches) {
+			// Process batch
+			for (app in batch) {
+				val appName = try {
+					packageManager.getApplicationLabel(app).toString()
+				} catch (e: Exception) {
+					app.packageName
+				}
+				
+				// 🚀 OPTIMIZATION 4: Skip icon loading initially for faster first paint
+				val icon = null // Load icons asynchronously later
+				
+				// 🚀 Use Map instead of database query
+				val existingRule = rulesMap[app.packageName]
+				
+				val appInfo = AppInfo(
+					uid = app.uid,
+					packageName = app.packageName,
+					appName = appName,
+					icon = icon,
+					blockWifi = existingRule?.blockWifi ?: false,
+					blockCellular = existingRule?.blockCellular ?: false,
+					blockMode = existingRule?.blockMode ?: "blacklist"
+				)
+				
+				// Add to cache
+				appInfoCache[app.packageName] = appInfo
+				appInfoList.add(appInfo)
+				processedCount++
 			}
 			
-			val icon = try {
-				packageManager.getApplicationIcon(app.packageName)
-			} catch (e: Exception) {
-				null
-			}
-			
-			// 🚀 از Map استفاده می‌کنیم به جای database query
-			val existingRule = rulesMap[app.packageName]
-			
-			val appInfo = AppInfo(
-				uid = app.uid,
-				packageName = app.packageName,
-				appName = appName,
-				icon = icon,
-				blockWifi = existingRule?.blockWifi ?: false,
-				blockCellular = existingRule?.blockCellular ?: false,
-				blockMode = existingRule?.blockMode ?: "blacklist"
-			)
-			
-			// اضافه کردن به cache
-			appInfoCache[app.packageName] = appInfo
-			appInfoList.add(appInfo)
+			// 🚀 OPTIMIZATION 5: Yield control between batches to prevent ANR
+			kotlinx.coroutines.yield()
 		}
 		
-		// به‌روزرسانی زمان cache
+		// Update cache time
 		lastCacheUpdate = currentTime
+		
+		Log.d("AppListViewModel", "Processed $processedCount apps in ${batches.size} batches")
 		
 		return@withContext appInfoList.sortedBy { it.appName }
 	}
@@ -195,7 +224,7 @@ class AppListViewModel(application: Application) : AndroidViewModel(application)
 
                 // Block/Allow internet for selected app using VPN Service
                 val intent = Intent(getApplication(), NetworkGuardVpnService::class.java)
-                // ارسال نوع شبکه برای دقیق‌سازی بلاک
+                // Send network type for precise blocking
                 intent.putExtra("network_type", "wifi")
                 if (blockWifi) {
                     // Block internet for selected app
@@ -248,7 +277,7 @@ class AppListViewModel(application: Application) : AndroidViewModel(application)
 
                 // Block/Allow internet for selected app using VPN Service
                 val intent = Intent(getApplication(), NetworkGuardVpnService::class.java)
-                // ارسال نوع شبکه برای دقیق‌سازی بلاک
+                // Send network type for precise blocking
                 intent.putExtra("network_type", "cellular")
                 if (blockCellular) {
                     // Block internet for selected app
@@ -286,6 +315,38 @@ class AppListViewModel(application: Application) : AndroidViewModel(application)
 	 */
 	fun clearError() {
 		_errorMessage.value = null
+	}
+
+	/**
+	 * Asynchronously loads app icons and updates list items progressively
+	 */
+	private fun loadIconsAsync() {
+		viewModelScope.launch(kotlinx.coroutines.Dispatchers.IO) {
+			val pm = packageManager
+			val current = _appList.value ?: return@launch
+			
+			Log.d("AppListViewModel", "Loading icons for ${current.size} apps")
+			
+			// 🚀 OPTIMIZATION: Load icons in batches to prevent UI blocking
+			val appsWithoutIcons = current.filter { it.icon == null }
+			val batches = appsWithoutIcons.chunked(20) // Smaller batches for icons
+			
+			for (batch in batches) {
+				for (item in batch) {
+					try {
+						val icon = pm.getApplicationIcon(item.packageName)
+						updateAppInList(item.packageName) { it.copy(icon = icon) }
+					} catch (e: Exception) {
+						Log.w("AppListViewModel", "Failed to load icon for ${item.packageName}: ${e.message}")
+					}
+				}
+				
+				// 🚀 Yield control between batches to keep UI responsive
+				kotlinx.coroutines.yield()
+			}
+			
+			Log.d("AppListViewModel", "Finished loading icons")
+		}
 	}
 
 }
