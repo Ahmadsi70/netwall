@@ -1,0 +1,16 @@
+[build]
+builder = "NIXPACKS"
+
+[deploy]
+startCommand = "npm start"
+healthcheckPath = "/health"
+healthcheckTimeout = 100
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+
+[environments.production.variables]
+NODE_ENV = "production"
+PORT = "3000"
+APP_SECRET = "internetguard-pro-default"
+OPENAI_MODERATION_MODEL = "text-moderation-latest"
+OPENAI_SUGGEST_MODEL = "gpt-3.5-turbo"
