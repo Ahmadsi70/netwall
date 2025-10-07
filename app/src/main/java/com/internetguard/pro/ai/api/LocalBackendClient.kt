@@ -42,6 +42,7 @@ class LocalBackendClient(
                 val request = Request.Builder()
                     .url(endpoint)
                     .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", "Bearer internetguard-pro-default")
                     .post(payload.toString().toRequestBody(json))
                     .build()
 
@@ -74,6 +75,7 @@ class LocalBackendClient(
                 val request = Request.Builder()
                     .url(url)
                     .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", "Bearer internetguard-pro-default")
                     .post(payload.toString().toRequestBody(json))
                     .build()
 
