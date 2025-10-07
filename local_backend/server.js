@@ -316,7 +316,7 @@ Return ONLY a valid JSON object with these fields:
   "notes": "brief explanation"
 }
 
-Focus on harmful content categories: violence, sexual content, drugs, hate speech, self-harm, gambling, scams.`;
+For ANY keyword, generate related terms including synonyms, variants, and obfuscations. Focus on harmful content categories: violence, sexual content, drugs, hate speech, self-harm, gambling, scams. For neutral words, generate general related terms.`;
 
                 const userMessage = `Keyword: "${keyword}"${language ? `\nLanguage: ${language}` : ''}${category ? `\nCategory: ${category}` : ''}\n\nReturn JSON with up to 12 synonyms/variants/obfuscations and safe regex patterns.`;
 

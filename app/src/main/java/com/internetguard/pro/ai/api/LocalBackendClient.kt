@@ -89,7 +89,7 @@ class LocalBackendClient(
                     parseSuggestResponse(body)
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "Suggestion error: ${e.message}")
+                Log.e(TAG, "Suggestion error: ${e.message}", e)
                 SuggestResult()
             }
         }
